@@ -1,18 +1,16 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { Recipe } from '../Recipe/Recipe'
+import { getRecipes } from '../../services/recipe'
 import type { Recipe as RecipeType } from '../../types'
 
 const App: React.FC = () => {
-  const testRecipePath: string = '/src/assets/testRecipes.json'
-
   const [recipes, setRecipes] = useState<RecipeType[] | null>(null);
 
   useEffect(() => {
-    fetch(testRecipePath)
-      .then(response => response.json())
+    getRecipes()
       .then(data => setRecipes(data))
-      .catch(error => console.error('Error loading JSON:', error))
+      .catch(error => console.error('Error fetching recipes:', error))
   }, []);
 
   return (
