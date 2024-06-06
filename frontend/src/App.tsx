@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper'
 import { Recipe, Ingredient } from './types'
 
 const App: React.FC = () => {
-  const testRecipePath: string = '/src/testRecipe.json'
+  const testRecipePath: string = '/src/assets/testRecipe3.json'
 
   const [recipe, setRecipe] = useState<Recipe | null>(null);
 
@@ -65,7 +65,7 @@ const App: React.FC = () => {
                         <TableCell>{formatIngredient(ingredient)}</TableCell>
                       </TableRow>
                     ))}
-                    <TableCell>{step.instructions}</TableCell>
+                    <TableCell>{stepIndex + 1}. {step.instructions}</TableCell>
                   </TableRow>
                 )
               })}

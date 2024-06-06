@@ -1,0 +1,182 @@
+{
+  "name": "Paneer Butter Masala",
+  "description": "This Paneer Butter Masala is a rich & creamy curry made with paneer, spices, onions, tomatoes, cashews, and butter. It is soft paneer dunked in a creamy, silky, super flavorful, and delicious curry.",
+  "author": "Swasthi",
+  "servings": 4,
+  "prepTime": 15,
+  "cookingTime": 30,
+  "steps": [
+    {
+      "ingredients": [
+        {
+          "ingredient": "Paneer",
+          "preparation": "cubed",
+          "amount": 200,
+          "units": "grams"
+        },
+        {
+          "ingredient": "Water",
+          "preparation": "hot",
+          "amount": 2,
+          "units": "cups"
+        }
+      ],
+      "instructions": "Soak the paneer cubes in hot water for 15-20 minutes if store-bought. Drain and set aside."
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Oil",
+          "preparation": null,
+          "amount": 1,
+          "units": "tablespoon"
+        },
+        {
+          "ingredient": "Green cardamoms",
+          "preparation": null,
+          "amount": 2,
+          "units": null
+        },
+        {
+          "ingredient": "Onions",
+          "preparation": "cubed",
+          "amount": 1,
+          "units": "cup"
+        }
+      ],
+      "instructions": "Heat oil in a pan. Add green cardamoms and onions. Saute until onions turn transparent or lightly pink."
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Tomatoes",
+          "preparation": "finely chopped",
+          "amount": 1.5,
+          "units": "cups"
+        },
+        {
+          "ingredient": "Salt",
+          "preparation": null,
+          "amount": 0.75,
+          "units": "teaspoon"
+        }
+      ],
+      "instructions": "Add tomatoes and salt. Saute for 2-3 minutes, cover, and cook until tomatoes turn mushy."
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Kashmiri red chili powder",
+          "preparation": null,
+          "amount": 0.75,
+          "units": "teaspoon"
+        },
+        {
+          "ingredient": "Garam masala",
+          "preparation": null,
+          "amount": 0.75,
+          "units": "teaspoon"
+        },
+        {
+          "ingredient": "Coriander powder",
+          "preparation": null,
+          "amount": 1,
+          "units": "teaspoon"
+        },
+        {
+          "ingredient": "Cashews",
+          "preparation": null,
+          "amount": 12,
+          "units": null
+        },
+        {
+          "ingredient": "Sugar",
+          "preparation": null,
+          "amount": 0.75,
+          "units": "teaspoon"
+        }
+      ],
+      "instructions": "Add Kashmiri red chili powder, garam masala, coriander powder, cashews, and sugar. Saute until aromatic. Turn off the stove and cool the mixture completely."
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Water",
+          "preparation": null,
+          "amount": 1,
+          "units": "cup"
+        }
+      ],
+      "instructions": "Blend the cooled mixture with water to a smooth puree. Strain if necessary."
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Butter",
+          "preparation": null,
+          "amount": 1.5,
+          "units": "tablespoons"
+        },
+        {
+          "ingredient": "Bay leaf",
+          "preparation": null,
+          "amount": 1,
+          "units": null
+        },
+        {
+          "ingredient": "Cinnamon",
+          "preparation": "piece",
+          "amount": 0.5,
+          "units": "inch"
+        },
+        {
+          "ingredient": "Cloves",
+          "preparation": null,
+          "amount": 3,
+          "units": null
+        },
+        {
+          "ingredient": "Ginger garlic paste",
+          "preparation": null,
+          "amount": 1.5,
+          "units": "teaspoons"
+        }
+      ],
+      "instructions": "Heat butter in a pan. Add bay leaf, cinnamon, cloves, and ginger garlic paste. Saute until aromatic."
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Blended puree",
+          "preparation": null,
+          "amount": null,
+          "units": null
+        },
+        {
+          "ingredient": "Water",
+          "preparation": null,
+          "amount": 0.5,
+          "units": "cup"
+        }
+      ],
+      "instructions": "Add the blended puree to the pan. Pour water to adjust consistency. Cook until the gravy thickens and traces of fat are visible."
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Kasuri methi",
+          "preparation": "crushed",
+          "amount": 1,
+          "units": "teaspoon"
+        },
+        {
+          "ingredient": "Cream",
+          "preparation": null,
+          "amount": 3,
+          "units": "tablespoons"
+        }
+      ],
+      "instructions": "Add paneer, kasuri methi, and cream to the gravy. Stir well and cook on low flame for 1-3 minutes. Garnish with extra cream and coriander leaves."
+    }
+  ]
+}
