@@ -1,8 +1,15 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import express, { Request, Response } from 'express'
 
-export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify('Hello from Lambda!'),
-  };
-};
+// Create an Express app
+const app = express();
+
+// Define a route
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello, World!');
+});
+
+// Start the server
+const PORT: number = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
