@@ -9,8 +9,8 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { Recipe, Ingredient } from './types'
 
-function App() {
-  const testRecipePath = '/src/testRecipe.json'
+const App: React.FC = () => {
+  const testRecipePath: string = '/src/testRecipe.json'
 
   const [recipe, setRecipe] = useState<Recipe | null>(null);
 
@@ -21,7 +21,7 @@ function App() {
       .catch(error => console.error('Error loading JSON:', error))
   }, []);
 
-  const formatIngredient = (ingredient: Ingredient) => {
+  const formatIngredient = (ingredient: Ingredient): string => {
     return `${ingredient.ingredient} - ${ingredient.amount}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`
   }
 
@@ -42,19 +42,19 @@ function App() {
                 <TableCell colSpan={2}>{recipe.description}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Author: </TableCell>
+                <TableCell>Author:</TableCell>
                 <TableCell>{recipe.author}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Servings: </TableCell>
+                <TableCell>Servings:</TableCell>
                 <TableCell>{recipe.servings}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Prep Time: </TableCell>
+                <TableCell>Prep Time:</TableCell>
                 <TableCell>{recipe.prepTime}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Serving Time: </TableCell>
+                <TableCell>Serving Time:</TableCell>
                 <TableCell>{recipe.cookingTime}</TableCell>
               </TableRow>
               {recipe.steps.map((step, stepIndex) => {
