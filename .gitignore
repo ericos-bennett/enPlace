@@ -1,0 +1,11 @@
+# FRONTEND
+frontend/logs
+frontend/*.log
+frontend/npm-debug.log*
+node_modules
+dist
+dist-ssr
+*.local
+.vscode/*
+.idea
+.DS_Store
