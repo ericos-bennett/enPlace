@@ -27,15 +27,15 @@ function App() {
         <div>Loading...</div>
       ) :
         (<TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>{recipe.name}</TableCell>
+                <TableCell colSpan={2}>{recipe.name}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{recipe.description}</TableCell>
+                <TableCell colSpan={2}>{recipe.description}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Author: </TableCell>
@@ -53,6 +53,19 @@ function App() {
                 <TableCell>Serving Time: </TableCell>
                 <TableCell>{recipe.cookingTime}</TableCell>
               </TableRow>
+              {recipe.steps.map((step) => {
+                const ingredientCount = step.ingredients.length
+                return (
+                  <TableRow>
+                    {step.ingredients.map((ingredient) => (
+                      <TableRow>
+                        <TableCell>{ingredient.ingredient} - {ingredient.amount} {ingredient.units}, {ingredient.preparation}</TableCell>
+                      </TableRow>
+                    ))}
+                    <TableCell rowSpan={ingredientCount}>{step.instructions}</TableCell>
+                  </TableRow>
+                )
+              })}
             </TableBody>
           </Table >
         </TableContainer >)}

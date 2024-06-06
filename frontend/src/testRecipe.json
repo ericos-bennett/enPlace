@@ -4,5 +4,24 @@
   "author": "Eric Bennett",
   "servings": 4,
   "prepTime": 15,
-  "cookingTime": 45
+  "cookingTime": 45,
+  "steps": [
+    {
+      "ingredients": [
+        {
+          "ingredient": "Tomatoes",
+          "preparation": "Diced",
+          "amount": 4,
+          "units": null
+        },
+        {
+          "ingredient": "Basil",
+          "preparation": "Sliced",
+          "amount": 10,
+          "units": "Leaves"
+        }
+      ],
+      "instructions": "Combine tomatoes and basil"
+    }
+  ]
 }
