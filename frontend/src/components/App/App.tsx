@@ -18,7 +18,7 @@ const App: React.FC = () => {
       {!recipes ? (
         <div>Loading...</div>
       ) : (
-        <div>
+        <div id='recipe-container'>
           {recipes.map((recipe, recipeIndex) => (
             <Recipe recipe={recipe} key={recipeIndex}></Recipe>
           ))}
