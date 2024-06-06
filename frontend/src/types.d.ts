@@ -9,13 +9,13 @@ export type Recipe = {
 };
 
 export type Step = {
-  ingredients: Ingredient[];
   instructions: string;
+  ingredients?: Ingredient[];
 };
 
 export type Ingredient = {
   ingredient: string;
-  preparation: string;
+  preparation?: string;
   amount: number;
   units?: string;
 };

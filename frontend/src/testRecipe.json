@@ -9,6 +9,17 @@
     {
       "ingredients": [
         {
+          "ingredient": "Olive Oil",
+          "preparation": null,
+          "amount": 2,
+          "units": "Tbsp"
+        }
+      ],
+      "instructions": "Heat oil in a large pan"
+    },
+    {
+      "ingredients": [
+        {
           "ingredient": "Tomatoes",
           "preparation": "Diced",
           "amount": 4,

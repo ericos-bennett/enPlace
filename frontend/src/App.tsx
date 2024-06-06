@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import './App.css'
+import { useState, useEffect } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { Recipe } from './types'
+import { Recipe, Ingredient } from './types'
 
 function App() {
   const testRecipePath = '/src/testRecipe.json'
@@ -20,6 +20,10 @@ function App() {
       .then(data => setRecipe(data))
       .catch(error => console.error('Error loading JSON:', error))
   }, []);
+
+  const formatIngredient = (ingredient: Ingredient) => {
+    return `${ingredient.ingredient} - ${ingredient.amount}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`
+  }
 
   return (
     <>
@@ -53,16 +57,15 @@ function App() {
                 <TableCell>Serving Time: </TableCell>
                 <TableCell>{recipe.cookingTime}</TableCell>
               </TableRow>
-              {recipe.steps.map((step) => {
-                const ingredientCount = step.ingredients.length
+              {recipe.steps.map((step, stepIndex) => {
                 return (
-                  <TableRow>
-                    {step.ingredients.map((ingredient) => (
-                      <TableRow>
-                        <TableCell>{ingredient.ingredient} - {ingredient.amount} {ingredient.units}, {ingredient.preparation}</TableCell>
+                  <TableRow key={stepIndex}>
+                    {step.ingredients?.map((ingredient, ingredientIndex) => (
+                      <TableRow key={ingredientIndex}>
+                        <TableCell>{formatIngredient(ingredient)}</TableCell>
                       </TableRow>
                     ))}
-                    <TableCell rowSpan={ingredientCount}>{step.instructions}</TableCell>
+                    <TableCell>{step.instructions}</TableCell>
                   </TableRow>
                 )
               })}
