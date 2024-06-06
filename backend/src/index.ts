@@ -1,11 +1,13 @@
 import express, { Request, Response } from 'express'
+import { getRecipes } from './recipes.js'
 
 // Create an Express app
 const app = express();
 
 // Define a route
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, World!');
+app.get('/recipes', (req: Request, res: Response) => {
+  const recipes = getRecipes()
+  res.send(recipes);
 });
 
 // Start the server
