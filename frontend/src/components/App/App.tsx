@@ -2,7 +2,7 @@ import './App.css'
 import { useState, useEffect } from 'react'
 import { Recipe } from '../Recipe/Recipe'
 import { getRecipes } from '../../services/recipe'
-import type { Recipe as RecipeType } from '../../types'
+import type { Recipe as RecipeType } from '../../../../types/types'
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<RecipeType[] | null>(null);

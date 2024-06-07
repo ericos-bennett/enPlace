@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import type { Recipe as RecipeType, Ingredient } from '../../types'
+import type { Recipe as RecipeType, Ingredient } from '../../../../types/types'
 
 export const Recipe: React.FC<{ recipe: RecipeType }> = ({ recipe }) => {
 

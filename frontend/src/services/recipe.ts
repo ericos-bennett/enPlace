@@ -1,8 +1,6 @@
-import { Recipe } from "../types";
+import { Recipe } from "../../../types/types";
 
-const testRecipePath: string = '/src/assets/testRecipes.json'
-
-export const getRecipes = (): Promise<Recipe[]> => {
-  return fetch(testRecipePath)
-    .then(response => response.json())
+export const getRecipes = async (): Promise<Recipe[]> => {
+  const response = await fetch('http://localhost:3000/recipes');
+  return response.json()
 }
