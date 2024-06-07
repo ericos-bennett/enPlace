@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Recipe } from '../Recipe/Recipe'
 import { getRecipes } from '../../services/recipe'
 import type { Recipe as RecipeType } from '../../../../types/types'
+import { CreateRecipeForm } from '../CreateRecipeForm/CreateRecipeForm'
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<RecipeType[] | null>(null);
@@ -13,8 +14,14 @@ const App: React.FC = () => {
       .catch(error => console.error('Error fetching recipes:', error))
   }, []);
 
+  const handleResponse = (recipe: RecipeType) => {
+    console.log(recipe)
+    // add Recipe to recipes list
+  };
+
   return (
     <>
+      <CreateRecipeForm onCreateRecipe={handleResponse} />
       {!recipes ? (
         <div>Loading...</div>
       ) : (
@@ -24,7 +31,8 @@ const App: React.FC = () => {
           ))}
         </div>
       )
-      }</>
+      }
+    </>
   )
 }
 
