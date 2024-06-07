@@ -7,7 +7,11 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import type { Recipe as RecipeType, Ingredient } from '../../../../types/types'
 
-export const Recipe: React.FC<{ recipe: RecipeType }> = ({ recipe }) => {
+interface RecipeProps {
+  recipe: RecipeType
+}
+
+export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
 
   const formatIngredient = (ingredient: Ingredient): string => {
     return `${ingredient.ingredient} - ${ingredient.amount}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`

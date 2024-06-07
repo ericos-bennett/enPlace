@@ -5,12 +5,11 @@ import Box from '@mui/material/Box';
 import { createRecipe } from '../../services/recipe';
 import { Recipe } from '../../../../types/types';
 
-interface ChildComponentProps {
+interface CreateRecipeFormProps {
   onCreateRecipe: (recipe: Recipe) => void;
 }
 
-export const CreateRecipeForm: React.FC<ChildComponentProps> = ({ onCreateRecipe }) => {
-
+export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({ onCreateRecipe }) => {
 
   const [inputValue, setInputValue] = useState('');
 
@@ -18,11 +17,14 @@ export const CreateRecipeForm: React.FC<ChildComponentProps> = ({ onCreateRecipe
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    createRecipe(inputValue)
-      .then(recipe => onCreateRecipe(recipe))
-      .catch(error => console.error('Error creating recipe:', error))
+    try {
+      const recipe: Recipe = await createRecipe(inputValue)
+      onCreateRecipe(recipe)
+    } catch (error) {
+      console.log('Error creating recipe:', error)
+    }
   };
 
   return (
