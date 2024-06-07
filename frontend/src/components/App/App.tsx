@@ -2,8 +2,8 @@ import './App.css'
 import { useState, useEffect } from 'react'
 import { Recipe } from '../Recipe/Recipe'
 import { getRecipes } from '../../services/recipe'
-import type { Recipe as RecipeType } from '../../../../types/types'
 import { CreateRecipeForm } from '../CreateRecipeForm/CreateRecipeForm'
+import type { Recipe as RecipeType } from '../../../../types/types'
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<RecipeType[] | null>(null);
@@ -14,14 +14,19 @@ const App: React.FC = () => {
       .catch(error => console.error('Error fetching recipes:', error))
   }, []);
 
-  const handleResponse = (recipe: RecipeType) => {
-    console.log(recipe)
-    // add Recipe to recipes list
-  };
+  const handleCreateRecipe = (recipe: RecipeType) => {
+    setRecipes(prevRecipes => {
+      if (prevRecipes === null) {
+        return [recipe];
+      } else {
+        return [...prevRecipes, recipe];
+      }
+    })
+  }
 
   return (
     <>
-      <CreateRecipeForm onCreateRecipe={handleResponse} />
+      <CreateRecipeForm onCreateRecipe={handleCreateRecipe} />
       {!recipes ? (
         <div>Loading...</div>
       ) : (
