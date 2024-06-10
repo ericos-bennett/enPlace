@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { createRecipe } from '../../services/recipe';
-import { Recipe } from '../../../../types/types';
+import { Recipe } from '../../types';
 
 interface CreateRecipeFormProps {
   onCreateRecipe: (recipe: Recipe) => void;
