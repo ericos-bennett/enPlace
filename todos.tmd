@@ -2,6 +2,9 @@
 - [x] Fix localstack connection issue between lambda and dynamodb
 - [x] Create lambda which saves JSON to dynamo and then returns it
 - [x] Create lambda which reads JSONs from dynamo
-- [ ] Update lambdas to use correct recipes JSON
-- [ ] Create API gateway layer on localstack
-- [ ] Connect FE to API gateway
+- [x] Create API gateway layer on localstack
+- [ ] Connect FE to API gateway with Route 53
+- [ ] Use environement variables for local env data across stack
+- [ ] Pass pasted URL on createRecipe POST
+- [ ] Use OpenAI API instead of static JSON on createRecipe POST
+- [ ] Pass encrypted userId from FE when querying for recipes
