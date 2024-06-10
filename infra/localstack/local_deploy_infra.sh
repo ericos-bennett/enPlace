@@ -1,4 +1,4 @@
-# Check if the network exists
+# Create the localstack docker network if it doesn't exist
 NETWORK_NAME="localstack-network"
 if ! docker network ls | grep -q "$NETWORK_NAME"; then
   echo "Network $NETWORK_NAME does not exist. Creating it..."
@@ -8,8 +8,7 @@ else
   echo "Network $NETWORK_NAME already exists."
 fi
 
-
-# Delete localstack container
+# Delete the localstack container if it exists
 CONTAINER_NAME="localstack"
 if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
     echo "Stopping and removing the running container: $CONTAINER_NAME"
@@ -21,7 +20,7 @@ fi
     docker rm $CONTAINER_NAME    
 
 
-# Update lambda zips
+# Package lambda code
 echo "Updating lambda code"
 cd ../../backend/lambdas/create_recipe
 zip -r ../../../infra/localstack/create_recipe.zip .
@@ -31,8 +30,16 @@ cd ../../../infra/localstack
 echo "Lambda code updated"
 
 # Start localstack container
-echo "Run localstack docker container"
-bash ./run_localstack_docker.sh
+echo "Starting localstack docker container"
+docker run -d \
+    --name $CONTAINER_NAME \
+    --network localstack-network \
+    -p 4566:4566 -p 4571:4571 \
+    -e SERVICES=iam,apigateway,lambda,dynamodb \
+    -e DEBUG=1 \
+    -e LAMBDA_EXECUTOR=docker \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    localstack/localstack
 echo "Localstack docker container is running"
 
 # Apply terraform

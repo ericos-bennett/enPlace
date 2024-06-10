@@ -5,10 +5,80 @@ provider "aws" {
   skip_credentials_validation = true
   skip_metadata_api_check     = true
   endpoints {
-    dynamodb = "http://localhost:4566"
-    lambda   = "http://localhost:4566"
-    iam      = "http://localhost:4566"
+    iam        = "http://localhost:4566"
+    apigateway = "http://localhost:4566"
+    lambda     = "http://localhost:4566"
+    dynamodb   = "http://localhost:4566"
   }
+}
+
+
+resource "aws_api_gateway_rest_api" "menu_api" {
+  name        = "MenuAPI"
+  description = "API for the Menu app"
+}
+
+resource "aws_api_gateway_resource" "recipes_resource" {
+  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  parent_id   = aws_api_gateway_rest_api.menu_api.root_resource_id
+  path_part   = "recipes"
+}
+
+resource "aws_api_gateway_method" "get_recipes_method" {
+  rest_api_id   = aws_api_gateway_rest_api.menu_api.id
+  resource_id   = aws_api_gateway_resource.recipes_resource.id
+  http_method   = "GET"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "get_recipes_integration" {
+  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  resource_id = aws_api_gateway_resource.recipes_resource.id
+  http_method = aws_api_gateway_method.get_recipes_method.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.get_recipes.invoke_arn
+}
+
+resource "aws_api_gateway_method" "create_recipe_method" {
+  rest_api_id   = aws_api_gateway_rest_api.menu_api.id
+  resource_id   = aws_api_gateway_resource.recipes_resource.id
+  http_method   = "POST"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "create_recipe_integration" {
+  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  resource_id = aws_api_gateway_resource.recipes_resource.id
+  http_method = aws_api_gateway_method.create_recipe_method.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.create_recipe.invoke_arn
+}
+
+resource "aws_api_gateway_deployment" "deployment" {
+  depends_on = [
+    aws_api_gateway_integration.get_recipes_integration,
+    aws_api_gateway_integration.create_recipe_integration
+  ]
+  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  stage_name  = "local"
+}
+
+resource "aws_lambda_permission" "get_recipes_permission" {
+  statement_id  = "AllowAPIGatewayInvokeGetRecipes"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_recipes.arn
+  principal     = "apigateway.amazonaws.com"
+}
+
+resource "aws_lambda_permission" "create_recipe_permission" {
+  statement_id  = "AllowAPIGatewayInvokeCreateRecipe"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.create_recipe.arn
+  principal     = "apigateway.amazonaws.com"
 }
 
 
