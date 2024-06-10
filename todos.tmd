@@ -1,6 +1,7 @@
-- [ ] Move types to frontend folder
-- [ ] Fix localstack connection issue between lambda and dynamodb
-- [ ] Create Python lambda which saves JSON to dynamo and then returns it
-- [ ] Create Python lambda which reads JSONs from dynamo
+- [x] Move types to frontend folder
+- [x] Fix localstack connection issue between lambda and dynamodb
+- [x] Create lambda which saves JSON to dynamo and then returns it
+- [x] Create lambda which reads JSONs from dynamo
+- [ ] Update lambdas to use correct recipes JSON
 - [ ] Create API gateway layer on localstack
 - [ ] Connect FE to API gateway

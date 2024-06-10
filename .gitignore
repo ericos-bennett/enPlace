@@ -9,3 +9,12 @@ dist-ssr
 .vscode/*
 .idea
 .DS_Store
+
+# INFRA
+.terraform/
+*.tfstate*
+.terraform.lock.hcl
+.terraformrc
+.terraform-version
+infra/localstack/*.zip
+infra/localstack/output.json
