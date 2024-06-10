@@ -1,3 +1,45 @@
+const testJson = {
+  'UserId': 123,
+  'Timestamp': 1623064800,
+  "name": "Sausage Pasta",
+  "description": "A family favorite full of healthy ingredients",
+  "author": "Eric Bennett",
+  "servings": 4,
+  "prepTime": 15,
+  "cookingTime": 45,
+  "steps": [
+    {
+      "ingredients": [
+        {
+          "ingredient": "Olive Oil",
+          "preparation": null,
+          "amount": 2,
+          "units": "Tbsp"
+        }
+      ],
+      "instructions": "Heat oil in a large pan"
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Tomatoes",
+          "preparation": "Diced",
+          "amount": 4,
+          "units": null
+        },
+        {
+          "ingredient": "Basil",
+          "preparation": "Sliced",
+          "amount": 10,
+          "units": "Leaves"
+        }
+      ],
+      "instructions": "Combine tomatoes and basil"
+    }
+  ]
+}
+
+
 const AWS = require('aws-sdk');
 
 const dynamodb = new AWS.DynamoDB.DocumentClient({
@@ -5,14 +47,11 @@ const dynamodb = new AWS.DynamoDB.DocumentClient({
   region: 'us-east-1'
 });
 
+
 exports.handler = async (event) => {
   const params = {
     TableName: 'Recipes',
-    Item: {
-      'UserId': 123,
-      'Timestamp': 1623064800,
-      'Author': 'Lolo'
-    }
+    Item: testJson
   };
 
   try {
