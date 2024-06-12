@@ -9,9 +9,6 @@ const getRecipeJson = (recipeUrl) => {
 }
 
 exports.handler = async (event) => {
-  const { recipeUrl } = JSON.parse(event.body);
-  recipeItem = getRecipeJson(recipeUrl)
-
   const dynamodb = new AWS.DynamoDB.DocumentClient({
     endpoint: 'http://localstack:4566',
     region: 'us-east-1'
@@ -21,12 +18,13 @@ exports.handler = async (event) => {
     'Access-Control-Allow-Origin': '*'
   }
 
-  const params = {
-    TableName: 'Recipes',
-    Item: recipeItem
-  };
-
   try {
+    const { recipeUrl } = JSON.parse(event.body);
+    recipeItem = getRecipeJson(recipeUrl)
+    const params = {
+      TableName: 'Recipes',
+      Item: recipeItem
+    };
     await dynamodb.put(params).promise();
     console.log(`Item from URL {${recipeUrl}} added to Recipes table!`)
     return {

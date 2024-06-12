@@ -7,33 +7,32 @@ exports.handler = async (event) => {
     region: 'us-east-1'
   });
 
-  const userId = 123;
-
-  const params = {
-    TableName: 'Recipes',
-    KeyConditionExpression: 'UserId = :userId',
-    ExpressionAttributeValues: {
-      ':userId': userId
-    }
-  };
+  headers = {
+    'Access-Control-Allow-Origin': '*'
+  }
 
   try {
+    const userId = 123;
+    const params = {
+      TableName: 'Recipes',
+      KeyConditionExpression: 'UserId = :userId',
+      ExpressionAttributeValues: {
+        ':userId': userId
+      }
+    };
+
     const result = await dynamodb.query(params).promise();
     return {
       statusCode: 200,
       body: JSON.stringify(result.Items),
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
+      headers
     };
   } catch (error) {
     console.log(error);
     return {
       statusCode: 500,
       body: JSON.stringify(error),
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
+      headers
     };
   }
 };
