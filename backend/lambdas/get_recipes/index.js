@@ -20,13 +20,19 @@ exports.handler = async (event) => {
     const result = await dynamodb.query(params).promise();
     return {
       statusCode: 200,
-      body: JSON.stringify(result.Items)
+      body: JSON.stringify(result.Items),
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
     };
   } catch (error) {
     console.log(error);
     return {
       statusCode: 500,
-      body: JSON.stringify(error)
+      body: JSON.stringify(error),
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
     };
   }
 };

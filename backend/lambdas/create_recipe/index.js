@@ -58,13 +58,19 @@ exports.handler = async (event) => {
     await dynamodb.put(params).promise();
     return {
       statusCode: 201,
-      body: JSON.stringify('Item added to Recipes table!')
+      body: JSON.stringify('Item added to Recipes table!'),
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
     };
   } catch (error) {
     console.log(error)
     return {
       statusCode: 500,
-      body: JSON.stringify(error)
+      body: JSON.stringify(error),
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
     };
   }
 };

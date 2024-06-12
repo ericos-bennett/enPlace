@@ -6,9 +6,38 @@ provider "aws" {
   skip_metadata_api_check     = true
   endpoints {
     iam        = "http://localhost:4566"
+    route53    = "http://localhost:4566"
     apigateway = "http://localhost:4566"
     lambda     = "http://localhost:4566"
     dynamodb   = "http://localhost:4566"
+  }
+}
+
+
+resource "aws_api_gateway_domain_name" "localmenuapp_custom_domain" {
+  domain_name     = "api.localmenuapp.com"
+  certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/EXAMPLE-CERTIFICATE-ID"
+}
+
+resource "aws_api_gateway_base_path_mapping" "localmenuapp_custom_domain_mapping" {
+  api_id      = aws_api_gateway_rest_api.menu_api.id
+  stage_name  = aws_api_gateway_deployment.deployment.stage_name
+  domain_name = aws_api_gateway_domain_name.localmenuapp_custom_domain.domain_name
+}
+
+resource "aws_route53_zone" "localmenuapp_com" {
+  name = "localmenuapp.com"
+}
+
+resource "aws_route53_record" "menu_api_alias" {
+  name    = aws_api_gateway_domain_name.localmenuapp_custom_domain.domain_name
+  zone_id = aws_route53_zone.localmenuapp_com.zone_id
+  type    = "A"
+
+  alias {
+    name                   = aws_api_gateway_domain_name.localmenuapp_custom_domain.regional_domain_name
+    zone_id                = aws_api_gateway_domain_name.localmenuapp_custom_domain.regional_zone_id
+    evaluate_target_health = false
   }
 }
 

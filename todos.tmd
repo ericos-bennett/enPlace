@@ -4,6 +4,7 @@
 - [x] Create lambda which reads JSONs from dynamo
 - [x] Create API gateway layer on localstack
 - [ ] Connect FE to API gateway with Route 53 (allow CORS)
+- [ ] Split TF into modules
 - [ ] Use environement variables for local env data across stack
 - [ ] Pass pasted URL on createRecipe POST
 - [ ] Use OpenAI API instead of static JSON on createRecipe POST
