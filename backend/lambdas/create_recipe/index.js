@@ -10,8 +10,8 @@ const getRecipeJson = (recipeUrl) => {
 
 exports.handler = async (event) => {
   const dynamodb = new AWS.DynamoDB.DocumentClient({
-    endpoint: 'http://localstack:4566',
-    region: 'us-east-1'
+    region: process.env.AWS_REGION,
+    endpoint: process.env.LAMBDA_DYNAMODB_ENDPOINT
   });
 
   headers = {
