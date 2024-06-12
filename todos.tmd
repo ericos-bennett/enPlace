@@ -3,7 +3,8 @@
 - [x] Create lambda which saves JSON to dynamo and then returns it
 - [x] Create lambda which reads JSONs from dynamo
 - [x] Create API gateway layer on localstack
-- [ ] Connect FE to API gateway with Route 53 (allow CORS)
+- [x] Connect FE to API gateway (allow CORS)
+- [ ] Set up Route 53 
 - [ ] Split TF into modules
 - [ ] Use environement variables for local env data across stack
 - [ ] Pass pasted URL on createRecipe POST
