@@ -6,7 +6,7 @@
 - [x] Connect FE to API gateway (allow CORS)
 - [x] Pass pasted URL on createRecipe POST
 - [x] Use environement variables for local infra
-- [ ] Add error handling to local_deploy.sh
+- [x] Add error handling to local_deploy.sh
 - [ ] Set up Route 53 
 - [ ] Split TF into modules
 - [ ] Use OpenAI API instead of static JSON on createRecipe POST
