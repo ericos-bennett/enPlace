@@ -1,49 +1,104 @@
+# Variables
+variable "aws_access_key" {
+  type     = string
+  nullable = false
+}
+variable "aws_secret_key" {
+  type     = string
+  nullable = false
+}
+variable "aws_region" {
+  type     = string
+  nullable = false
+}
+variable "iam_endpoint" {
+  type     = string
+  nullable = false
+}
+variable "route53_endpoint" {
+  type     = string
+  nullable = false
+}
+variable "route53_zone" {
+  type     = string
+  nullable = false
+}
+variable "apigateway_endpoint" {
+  type     = string
+  nullable = false
+}
+variable "apigateway_stage" {
+  type     = string
+  nullable = false
+}
+variable "apigateway_doman" {
+  type     = string
+  nullable = false
+}
+variable "apigateway_domain_cert" {
+  type     = string
+  nullable = false
+}
+variable "lambda_endpoint" {
+  type     = string
+  nullable = false
+}
+variable "lambda_dynamodb_endpoint" {
+  type     = string
+  nullable = false
+}
+variable "dynamodb_endpoint" {
+  type     = string
+  nullable = false
+}
+
+
 # Define the provider
 provider "aws" {
-  access_key                  = "mock_access_key"
-  secret_key                  = "mock_secret_key"
-  region                      = "us-east-1"
+  access_key                  = var.aws_access_key
+  secret_key                  = var.aws_secret_key
+  region                      = var.aws_region
   skip_credentials_validation = true
   skip_metadata_api_check     = true
   endpoints {
-    iam        = "http://localhost:4566"
-    route53    = "http://localhost:4566"
-    apigateway = "http://localhost:4566"
-    lambda     = "http://localhost:4566"
-    dynamodb   = "http://localhost:4566"
+    iam        = var.iam_endpoint
+    route53    = var.route53_endpoint
+    apigateway = var.apigateway_endpoint
+    lambda     = var.lambda_endpoint
+    dynamodb   = var.dynamodb_endpoint
   }
 }
 
-# # Define the Route53 zone
-# resource "aws_route53_zone" "localmenuapp_com" {
-#   name = "localmenuapp.com"
-# }
+# Define the Route53 zone
+resource "aws_route53_zone" "menuapp_zone" {
+  name = var.route53_zone
+}
 
-# # Define the custom domain name
-# resource "aws_api_gateway_domain_name" "localmenuapp_custom_domain" {
-#   domain_name     = "api.localmenuapp.com"
-#   certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/EXAMPLE-CERTIFICATE-ID"
-# }
+# Define the domain name
+resource "aws_api_gateway_domain_name" "menuapp_domain" {
+  domain_name     = var.apigateway_doman
+  certificate_arn = var.apigateway_domain_cert
+}
 
-# # Define the base path mapping
-# resource "aws_api_gateway_base_path_mapping" "localmenuapp_custom_domain_mapping" {
-#   api_id      = aws_api_gateway_rest_api.menu_api.id
-#   stage_name  = aws_api_gateway_deployment.menu_api_deployment.stage_name
-#   domain_name = aws_api_gateway_domain_name.localmenuapp_custom_domain.domain_name
-# }
+# Define the base path mapping
+resource "aws_api_gateway_base_path_mapping" "menuapp_domain_mapping" {
+  api_id      = aws_api_gateway_rest_api.menu_api.id
+  stage_name  = aws_api_gateway_deployment.menu_api_deployment.stage_name
+  domain_name = aws_api_gateway_domain_name.menuapp_domain.domain_name
+}
 
-# # Define the Route53 record
-# resource "aws_route53_record" "menu_api_alias" {
-#   name    = aws_api_gateway_domain_name.localmenuapp_custom_domain.domain_name
-#   zone_id = aws_route53_zone.localmenuapp_com.zone_id
-#   type    = "A"
+# Define the Route53 record
+resource "aws_route53_record" "menu_api_alias" {
+  name    = aws_api_gateway_domain_name.menuapp_domain.domain_name
+  zone_id = aws_route53_zone.menuapp_zone.zone_id
+  type    = "A"
 
-#   alias {
-#     name                   = aws_api_gateway_domain_name.localmenuapp_custom_domain.regional_domain_name
-#     zone_id                = aws_api_gateway_domain_name.localmenuapp_custom_domain.regional_zone_id
-#     evaluate_target_health = false
-#   }
-# }
+  alias {
+    name                   = aws_api_gateway_domain_name.menuapp_domain.regional_domain_name
+    zone_id                = aws_api_gateway_domain_name.menuapp_domain.regional_zone_id
+    evaluate_target_health = false
+  }
+}
 
 # Define the API Gateway Menu REST API
 resource "aws_api_gateway_rest_api" "menu_api" {
@@ -162,7 +217,7 @@ resource "aws_api_gateway_deployment" "menu_api_deployment" {
     aws_api_gateway_integration.create_recipe_integration
   ]
   rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  stage_name  = "local"
+  stage_name  = var.apigateway_stage
 }
 
 # Define the GET Recipes Lambda permission
@@ -192,8 +247,8 @@ resource "aws_lambda_function" "get_recipes" {
   timeout          = 30
   environment {
     variables = {
-      AWS_REGION               = "us-east-1",
-      LAMBDA_DYNAMODB_ENDPOINT = "http://localstack:4566"
+      AWS_REGION               = var.aws_region
+      LAMBDA_DYNAMODB_ENDPOINT = var.lambda_dynamodb_endpoint
     }
   }
 }
@@ -252,8 +307,8 @@ resource "aws_lambda_function" "create_recipe" {
   timeout          = 30
   environment {
     variables = {
-      AWS_REGION               = "us-east-1",
-      LAMBDA_DYNAMODB_ENDPOINT = "http://localstack:4566"
+      AWS_REGION               = var.aws_region,
+      LAMBDA_DYNAMODB_ENDPOINT = var.lambda_dynamodb_endpoint
     }
   }
 }

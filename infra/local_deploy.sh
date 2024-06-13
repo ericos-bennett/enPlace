@@ -44,5 +44,5 @@ echo "Localstack docker container is running"
 
 # Apply terraform
 echo "Applying terraform locally"
-terraform apply -auto-approve
+terraform apply -auto-approve -var-file="local.tfvars"
 echo "Terraform applied!"
