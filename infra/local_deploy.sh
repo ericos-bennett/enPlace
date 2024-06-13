@@ -19,14 +19,13 @@ else
 fi
     docker rm $CONTAINER_NAME    
 
-
 # Package lambda code
 echo "Updating lambda code"
-cd ../backend/lambdas/create_recipe
-zip -r ../../../infra/create_recipe.zip .
+cd ../backend/create_recipe
+zip -r ../../infra/create_recipe.zip .
 cd ../get_recipes
-zip -r ../../../infra/get_recipes.zip .
-cd ../../../infra
+zip -r ../../infra/get_recipes.zip .
+cd ../../infra
 echo "Lambda code updated"
 
 # Start localstack container
