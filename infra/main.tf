@@ -183,11 +183,11 @@ resource "aws_lambda_permission" "create_recipe_permission" {
 
 # Define the GET Recipes Lambda function
 resource "aws_lambda_function" "get_recipes" {
-  filename         = "${path.module}/localstack/get_recipes.zip"
+  filename         = "${path.module}/get_recipes.zip"
   function_name    = "GetRecipes"
   role             = aws_iam_role.get_recipes_role.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("${path.module}/localstack/get_recipes.zip")
+  source_code_hash = filebase64sha256("${path.module}/get_recipes.zip")
   runtime          = "nodejs14.x"
   timeout          = 30
   environment {
@@ -243,11 +243,11 @@ resource "aws_iam_role_policy_attachment" "get_recipes_role_policy_attach" {
 
 # Define the POST Recipes Lambda function
 resource "aws_lambda_function" "create_recipe" {
-  filename         = "${path.module}/localstack/create_recipe.zip"
+  filename         = "${path.module}/create_recipe.zip"
   function_name    = "CreateRecipe"
   role             = aws_iam_role.create_recipe_role.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("${path.module}/localstack/create_recipe.zip")
+  source_code_hash = filebase64sha256("${path.module}/create_recipe.zip")
   runtime          = "nodejs14.x"
   timeout          = 30
   environment {

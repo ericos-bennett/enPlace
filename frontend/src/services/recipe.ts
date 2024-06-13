@@ -1,6 +1,6 @@
 import { Recipe } from '../types'
 
-const localApiGatewayId = 'ckgw6b9hjc'
+const localApiGatewayId = 'ggxu8lc3hj'
 
 export const getRecipes = async (): Promise<Recipe[]> => {
   const response = await fetch(`https://${localApiGatewayId}.execute-api.localhost.localstack.cloud:4566/local/recipes`);

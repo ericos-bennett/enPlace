@@ -22,11 +22,11 @@ fi
 
 # Package lambda code
 echo "Updating lambda code"
-cd ../../backend/lambdas/create_recipe
-zip -r ../../../infra/localstack/create_recipe.zip .
+cd ../backend/lambdas/create_recipe
+zip -r ../../../infra/create_recipe.zip .
 cd ../get_recipes
-zip -r ../../../infra/localstack/get_recipes.zip .
-cd ../../../infra/localstack
+zip -r ../../../infra/get_recipes.zip .
+cd ../../../infra
 echo "Lambda code updated"
 
 # Start localstack container
@@ -44,6 +44,5 @@ echo "Localstack docker container is running"
 
 # Apply terraform
 echo "Applying terraform locally"
-cd ..
 terraform apply -auto-approve
 echo "Terraform applied!"
