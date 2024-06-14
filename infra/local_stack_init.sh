@@ -13,15 +13,14 @@ fi
 
 # Delete the localstack container if it exists
 CONTAINER_NAME="localstack"
-if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-    echo ">>> Stopping and removing the running container: $CONTAINER_NAME..."
-    docker stop $CONTAINER_NAME
-    echo ">>> Container $CONTAINER_NAME stopped"
-else
-    echo ">>> Container $CONTAINER_NAME is not running"
-fi
-    docker rm $CONTAINER_NAME    
+if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+    echo ">>> Stopping and removing the container: $CONTAINER_NAME..."
+    docker stop $CONTAINER_NAME 2>/dev/null
+    docker rm $CONTAINER_NAME
     echo ">>> Container $CONTAINER_NAME removed"
+else
+    echo ">>> Container $CONTAINER_NAME does not exist"
+fi
 
 # Start localstack container
 echo ">>> Starting localstack docker container..."
