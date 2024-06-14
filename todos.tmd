@@ -7,7 +7,7 @@
 - [x] Pass pasted URL on createRecipe POST
 - [x] Use environement variables for local infra
 - [x] Add error handling to local_deploy.sh
+- [x] Clean up TF code
 - [ ] Set up Route 53 
-- [ ] Split TF into modules
 - [ ] Use OpenAI API instead of static JSON on createRecipe POST
 - [ ] Pass encrypted userId from FE when querying for recipes
