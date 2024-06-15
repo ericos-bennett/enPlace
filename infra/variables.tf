@@ -14,27 +14,11 @@ variable "iam_endpoint" {
   type     = string
   nullable = false
 }
-variable "route53_endpoint" {
-  type     = string
-  nullable = false
-}
-variable "route53_zone" {
-  type     = string
-  nullable = false
-}
 variable "apigateway_endpoint" {
   type     = string
   nullable = false
 }
 variable "apigateway_stage" {
-  type     = string
-  nullable = false
-}
-variable "apigateway_doman" {
-  type     = string
-  nullable = false
-}
-variable "apigateway_domain_cert" {
   type     = string
   nullable = false
 }

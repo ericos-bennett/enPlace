@@ -10,7 +10,6 @@ dist-ssr
 .DS_Store
 .env*
 !.env.example
-!.env.local
 
 # INFRA
 .terraform/
