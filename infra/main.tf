@@ -7,41 +7,9 @@ provider "aws" {
   skip_metadata_api_check     = true
   endpoints {
     iam        = var.iam_endpoint
-    route53    = var.route53_endpoint
     apigateway = var.apigateway_endpoint
     lambda     = var.lambda_endpoint
     dynamodb   = var.dynamodb_endpoint
-  }
-}
-
-# Define the Route53 zone
-resource "aws_route53_zone" "menuapp_zone" {
-  name = var.route53_zone
-}
-
-# Define the domain name
-resource "aws_api_gateway_domain_name" "menuapp_domain" {
-  domain_name     = var.apigateway_doman
-  certificate_arn = var.apigateway_domain_cert
-}
-
-# Define the base path mapping
-resource "aws_api_gateway_base_path_mapping" "menuapp_domain_mapping" {
-  api_id      = aws_api_gateway_rest_api.menu_api.id
-  stage_name  = aws_api_gateway_deployment.menu_api_deployment.stage_name
-  domain_name = aws_api_gateway_domain_name.menuapp_domain.domain_name
-}
-
-# Define the Route53 record
-resource "aws_route53_record" "menu_api_alias" {
-  name    = aws_api_gateway_domain_name.menuapp_domain.domain_name
-  zone_id = aws_route53_zone.menuapp_zone.zone_id
-  type    = "A"
-
-  alias {
-    name                   = aws_api_gateway_domain_name.menuapp_domain.regional_domain_name
-    zone_id                = aws_api_gateway_domain_name.menuapp_domain.regional_zone_id
-    evaluate_target_health = false
   }
 }
 
