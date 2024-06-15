@@ -11,3 +11,4 @@
 - [ ] Set up Route 53 
 - [ ] Use OpenAI API instead of static JSON on createRecipe POST
 - [ ] Pass encrypted userId from FE when querying for recipes
+- [ ] Improve FE design
