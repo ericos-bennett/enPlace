@@ -9,6 +9,8 @@
 - [x] Add error handling to local_deploy.sh
 - [x] Clean up TF code
 - [x] Use OpenAI API instead of static JSON on createRecipe POST
+- [ ] Prevent further FE requests when create recipe in progress
+- [ ] Validate that input is valid URL before using OpenAI API
 - [ ] Improve precision of prompt
 - [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
 - [ ] Pass encrypted userId from FE when querying for recipes
