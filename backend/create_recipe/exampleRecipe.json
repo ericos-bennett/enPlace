@@ -1,9 +1,7 @@
 {
-  "UserId": 123,
-  "Timestamp": 1623064800,
-  "name": "Sausage Pasta",
-  "description": "A family favorite full of healthy ingredients",
-  "author": "Eric Bennett",
+  "name": "Pasta",
+  "description": "Tasty",
+  "author": "Eric",
   "servings": 4,
   "prepTime": 15,
   "cookingTime": 45,
@@ -17,7 +15,7 @@
           "units": "Tbsp"
         }
       ],
-      "instructions": "Heat oil in a large pan"
+      "instructions": "Heat oil in pan"
     },
     {
       "ingredients": [

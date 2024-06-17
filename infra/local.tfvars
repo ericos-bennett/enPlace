@@ -7,7 +7,10 @@ iam_endpoint = "http://localhost:4566"
 apigateway_endpoint = "http://localhost:4566"
 apigateway_stage    = "local"
 
-lambda_endpoint          = "http://localhost:4566"
-lambda_dynamodb_endpoint = "http://localstack:4566"
+secretsmanager_endpoint = "http://localhost:4566"
+
+lambda_endpoint                = "http://localhost:4566"
+lambda_secretsmanager_endpoint = "http://localstack:4566"
+lambda_dynamodb_endpoint       = "http://localstack:4566"
 
 dynamodb_endpoint = "http://localhost:4566"

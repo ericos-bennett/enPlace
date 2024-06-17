@@ -6,10 +6,11 @@ provider "aws" {
   skip_credentials_validation = true
   skip_metadata_api_check     = true
   endpoints {
-    iam        = var.iam_endpoint
-    apigateway = var.apigateway_endpoint
-    lambda     = var.lambda_endpoint
-    dynamodb   = var.dynamodb_endpoint
+    iam            = var.iam_endpoint
+    apigateway     = var.apigateway_endpoint
+    secretsmanager = var.secretsmanager_endpoint
+    lambda         = var.lambda_endpoint
+    dynamodb       = var.dynamodb_endpoint
   }
 }
 
@@ -145,6 +146,16 @@ resource "aws_lambda_permission" "create_recipe_permission" {
   principal     = "apigateway.amazonaws.com"
 }
 
+resource "aws_secretsmanager_secret" "openai_api_key" {
+  name        = "openai_api_key"
+  description = "Key for the OpenAI API"
+}
+
+resource "aws_secretsmanager_secret_version" "openai_api_key_version" {
+  secret_id     = aws_secretsmanager_secret.openai_api_key.id
+  secret_string = var.openai_api_key
+}
+
 # Define the GET Recipes Lambda function
 resource "aws_lambda_function" "get_recipes" {
   filename         = "${path.module}/get_recipes.zip"
@@ -152,7 +163,7 @@ resource "aws_lambda_function" "get_recipes" {
   role             = aws_iam_role.get_recipes_role.arn
   handler          = "index.handler"
   source_code_hash = filebase64sha256("${path.module}/get_recipes.zip")
-  runtime          = "nodejs14.x"
+  runtime          = "nodejs20.x"
   timeout          = 30
   environment {
     variables = {
@@ -212,12 +223,14 @@ resource "aws_lambda_function" "create_recipe" {
   role             = aws_iam_role.create_recipe_role.arn
   handler          = "index.handler"
   source_code_hash = filebase64sha256("${path.module}/create_recipe.zip")
-  runtime          = "nodejs14.x"
+  runtime          = "nodejs20.x"
   timeout          = 30
   environment {
     variables = {
-      AWS_REGION               = var.aws_region,
-      LAMBDA_DYNAMODB_ENDPOINT = var.lambda_dynamodb_endpoint
+      AWS_REGION                     = var.aws_region,
+      LAMBDA_SECRETSMANAGER_ENDPOINT = var.lambda_secretsmanager_endpoint
+      LAMBDA_DYNAMODB_ENDPOINT       = var.lambda_dynamodb_endpoint,
+      OPENAI_API_KEY_ID              = aws_secretsmanager_secret.openai_api_key.id,
     }
   }
 }
@@ -253,7 +266,15 @@ resource "aws_iam_role_policy" "create_recipe_policy" {
           "dynamodb:UpdateItem",
         ],
         Resource = aws_dynamodb_table.recipes.arn
-      }
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ],
+        Resource = aws_secretsmanager_secret.openai_api_key.arn
+      },
     ]
   })
 }
@@ -279,6 +300,6 @@ resource "aws_dynamodb_table" "recipes" {
 
   attribute {
     name = "Timestamp"
-    type = "N"
+    type = "S"
   }
 }

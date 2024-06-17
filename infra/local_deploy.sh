@@ -4,9 +4,11 @@ set -e
 # Package lambda code
 echo ">>> Updating lambda code..."
 cd ../backend/create_recipe
-zip -r ../../infra/create_recipe.zip .
+npm install
+zip -q -r ../../infra/create_recipe.zip .
 cd ../get_recipes
-zip -r ../../infra/get_recipes.zip .
+npm install
+zip -q -r ../../infra/get_recipes.zip .
 cd ../../infra
 echo ">>> Lambda code updated"
 

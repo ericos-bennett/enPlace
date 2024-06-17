@@ -8,6 +8,8 @@
 - [x] Use environement variables for local infra
 - [x] Add error handling to local_deploy.sh
 - [x] Clean up TF code
-- [ ] Use OpenAI API instead of static JSON on createRecipe POST
+- [x] Use OpenAI API instead of static JSON on createRecipe POST
+- [ ] Improve precision of prompt
+- [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
 - [ ] Pass encrypted userId from FE when querying for recipes
 - [ ] Improve FE design

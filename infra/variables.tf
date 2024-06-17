@@ -1,3 +1,8 @@
+variable "openai_api_key" {
+  type      = string
+  nullable  = false
+  sensitive = true
+}
 variable "aws_access_key" {
   type     = string
   nullable = false
@@ -22,7 +27,15 @@ variable "apigateway_stage" {
   type     = string
   nullable = false
 }
+variable "secretsmanager_endpoint" {
+  type     = string
+  nullable = false
+}
 variable "lambda_endpoint" {
+  type     = string
+  nullable = false
+}
+variable "lambda_secretsmanager_endpoint" {
   type     = string
   nullable = false
 }
