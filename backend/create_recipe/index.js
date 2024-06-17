@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk'
 import OpenAI from "openai"
+import { v4 as uuidv4 } from 'uuid';
 import exampleRecipe from './exampleRecipe.json' assert { type: 'json' }
 
 const SecretId = process.env.OPENAI_API_KEY_ID
@@ -20,20 +21,22 @@ export const handler = async (event) => {
     const apiKey = secretData.SecretString
     const openai = new OpenAI({ apiKey })
 
-    // Get recipe from OpenAI API
-    const { recipeUrl } = JSON.parse(event.body)
-    const prompt = `Return the recipe from: ${recipeUrl} as a VALID JSON following this format: ${JSON.stringify(exampleRecipe)}. Save numbers as decimals and don't add newlines.`
-
-    const completion = await openai.chat.completions.create({
-      messages: [{ role: "system", content: prompt }],
-      model: "gpt-3.5-turbo",
-    })
-    console.log(`OpenAI API Usage: ${JSON.stringify(completion.usage)}`)
-
-    const recipeItem = JSON.parse(completion.choices[0].message.content)
+    // Get recipe from OpenAI APIs
+    if (false) { // Skip OpenAI call for local testing
+      const { recipeUrl } = JSON.parse(event.body)
+      const prompt = `Return the recipe from: ${recipeUrl} as a VALID JSON following this format: ${JSON.stringify(exampleRecipe)}. Save numbers as decimals and don't add newlines.`
+      const completion = await openai.chat.completions.create({
+        messages: [{ role: "system", content: prompt }],
+        model: "gpt-3.5-turbo",
+      })
+      console.log(`OpenAI API Usage: ${JSON.stringify(completion.usage)}`)
+      const recipeItem = JSON.parse(completion.choices[0].message.content)
+    }
+    const recipeItem = exampleRecipe
+    recipeItem.Id = uuidv4()
+    recipeItem.CreatedAt = new Date().toISOString()
     recipeItem.UserId = userId
-    recipeItem.Timestamp = new Date().toISOString()
-    console.log(recipeItem)
+    console.log({ recipeItem })
 
     // // Save to DynamoDB
     const params = {

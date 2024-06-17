@@ -12,6 +12,7 @@ export const handler = async (event) => {
   try {
     const params = {
       TableName: 'Recipes',
+      IndexName: 'UserIdIndex',
       KeyConditionExpression: 'UserId = :userId',
       ExpressionAttributeValues: {
         ':userId': userId
