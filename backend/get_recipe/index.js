@@ -9,7 +9,7 @@ export const handler = async (event) => {
   }
 
   try {
-    const { recipeId } = JSON.parse(event.body)
+    const { recipeId } = event.pathParameters
     const params = {
       TableName: 'Recipes',
       KeyConditionExpression: 'Id = :id',
@@ -19,8 +19,9 @@ export const handler = async (event) => {
     }
 
     const dynamodb = new AWS.DynamoDB.DocumentClient({ region, endpoint: dynamoDbEndpoint })
-    const result = await dynamodb.query(params).promise()
-    if (result.length == 0) {
+    const { Items } = await dynamodb.query(params).promise()
+    console.log(JSON.stringify(Items))
+    if (Items.length == 0) {
       return {
         statusCode: 404,
         headers
@@ -28,7 +29,7 @@ export const handler = async (event) => {
     }
     return {
       statusCode: 200,
-      body: JSON.stringify(result.Items[0]),
+      body: JSON.stringify(Items[0]),
       headers
     }
   } catch (error) {

@@ -2,6 +2,11 @@ import { Recipe } from '../types'
 
 const recipesEndpoint = `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_API_STAGE}/recipes`
 
+export const getRecipe = async (recipeId: string): Promise<Recipe> => {
+  const response = await fetch(`${recipesEndpoint}/${recipeId}`);
+  return response.json()
+}
+
 export const getRecipes = async (): Promise<Recipe[]> => {
   const response = await fetch(recipesEndpoint);
   return response.json()
