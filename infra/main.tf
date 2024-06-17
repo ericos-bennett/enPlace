@@ -1,4 +1,3 @@
-# Define the provider
 provider "aws" {
   access_key                  = var.aws_access_key
   secret_key                  = var.aws_secret_key
@@ -14,31 +13,44 @@ provider "aws" {
   }
 }
 
-# Define the API Gateway Menu REST API
+resource "aws_secretsmanager_secret" "openai_api_key" {
+  name        = "openai_api_key"
+  description = "Key for the OpenAI API"
+}
+
+resource "aws_secretsmanager_secret_version" "openai_api_key_version" {
+  secret_id     = aws_secretsmanager_secret.openai_api_key.id
+  secret_string = var.openai_api_key
+}
+
 resource "aws_api_gateway_rest_api" "menu_api" {
   name        = "MenuAPI"
   description = "API for the Menu app"
 }
 
-# Define the API Gateway Recipes resource
-resource "aws_api_gateway_resource" "recipes_resource" {
+resource "aws_api_gateway_resource" "recipes" {
   rest_api_id = aws_api_gateway_rest_api.menu_api.id
   parent_id   = aws_api_gateway_rest_api.menu_api.root_resource_id
   path_part   = "recipes"
 }
 
+resource "aws_api_gateway_resource" "recipe" {
+  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  parent_id   = aws_api_gateway_resource.recipes.id
+  path_part   = "{recipeId}"
+}
+
 # Define the OPTIONS method for CORS
 resource "aws_api_gateway_method" "options_recipes_method" {
   rest_api_id   = aws_api_gateway_rest_api.menu_api.id
-  resource_id   = aws_api_gateway_resource.recipes_resource.id
+  resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "OPTIONS"
   authorization = "NONE"
 }
 
-# Define the method response for OPTIONS
 resource "aws_api_gateway_method_response" "options_recipes_method_response" {
   rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  resource_id = aws_api_gateway_resource.recipes_resource.id
+  resource_id = aws_api_gateway_resource.recipes.id
   http_method = aws_api_gateway_method.options_recipes_method.http_method
   status_code = "200"
 
@@ -53,10 +65,9 @@ resource "aws_api_gateway_method_response" "options_recipes_method_response" {
   }
 }
 
-# Define the integration for OPTIONS
 resource "aws_api_gateway_integration" "options_recipes_integration" {
   rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  resource_id = aws_api_gateway_resource.recipes_resource.id
+  resource_id = aws_api_gateway_resource.recipes.id
   http_method = aws_api_gateway_method.options_recipes_method.http_method
   type        = "MOCK"
   request_templates = {
@@ -64,14 +75,13 @@ resource "aws_api_gateway_integration" "options_recipes_integration" {
   }
 }
 
-# Define the integration response for OPTIONS
 resource "aws_api_gateway_integration_response" "options_recipes_integration_response" {
   depends_on = [
     aws_api_gateway_integration.options_recipes_integration
   ]
 
   rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  resource_id = aws_api_gateway_resource.recipes_resource.id
+  resource_id = aws_api_gateway_resource.recipes.id
   http_method = aws_api_gateway_method.options_recipes_method.http_method
   status_code = "200"
 
@@ -82,18 +92,41 @@ resource "aws_api_gateway_integration_response" "options_recipes_integration_res
   }
 }
 
-# Define the GET Recipes method
+resource "aws_api_gateway_method" "get_recipe_method" {
+  rest_api_id   = aws_api_gateway_rest_api.menu_api.id
+  resource_id   = aws_api_gateway_resource.recipe.id
+  http_method   = "GET"
+  authorization = "NONE"
+
+  request_parameters = {
+    "method.request.path.recipeId" = true
+  }
+}
+
+resource "aws_api_gateway_integration" "get_recipe_integration" {
+  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  resource_id = aws_api_gateway_resource.recipes.id
+  http_method = aws_api_gateway_method.get_recipe_method.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.get_recipe.invoke_arn
+
+  request_parameters = {
+    "integration.request.path.recipeId" = "method.request.path.recipeId"
+  }
+}
+
 resource "aws_api_gateway_method" "get_recipes_method" {
   rest_api_id   = aws_api_gateway_rest_api.menu_api.id
-  resource_id   = aws_api_gateway_resource.recipes_resource.id
+  resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "GET"
   authorization = "NONE"
 }
 
-# Define the GET Recipes integration
 resource "aws_api_gateway_integration" "get_recipes_integration" {
   rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  resource_id = aws_api_gateway_resource.recipes_resource.id
+  resource_id = aws_api_gateway_resource.recipes.id
   http_method = aws_api_gateway_method.get_recipes_method.http_method
 
   integration_http_method = "POST"
@@ -101,18 +134,16 @@ resource "aws_api_gateway_integration" "get_recipes_integration" {
   uri                     = aws_lambda_function.get_recipes.invoke_arn
 }
 
-# Define the POST Recipes method
 resource "aws_api_gateway_method" "create_recipe_method" {
   rest_api_id   = aws_api_gateway_rest_api.menu_api.id
-  resource_id   = aws_api_gateway_resource.recipes_resource.id
+  resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "POST"
   authorization = "NONE"
 }
 
-# Define the POST Recipes integration
 resource "aws_api_gateway_integration" "create_recipe_integration" {
   rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  resource_id = aws_api_gateway_resource.recipes_resource.id
+  resource_id = aws_api_gateway_resource.recipes.id
   http_method = aws_api_gateway_method.create_recipe_method.http_method
 
   integration_http_method = "POST"
@@ -120,9 +151,9 @@ resource "aws_api_gateway_integration" "create_recipe_integration" {
   uri                     = aws_lambda_function.create_recipe.invoke_arn
 }
 
-# Define the API Gateway Menu deployment
 resource "aws_api_gateway_deployment" "menu_api_deployment" {
   depends_on = [
+    aws_api_gateway_integration.get_recipe_integration,
     aws_api_gateway_integration.get_recipes_integration,
     aws_api_gateway_integration.create_recipe_integration
   ]
@@ -130,7 +161,13 @@ resource "aws_api_gateway_deployment" "menu_api_deployment" {
   stage_name  = var.apigateway_stage
 }
 
-# Define the GET Recipes Lambda permission
+resource "aws_lambda_permission" "get_recipe_permission" {
+  statement_id  = "AllowAPIGatewayInvokeGetRecipe"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_recipe.arn
+  principal     = "apigateway.amazonaws.com"
+}
+
 resource "aws_lambda_permission" "get_recipes_permission" {
   statement_id  = "AllowAPIGatewayInvokeGetRecipes"
   action        = "lambda:InvokeFunction"
@@ -138,7 +175,6 @@ resource "aws_lambda_permission" "get_recipes_permission" {
   principal     = "apigateway.amazonaws.com"
 }
 
-# Define the POST Recipes Lambda permission
 resource "aws_lambda_permission" "create_recipe_permission" {
   statement_id  = "AllowAPIGatewayInvokeCreateRecipe"
   action        = "lambda:InvokeFunction"
@@ -146,17 +182,61 @@ resource "aws_lambda_permission" "create_recipe_permission" {
   principal     = "apigateway.amazonaws.com"
 }
 
-resource "aws_secretsmanager_secret" "openai_api_key" {
-  name        = "openai_api_key"
-  description = "Key for the OpenAI API"
+resource "aws_lambda_function" "get_recipe" {
+  filename         = "${path.module}/get_recipe.zip"
+  function_name    = "GetRecipe"
+  role             = aws_iam_role.get_recipe_role.arn
+  handler          = "index.handler"
+  source_code_hash = filebase64sha256("${path.module}/get_recipe.zip")
+  runtime          = "nodejs20.x"
+  timeout          = 30
+  environment {
+    variables = {
+      AWS_REGION               = var.aws_region
+      LAMBDA_DYNAMODB_ENDPOINT = var.lambda_dynamodb_endpoint
+    }
+  }
 }
 
-resource "aws_secretsmanager_secret_version" "openai_api_key_version" {
-  secret_id     = aws_secretsmanager_secret.openai_api_key.id
-  secret_string = var.openai_api_key
+resource "aws_iam_role" "get_recipe_role" {
+  name = "get_recipe_role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+      }
+    ]
+  })
 }
 
-# Define the GET Recipes Lambda function
+resource "aws_iam_role_policy" "get_recipe_policy" {
+  name = "get_recipe_policy"
+  role = aws_iam_role.get_recipe_role.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:Query"
+        ],
+        Resource = aws_dynamodb_table.recipes.arn
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "get_recipe_role_policy_attach" {
+  role       = aws_iam_role.get_recipe_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
 resource "aws_lambda_function" "get_recipes" {
   filename         = "${path.module}/get_recipes.zip"
   function_name    = "GetRecipes"
@@ -173,7 +253,6 @@ resource "aws_lambda_function" "get_recipes" {
   }
 }
 
-# Define the GET Recipes IAM role
 resource "aws_iam_role" "get_recipes_role" {
   name = "get_recipes_role"
   assume_role_policy = jsonencode({
@@ -190,7 +269,6 @@ resource "aws_iam_role" "get_recipes_role" {
   })
 }
 
-# Define the GET Recipes IAM role policy
 resource "aws_iam_role_policy" "get_recipes_policy" {
   name = "get_recipes_policy"
   role = aws_iam_role.get_recipes_role.id
@@ -201,8 +279,7 @@ resource "aws_iam_role_policy" "get_recipes_policy" {
         Effect = "Allow",
         Action = [
           "dynamodb:GetItem",
-          "dynamodb:Query",
-          "dynamodb:Scan"
+          "dynamodb:Query"
         ],
         Resource = aws_dynamodb_table.recipes.arn
       }
@@ -210,13 +287,11 @@ resource "aws_iam_role_policy" "get_recipes_policy" {
   })
 }
 
-# Define the GET Recipes IAM role policy attachment
 resource "aws_iam_role_policy_attachment" "get_recipes_role_policy_attach" {
   role       = aws_iam_role.get_recipes_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-# Define the POST Recipes Lambda function
 resource "aws_lambda_function" "create_recipe" {
   filename         = "${path.module}/create_recipe.zip"
   function_name    = "CreateRecipe"
@@ -235,7 +310,6 @@ resource "aws_lambda_function" "create_recipe" {
   }
 }
 
-# Define the POST Recipes IAM role
 resource "aws_iam_role" "create_recipe_role" {
   name = "create_recipe_role"
   assume_role_policy = jsonencode({
@@ -252,7 +326,6 @@ resource "aws_iam_role" "create_recipe_role" {
   })
 }
 
-# Define the POST Recipes IAM role policy
 resource "aws_iam_role_policy" "create_recipe_policy" {
   name = "create_recipe_policy"
   role = aws_iam_role.create_recipe_role.id
@@ -263,7 +336,7 @@ resource "aws_iam_role_policy" "create_recipe_policy" {
         Effect = "Allow",
         Action = [
           "dynamodb:PutItem",
-          "dynamodb:UpdateItem",
+          "dynamodb:UpdateItem"
         ],
         Resource = aws_dynamodb_table.recipes.arn
       },
@@ -279,13 +352,11 @@ resource "aws_iam_role_policy" "create_recipe_policy" {
   })
 }
 
-# Define the POST Recipes IAM role policy attachment
 resource "aws_iam_role_policy_attachment" "create_recipe_role_policy_attach" {
   role       = aws_iam_role.create_recipe_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-# Define the DynamoDB Recipes table
 resource "aws_dynamodb_table" "recipes" {
   name         = "Recipes"
   billing_mode = "PAY_PER_REQUEST"
