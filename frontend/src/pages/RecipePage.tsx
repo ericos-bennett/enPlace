@@ -4,7 +4,7 @@ import { getRecipe } from '../services/recipe'
 import type { Recipe as RecipeType } from '../types'
 import { useParams } from 'react-router-dom'
 
-const RecipePage = () => {
+const RecipePage: React.FC = () => {
   const { recipeId } = useParams() as { recipeId: string };
   const [recipe, setRecipe] = useState<RecipeType | null>(null);
 

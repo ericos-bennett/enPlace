@@ -4,7 +4,7 @@ import { getRecipes } from '../services/recipe'
 import { CreateRecipeForm } from '../components/CreateRecipeForm/CreateRecipeForm'
 import type { Recipe as RecipeType } from '../types'
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const [recipes, setRecipes] = useState<RecipeType[] | null>(null);
 
   useEffect(() => {
