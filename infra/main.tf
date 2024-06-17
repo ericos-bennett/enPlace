@@ -127,61 +127,6 @@ resource "aws_api_gateway_integration" "get_recipe" {
   }
 }
 
-resource "aws_api_gateway_method" "get_recipes" {
-  rest_api_id   = aws_api_gateway_rest_api.menu.id
-  resource_id   = aws_api_gateway_resource.recipes.id
-  http_method   = "GET"
-  authorization = "NONE"
-}
-
-resource "aws_api_gateway_integration" "get_recipes" {
-  rest_api_id = aws_api_gateway_rest_api.menu.id
-  resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.get_recipes.http_method
-
-  integration_http_method = "POST"
-  type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.get_recipes.invoke_arn
-}
-
-resource "aws_api_gateway_method" "create_recipe" {
-  rest_api_id   = aws_api_gateway_rest_api.menu.id
-  resource_id   = aws_api_gateway_resource.recipes.id
-  http_method   = "POST"
-  authorization = "NONE"
-}
-
-resource "aws_api_gateway_integration" "create_recipe" {
-  rest_api_id = aws_api_gateway_rest_api.menu.id
-  resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.create_recipe.http_method
-
-  integration_http_method = "POST"
-  type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.create_recipe.invoke_arn
-}
-
-resource "aws_lambda_permission" "get_recipe" {
-  statement_id  = "AllowAPIGatewayInvokeGetRecipe"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_recipe.arn
-  principal     = "apigateway.amazonaws.com"
-}
-
-resource "aws_lambda_permission" "get_recipes" {
-  statement_id  = "AllowAPIGatewayInvokeGetRecipes"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_recipes.arn
-  principal     = "apigateway.amazonaws.com"
-}
-
-resource "aws_lambda_permission" "create_recipe" {
-  statement_id  = "AllowAPIGatewayInvokeCreateRecipe"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.create_recipe.arn
-  principal     = "apigateway.amazonaws.com"
-}
-
 resource "aws_lambda_function" "get_recipe" {
   filename         = "${path.module}/get_recipe.zip"
   function_name    = "GetRecipe"
@@ -232,9 +177,33 @@ resource "aws_iam_role_policy" "get_recipe" {
   })
 }
 
+resource "aws_lambda_permission" "get_recipe" {
+  statement_id  = "AllowAPIGatewayInvokeGetRecipe"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_recipe.arn
+  principal     = "apigateway.amazonaws.com"
+}
+
 resource "aws_iam_role_policy_attachment" "get_recipe" {
   role       = aws_iam_role.get_recipe.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_api_gateway_method" "get_recipes" {
+  rest_api_id   = aws_api_gateway_rest_api.menu.id
+  resource_id   = aws_api_gateway_resource.recipes.id
+  http_method   = "GET"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "get_recipes" {
+  rest_api_id = aws_api_gateway_rest_api.menu.id
+  resource_id = aws_api_gateway_resource.recipes.id
+  http_method = aws_api_gateway_method.get_recipes.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.get_recipes.invoke_arn
 }
 
 resource "aws_lambda_function" "get_recipes" {
@@ -287,9 +256,33 @@ resource "aws_iam_role_policy" "get_recipes" {
   })
 }
 
+resource "aws_lambda_permission" "get_recipes" {
+  statement_id  = "AllowAPIGatewayInvokeGetRecipes"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_recipes.arn
+  principal     = "apigateway.amazonaws.com"
+}
+
 resource "aws_iam_role_policy_attachment" "get_recipes" {
   role       = aws_iam_role.get_recipes.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_api_gateway_method" "create_recipe" {
+  rest_api_id   = aws_api_gateway_rest_api.menu.id
+  resource_id   = aws_api_gateway_resource.recipes.id
+  http_method   = "POST"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "create_recipe" {
+  rest_api_id = aws_api_gateway_rest_api.menu.id
+  resource_id = aws_api_gateway_resource.recipes.id
+  http_method = aws_api_gateway_method.create_recipe.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.create_recipe.invoke_arn
 }
 
 resource "aws_lambda_function" "create_recipe" {
@@ -350,6 +343,13 @@ resource "aws_iam_role_policy" "create_recipe" {
       },
     ]
   })
+}
+
+resource "aws_lambda_permission" "create_recipe" {
+  statement_id  = "AllowAPIGatewayInvokeCreateRecipe"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.create_recipe.arn
+  principal     = "apigateway.amazonaws.com"
 }
 
 resource "aws_iam_role_policy_attachment" "create_recipe" {
