@@ -18,40 +18,50 @@ resource "aws_secretsmanager_secret" "openai_api_key" {
   description = "Key for the OpenAI API"
 }
 
-resource "aws_secretsmanager_secret_version" "openai_api_key_version" {
+resource "aws_secretsmanager_secret_version" "openai_api_key" {
   secret_id     = aws_secretsmanager_secret.openai_api_key.id
   secret_string = var.openai_api_key
 }
 
-resource "aws_api_gateway_rest_api" "menu_api" {
-  name        = "MenuAPI"
+resource "aws_api_gateway_rest_api" "menu" {
+  name        = "menu"
   description = "API for the Menu app"
 }
 
+resource "aws_api_gateway_deployment" "menu" {
+  depends_on = [
+    aws_api_gateway_integration.get_recipe,
+    aws_api_gateway_integration.get_recipes,
+    aws_api_gateway_integration.create_recipe
+  ]
+  rest_api_id = aws_api_gateway_rest_api.menu.id
+  stage_name  = var.apigateway_stage
+}
+
 resource "aws_api_gateway_resource" "recipes" {
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  parent_id   = aws_api_gateway_rest_api.menu_api.root_resource_id
+  rest_api_id = aws_api_gateway_rest_api.menu.id
+  parent_id   = aws_api_gateway_rest_api.menu.root_resource_id
   path_part   = "recipes"
 }
 
 resource "aws_api_gateway_resource" "recipe" {
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  rest_api_id = aws_api_gateway_rest_api.menu.id
   parent_id   = aws_api_gateway_resource.recipes.id
   path_part   = "{recipeId}"
 }
 
 # Define the OPTIONS method for CORS
-resource "aws_api_gateway_method" "options_recipes_method" {
-  rest_api_id   = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_method" "options_recipes" {
+  rest_api_id   = aws_api_gateway_rest_api.menu.id
   resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "OPTIONS"
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_method_response" "options_recipes_method_response" {
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_method_response" "options_recipes" {
+  rest_api_id = aws_api_gateway_rest_api.menu.id
   resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.options_recipes_method.http_method
+  http_method = aws_api_gateway_method.options_recipes.http_method
   status_code = "200"
 
   response_parameters = {
@@ -65,24 +75,24 @@ resource "aws_api_gateway_method_response" "options_recipes_method_response" {
   }
 }
 
-resource "aws_api_gateway_integration" "options_recipes_integration" {
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_integration" "options_recipes" {
+  rest_api_id = aws_api_gateway_rest_api.menu.id
   resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.options_recipes_method.http_method
+  http_method = aws_api_gateway_method.options_recipes.http_method
   type        = "MOCK"
   request_templates = {
     "application/json" = "{\"statusCode\": 200}"
   }
 }
 
-resource "aws_api_gateway_integration_response" "options_recipes_integration_response" {
+resource "aws_api_gateway_integration_response" "options_recipes" {
   depends_on = [
-    aws_api_gateway_integration.options_recipes_integration
+    aws_api_gateway_integration.options_recipes
   ]
 
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+  rest_api_id = aws_api_gateway_rest_api.menu.id
   resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.options_recipes_method.http_method
+  http_method = aws_api_gateway_method.options_recipes.http_method
   status_code = "200"
 
   response_parameters = {
@@ -92,8 +102,8 @@ resource "aws_api_gateway_integration_response" "options_recipes_integration_res
   }
 }
 
-resource "aws_api_gateway_method" "get_recipe_method" {
-  rest_api_id   = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_method" "get_recipe" {
+  rest_api_id   = aws_api_gateway_rest_api.menu.id
   resource_id   = aws_api_gateway_resource.recipe.id
   http_method   = "GET"
   authorization = "NONE"
@@ -103,10 +113,10 @@ resource "aws_api_gateway_method" "get_recipe_method" {
   }
 }
 
-resource "aws_api_gateway_integration" "get_recipe_integration" {
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_integration" "get_recipe" {
+  rest_api_id = aws_api_gateway_rest_api.menu.id
   resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.get_recipe_method.http_method
+  http_method = aws_api_gateway_method.get_recipe.http_method
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
@@ -117,65 +127,55 @@ resource "aws_api_gateway_integration" "get_recipe_integration" {
   }
 }
 
-resource "aws_api_gateway_method" "get_recipes_method" {
-  rest_api_id   = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_method" "get_recipes" {
+  rest_api_id   = aws_api_gateway_rest_api.menu.id
   resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "GET"
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "get_recipes_integration" {
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_integration" "get_recipes" {
+  rest_api_id = aws_api_gateway_rest_api.menu.id
   resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.get_recipes_method.http_method
+  http_method = aws_api_gateway_method.get_recipes.http_method
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.get_recipes.invoke_arn
 }
 
-resource "aws_api_gateway_method" "create_recipe_method" {
-  rest_api_id   = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_method" "create_recipe" {
+  rest_api_id   = aws_api_gateway_rest_api.menu.id
   resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "POST"
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "create_recipe_integration" {
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
+resource "aws_api_gateway_integration" "create_recipe" {
+  rest_api_id = aws_api_gateway_rest_api.menu.id
   resource_id = aws_api_gateway_resource.recipes.id
-  http_method = aws_api_gateway_method.create_recipe_method.http_method
+  http_method = aws_api_gateway_method.create_recipe.http_method
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.create_recipe.invoke_arn
 }
 
-resource "aws_api_gateway_deployment" "menu_api_deployment" {
-  depends_on = [
-    aws_api_gateway_integration.get_recipe_integration,
-    aws_api_gateway_integration.get_recipes_integration,
-    aws_api_gateway_integration.create_recipe_integration
-  ]
-  rest_api_id = aws_api_gateway_rest_api.menu_api.id
-  stage_name  = var.apigateway_stage
-}
-
-resource "aws_lambda_permission" "get_recipe_permission" {
+resource "aws_lambda_permission" "get_recipe" {
   statement_id  = "AllowAPIGatewayInvokeGetRecipe"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.get_recipe.arn
   principal     = "apigateway.amazonaws.com"
 }
 
-resource "aws_lambda_permission" "get_recipes_permission" {
+resource "aws_lambda_permission" "get_recipes" {
   statement_id  = "AllowAPIGatewayInvokeGetRecipes"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.get_recipes.arn
   principal     = "apigateway.amazonaws.com"
 }
 
-resource "aws_lambda_permission" "create_recipe_permission" {
+resource "aws_lambda_permission" "create_recipe" {
   statement_id  = "AllowAPIGatewayInvokeCreateRecipe"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.create_recipe.arn
@@ -185,7 +185,7 @@ resource "aws_lambda_permission" "create_recipe_permission" {
 resource "aws_lambda_function" "get_recipe" {
   filename         = "${path.module}/get_recipe.zip"
   function_name    = "GetRecipe"
-  role             = aws_iam_role.get_recipe_role.arn
+  role             = aws_iam_role.get_recipe.arn
   handler          = "index.handler"
   source_code_hash = filebase64sha256("${path.module}/get_recipe.zip")
   runtime          = "nodejs20.x"
@@ -198,7 +198,7 @@ resource "aws_lambda_function" "get_recipe" {
   }
 }
 
-resource "aws_iam_role" "get_recipe_role" {
+resource "aws_iam_role" "get_recipe" {
   name = "get_recipe_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -214,9 +214,9 @@ resource "aws_iam_role" "get_recipe_role" {
   })
 }
 
-resource "aws_iam_role_policy" "get_recipe_policy" {
+resource "aws_iam_role_policy" "get_recipe" {
   name = "get_recipe_policy"
-  role = aws_iam_role.get_recipe_role.id
+  role = aws_iam_role.get_recipe.id
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -232,15 +232,15 @@ resource "aws_iam_role_policy" "get_recipe_policy" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "get_recipe_role_policy_attach" {
-  role       = aws_iam_role.get_recipe_role.name
+resource "aws_iam_role_policy_attachment" "get_recipe" {
+  role       = aws_iam_role.get_recipe.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 resource "aws_lambda_function" "get_recipes" {
   filename         = "${path.module}/get_recipes.zip"
   function_name    = "GetRecipes"
-  role             = aws_iam_role.get_recipes_role.arn
+  role             = aws_iam_role.get_recipes.arn
   handler          = "index.handler"
   source_code_hash = filebase64sha256("${path.module}/get_recipes.zip")
   runtime          = "nodejs20.x"
@@ -253,7 +253,7 @@ resource "aws_lambda_function" "get_recipes" {
   }
 }
 
-resource "aws_iam_role" "get_recipes_role" {
+resource "aws_iam_role" "get_recipes" {
   name = "get_recipes_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -269,9 +269,9 @@ resource "aws_iam_role" "get_recipes_role" {
   })
 }
 
-resource "aws_iam_role_policy" "get_recipes_policy" {
+resource "aws_iam_role_policy" "get_recipes" {
   name = "get_recipes_policy"
-  role = aws_iam_role.get_recipes_role.id
+  role = aws_iam_role.get_recipes.id
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -287,15 +287,15 @@ resource "aws_iam_role_policy" "get_recipes_policy" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "get_recipes_role_policy_attach" {
-  role       = aws_iam_role.get_recipes_role.name
+resource "aws_iam_role_policy_attachment" "get_recipes" {
+  role       = aws_iam_role.get_recipes.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 resource "aws_lambda_function" "create_recipe" {
   filename         = "${path.module}/create_recipe.zip"
   function_name    = "CreateRecipe"
-  role             = aws_iam_role.create_recipe_role.arn
+  role             = aws_iam_role.create_recipe.arn
   handler          = "index.handler"
   source_code_hash = filebase64sha256("${path.module}/create_recipe.zip")
   runtime          = "nodejs20.x"
@@ -310,7 +310,7 @@ resource "aws_lambda_function" "create_recipe" {
   }
 }
 
-resource "aws_iam_role" "create_recipe_role" {
+resource "aws_iam_role" "create_recipe" {
   name = "create_recipe_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -326,9 +326,9 @@ resource "aws_iam_role" "create_recipe_role" {
   })
 }
 
-resource "aws_iam_role_policy" "create_recipe_policy" {
+resource "aws_iam_role_policy" "create_recipe" {
   name = "create_recipe_policy"
-  role = aws_iam_role.create_recipe_role.id
+  role = aws_iam_role.create_recipe.id
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -352,8 +352,8 @@ resource "aws_iam_role_policy" "create_recipe_policy" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "create_recipe_role_policy_attach" {
-  role       = aws_iam_role.create_recipe_role.name
+resource "aws_iam_role_policy_attachment" "create_recipe" {
+  role       = aws_iam_role.create_recipe.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
