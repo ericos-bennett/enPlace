@@ -25,3 +25,7 @@ export type Ingredient = {
   amount: number
   units?: string
 }
+
+export type CreateRecipeResponse = {
+  recipeId: string
+}

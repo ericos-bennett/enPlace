@@ -1,4 +1,4 @@
-import { Recipe, RecipeMeta } from '../types'
+import { CreateRecipeResponse, Recipe, RecipeMeta } from '../types'
 
 const recipesEndpoint = `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_API_STAGE}/recipes`
 
@@ -15,7 +15,9 @@ export const getRecipeMetas = async (): Promise<RecipeMeta[]> => {
   return response.json()
 }
 
-export const createRecipe = async (recipeUrl: string): Promise<Recipe> => {
+export const createRecipe = async (
+  recipeUrl: string
+): Promise<CreateRecipeResponse> => {
   const response = await fetch(recipesEndpoint, {
     method: 'POST',
     headers: {

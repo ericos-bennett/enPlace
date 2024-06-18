@@ -1,12 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { CreateRecipeForm } from '../components/CreateRecipeForm/CreateRecipeForm'
-import type { Recipe as RecipeType } from '../types'
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate()
 
-  const handleCreateRecipe = (recipe: RecipeType) => {
-    console.log(recipe)
+  const handleCreateRecipe = (recipeId: string) => {
+    navigate(`/recipes/${recipeId}`)
   }
 
   return (

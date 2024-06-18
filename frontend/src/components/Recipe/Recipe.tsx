@@ -38,11 +38,11 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
           </TableRow>
           <TableRow>
             <TableCell>Prep Time:</TableCell>
-            <TableCell>{recipe.prepTime}</TableCell>
+            <TableCell>{recipe.prepTime} minutes</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Serving Time:</TableCell>
-            <TableCell>{recipe.cookingTime}</TableCell>
+            <TableCell>Cooking Time:</TableCell>
+            <TableCell>{recipe.cookingTime} minutes</TableCell>
           </TableRow>
           {recipe.steps.map((step, stepIndex) => {
             return (

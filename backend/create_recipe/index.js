@@ -19,8 +19,8 @@ export const handler = async (event) => {
     // Validate URL input
     const { recipeUrl } = JSON.parse(event.body);
     new URL(recipeUrl); // This will throw a ERR_INVALID_URL error if the input string is invalid
-    const response = await fetch(recipeUrl); // This will throw a ENOTFOUND error if the DNS lookup fails
-    if (!response.ok) {
+    const urlPing = await fetch(recipeUrl); // This will throw a ENOTFOUND error if the DNS lookup fails
+    if (!urlPing.ok) {
       throw new Error(`URL Validation: invalid response from ${recipeUrl}`);
     }
 
@@ -44,7 +44,9 @@ export const handler = async (event) => {
       model: "gpt-3.5-turbo",
     });
     console.log(`OpenAI API Usage: ${JSON.stringify(completion.usage)}`);
-    const recipeItem = JSON.parse(completion.choices[0].message.content);
+    const openAiResponse = completion.choices[0].message.content;
+    console.log(openAiResponse);
+    const recipeItem = JSON.parse(openAiResponse);
 
     // Add extra properties to the recipe
     recipeItem.Id = uuidv4();
@@ -66,7 +68,7 @@ export const handler = async (event) => {
     // Return response to client
     return {
       statusCode: 201,
-      body: recipeItem,
+      body: { recipeId: recipeItem.Id },
       headers,
     };
   } catch (error) {

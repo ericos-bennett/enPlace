@@ -12,8 +12,8 @@
 - [x] Redirect to NotFound page if recipe 404s or not a programmed route
 - [x] Prevent further FE requests when create recipe in progress
 - [x] Validate that input is valid URL before using OpenAI API
-- [ ] Create RecipesPage, cause it to get recipes metadata for the given user (new GSI)
-- [ ] Redirect to RecipePage when new recipe created
+- [x] Create RecipesPage, cause it to get recipes metadata for the given user (new GSI)
+- [x] Redirect to RecipePage when new recipe created
 - [ ] Improve precision of prompt
 - [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
 - [ ] Pass encrypted userId from FE when querying for recipes

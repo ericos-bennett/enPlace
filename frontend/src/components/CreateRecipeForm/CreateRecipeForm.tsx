@@ -3,10 +3,9 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import { createRecipe } from '../../services/recipe'
-import { Recipe } from '../../types'
 
 interface CreateRecipeFormProps {
-  onCreateRecipe: (recipe: Recipe) => void
+  onCreateRecipe: (recipeId: string) => void
 }
 
 export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
@@ -25,8 +24,8 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
     setIsSubmitting(true)
 
     try {
-      const recipe: Recipe = await createRecipe(inputValue)
-      onCreateRecipe(recipe)
+      const { recipeId } = await createRecipe(inputValue)
+      onCreateRecipe(recipeId)
     } catch (error) {
       console.log(`Error creating recipe with input '${inputValue}':`, error)
     } finally {
