@@ -8,7 +8,7 @@ const RecipesPage: React.FC = () => {
 
   useEffect(() => {
     getRecipeMetas()
-      .then((data) => setRecipeMetas(data))
+      .then((recipeMetas) => setRecipeMetas(recipeMetas))
       .catch((error) => console.error('Error fetching recipes:', error))
   }, [])
 
