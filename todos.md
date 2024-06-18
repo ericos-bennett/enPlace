@@ -9,7 +9,7 @@
 - [x] Add error handling to local_deploy.sh
 - [x] Clean up TF code
 - [x] Use OpenAI API instead of static JSON on createRecipe POST
-- [ ] Redirect to NotFound page if recipe 404s or not a programmed route
+- [x] Redirect to NotFound page if recipe 404s or not a programmed route
 - [ ] Prevent further FE requests when create recipe in progress
 - [ ] Validate that input is valid URL before using OpenAI API
 - [ ] Improve precision of prompt

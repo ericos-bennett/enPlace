@@ -4,6 +4,9 @@ const recipesEndpoint = `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_
 
 export const getRecipe = async (recipeId: string): Promise<Recipe> => {
   const response = await fetch(`${recipesEndpoint}/${recipeId}`)
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
   return response.json()
 }
 
