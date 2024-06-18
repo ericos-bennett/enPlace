@@ -27,10 +27,10 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
     try {
       const recipe: Recipe = await createRecipe(inputValue)
       onCreateRecipe(recipe)
-      setInputValue('')
     } catch (error) {
-      console.log('Error creating recipe:', error)
+      console.log(`Error creating recipe with input '${inputValue}':`, error)
     } finally {
+      setInputValue('')
       setIsSubmitting(false)
     }
   }
