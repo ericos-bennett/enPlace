@@ -1,14 +1,22 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
 echo ">>> Running pre-commit git hook"
 
+# Save a list of staged files
+staged_files=$(git diff --cached --name-only --diff-filter=AM)
+
 cd frontend || exit 1
+
 npm run format
 
-status=$?
-if [ $status -ne 0 ]; then
-  echo ">>> npm run format failed. Aborting commit."
-  exit $status
-fi
+cd ..
 
-echo ">>> Pre-commit git hook completed"
+# Add formatting changes for staged files to the commit
+for file in $staged_files; do
+  git add "$(pwd)/$file"
+done
+
+echo
+echo ">>> Pre-commit git hook finished"
+echo
