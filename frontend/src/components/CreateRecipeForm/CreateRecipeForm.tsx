@@ -13,6 +13,7 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
   onCreateRecipe,
 }) => {
   const [inputValue, setInputValue] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
@@ -20,11 +21,17 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (isSubmitting) return
+    setIsSubmitting(true)
+
     try {
       const recipe: Recipe = await createRecipe(inputValue)
       onCreateRecipe(recipe)
+      setInputValue('')
     } catch (error) {
       console.log('Error creating recipe:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -35,9 +42,15 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
         variant="outlined"
         value={inputValue}
         onChange={handleInputChange}
+        disabled={isSubmitting}
       />
-      <Button variant="contained" color="primary" type="submit">
-        Create
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Submitting...' : 'Create'}
       </Button>
     </Box>
   )

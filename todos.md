@@ -10,7 +10,7 @@
 - [x] Clean up TF code
 - [x] Use OpenAI API instead of static JSON on createRecipe POST
 - [x] Redirect to NotFound page if recipe 404s or not a programmed route
-- [ ] Prevent further FE requests when create recipe in progress
+- [x] Prevent further FE requests when create recipe in progress
 - [ ] Validate that input is valid URL before using OpenAI API
 - [ ] Improve precision of prompt
 - [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
