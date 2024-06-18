@@ -5,20 +5,20 @@ import { CreateRecipeForm } from '../components/CreateRecipeForm/CreateRecipeFor
 import type { Recipe as RecipeType } from '../types'
 
 const HomePage: React.FC = () => {
-  const [recipes, setRecipes] = useState<RecipeType[] | null>(null);
+  const [recipes, setRecipes] = useState<RecipeType[] | null>(null)
 
   useEffect(() => {
     getRecipes()
-      .then(data => setRecipes(data))
-      .catch(error => console.error('Error fetching recipes:', error))
-  }, []);
+      .then((data) => setRecipes(data))
+      .catch((error) => console.error('Error fetching recipes:', error))
+  }, [])
 
   const handleCreateRecipe = (recipe: RecipeType) => {
-    setRecipes(prevRecipes => {
+    setRecipes((prevRecipes) => {
       if (prevRecipes === null) {
-        return [recipe];
+        return [recipe]
       } else {
-        return [...prevRecipes, recipe];
+        return [...prevRecipes, recipe]
       }
     })
   }
@@ -29,7 +29,7 @@ const HomePage: React.FC = () => {
       {!recipes ? (
         <div>Loading...</div>
       ) : (
-        <div id='recipe-container'>
+        <div id="recipe-container">
           {recipes.map((recipe, recipeIndex) => (
             <Recipe recipe={recipe} key={recipeIndex}></Recipe>
           ))}

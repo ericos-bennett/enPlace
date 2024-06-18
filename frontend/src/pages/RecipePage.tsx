@@ -5,23 +5,17 @@ import type { Recipe as RecipeType } from '../types'
 import { useParams } from 'react-router-dom'
 
 const RecipePage: React.FC = () => {
-  const { recipeId } = useParams() as { recipeId: string };
-  const [recipe, setRecipe] = useState<RecipeType | null>(null);
+  const { recipeId } = useParams() as { recipeId: string }
+  const [recipe, setRecipe] = useState<RecipeType | null>(null)
 
   useEffect(() => {
     getRecipe(recipeId)
-      .then(recipe => setRecipe(recipe))
-      .catch(error => console.error('Error fetching recipe:', error))
+      .then((recipe) => setRecipe(recipe))
+      .catch((error) => console.error('Error fetching recipe:', error))
   }, [recipeId])
 
   return (
-    <>
-      {!recipe ? (
-        <div>Loading...</div>
-      ) : (
-        <Recipe recipe={recipe}></Recipe >
-      )}
-    </>
+    <>{!recipe ? <div>Loading...</div> : <Recipe recipe={recipe}></Recipe>}</>
   )
 }
 

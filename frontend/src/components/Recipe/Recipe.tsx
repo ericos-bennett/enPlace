@@ -12,7 +12,6 @@ interface RecipeProps {
 }
 
 export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
-
   const formatIngredient = (ingredient: Ingredient): string => {
     return `${ingredient.ingredient} - ${ingredient.amount}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`
   }
@@ -53,12 +52,14 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
                     <TableCell>{formatIngredient(ingredient)}</TableCell>
                   </TableRow>
                 ))}
-                <TableCell>{stepIndex + 1}. {step.instructions}</TableCell>
+                <TableCell>
+                  {stepIndex + 1}. {step.instructions}
+                </TableCell>
               </TableRow>
             )
           })}
         </TableBody>
-      </Table >
-    </TableContainer >
+      </Table>
+    </TableContainer>
   )
 }
