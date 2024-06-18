@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo ">>> Running pre-commit git hook"
+
+cd frontend || exit 1
+npm run format
+
+status=$?
+if [ $status -ne 0 ]; then
+  echo ">>> npm run format failed. Aborting commit."
+  exit $status
+fi
+
+echo ">>> Pre-commit git hook completed"

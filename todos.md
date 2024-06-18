@@ -16,3 +16,5 @@
 - [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
 - [ ] Pass encrypted userId from FE when querying for recipes
 - [ ] Improve FE design
+- [ ] Format /backend automatically
+- [ ] Formet /infra automatically
