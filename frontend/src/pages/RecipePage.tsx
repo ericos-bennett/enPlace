@@ -12,7 +12,7 @@ const RecipePage: React.FC = () => {
     getRecipe(recipeId)
       .then(recipe => setRecipe(recipe))
       .catch(error => console.error('Error fetching recipe:', error))
-  }, []);
+  }, [recipeId])
 
   return (
     <>

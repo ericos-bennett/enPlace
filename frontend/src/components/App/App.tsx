@@ -4,7 +4,6 @@ import HomePage from '../../pages/HomePage'
 import RecipePage from '../../pages/RecipePage'
 import NotFoundPage from '../../pages/NotFoundPage'
 
-
 const App: React.FC = () => {
   return (
     <div className="App">
