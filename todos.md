@@ -14,10 +14,12 @@
 - [x] Validate that input is valid URL before using OpenAI API
 - [x] Create RecipesPage, cause it to get recipes metadata for the given user (new GSI)
 - [x] Redirect to RecipePage when new recipe created
+- [ ] Add script to bootstrap DB
 - [ ] Add header and footer to app
-- [ ] Improve precision of prompt
-- [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
-- [ ] Pass encrypted userId from FE when querying for recipes
 - [ ] Improve FE design
+- [ ] Alert user if create URL returns 400
+- [ ] Improve precision of prompt (e.g. ask for specific response if URL is not a recipe)
 - [ ] Format /backend automatically
 - [ ] Formet /infra automatically
+- [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
+- [ ] Add auth - pass encrypted userId from FE when querying for recipes
