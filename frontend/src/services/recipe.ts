@@ -25,6 +25,9 @@ export const createRecipe = async (
     },
     body: JSON.stringify({ recipeUrl }),
   })
+  if (response.status == 409) {
+    return response.json()
+  }
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`)
   }

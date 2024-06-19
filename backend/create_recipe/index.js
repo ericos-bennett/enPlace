@@ -9,19 +9,46 @@ const region = process.env.AWS_REGION;
 const secretsManagerEndpoint = process.env.LAMBDA_SECRETSMANAGER_ENDPOINT;
 const dynamoDbEndpoint = process.env.LAMBDA_DYNAMODB_ENDPOINT;
 
-export const handler = async (event) => {
-  const userId = 123;
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
+const clientResponse = (statusCode, body) => {
+  return {
+    statusCode,
+    body,
+    headers: { "Access-Control-Allow-Origin": "*" },
   };
+};
 
+export const handler = async (event) => {
   try {
-    // Validate URL input
+    const userId = 123;
+    const dynamodb = new AWS.DynamoDB.DocumentClient({
+      region,
+      endpoint: dynamoDbEndpoint,
+    });
     const { recipeUrl } = JSON.parse(event.body);
-    new URL(recipeUrl); // This will throw a ERR_INVALID_URL error if the input string is invalid
-    const urlPing = await fetch(recipeUrl); // This will throw a ENOTFOUND error if the DNS lookup fails
-    if (!urlPing.ok) {
-      throw new Error(`URL Validation: invalid response from ${recipeUrl}`);
+    // Validate URL input
+    try {
+      new URL(recipeUrl); // This will throw a ERR_INVALID_URL error if the input string is invalid
+      const urlPing = await fetch(recipeUrl); // This will throw a ENOTFOUND error if the DNS lookup fails
+      if (!urlPing.ok) {
+        throw new Error(`URL Validation: invalid response from ${recipeUrl}`);
+      }
+    } catch (error) {
+      return clientResponse(400, "Invalid recipe URL");
+    }
+
+    // Check if URL already exists in DB
+    const checkSourceUrlParams = {
+      TableName: "Recipes",
+      IndexName: "UserIdIndex",
+      KeyConditionExpression: "UserId = :userId AND SourceUrl = :sourceUrl",
+      ExpressionAttributeValues: {
+        ":userId": userId,
+        ":sourceUrl": recipeUrl,
+      },
+    };
+    const { Items } = await dynamodb.query(checkSourceUrlParams).promise();
+    if (Items.length > 0) {
+      return clientResponse(409, { recipeId: Items[0].Id });
     }
 
     // Get OpenAI secret and start client
@@ -50,44 +77,21 @@ export const handler = async (event) => {
 
     // Add extra properties to the recipe
     recipeItem.Id = uuidv4();
-    recipeItem.CreatedAt = new Date().toISOString();
     recipeItem.UserId = userId;
+    recipeItem.SourceUrl = recipeUrl;
+    recipeItem.CreatedAt = new Date().toISOString();
 
     // // Save to DynamoDB
     console.log(`Saving recipe with ID: ${recipeItem.Id}`);
-    const params = {
+    const saveRecipeParams = {
       TableName: "Recipes",
       Item: recipeItem,
     };
-    const dynamodb = new AWS.DynamoDB.DocumentClient({
-      region,
-      endpoint: dynamoDbEndpoint,
-    });
-    await dynamodb.put(params).promise();
+    await dynamodb.put(saveRecipeParams).promise();
 
-    // Return response to client
-    return {
-      statusCode: 201,
-      body: { recipeId: recipeItem.Id },
-      headers,
-    };
+    return clientResponse(201, { recipeId: recipeItem.Id });
   } catch (error) {
-    if (
-      error.code == "ERR_INVALID_URL" ||
-      error.code == "ENOTFOUND" ||
-      error.message.includes("URL Validation")
-    ) {
-      return {
-        statusCode: 400,
-        body: "Invalid recipe URL",
-        headers,
-      };
-    }
     console.log(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify(error),
-      headers,
-    };
+    return clientResponse(500, JSON.stringify(error));
   }
 };

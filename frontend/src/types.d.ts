@@ -2,6 +2,7 @@ export type RecipeMeta = {
   Id: string
   CreatedAt: string
   UserId: number
+  SourceUrl: string
   name: string
 }
 
