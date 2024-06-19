@@ -65,7 +65,7 @@ export const handler = async (event) => {
     // Get the recipe object from the OpenAI API
     const prompt = `Return the recipe from: ${recipeUrl} as a VALID JSON following this format: ${JSON.stringify(
       exampleRecipe
-    )}. Save numbers as decimals and don't add newlines.`;
+    )}. Don't add newlines. Save all amounts as decimals. Create a separate step for each instruction in the recipe and do not duplicate ingredients.`;
     const completion = await openai.chat.completions.create({
       messages: [{ role: "system", content: prompt }],
       model: "gpt-3.5-turbo",

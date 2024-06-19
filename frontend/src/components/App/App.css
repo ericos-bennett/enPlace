@@ -1,9 +1,9 @@
-#root {
-  max-width: 1280px;
+/* #root {
   margin: 0 auto;
   padding: 2rem;
+  max-width: 1280px;
   text-align: center;
-}
+} */
 
 #recipe-container {
   display: flex;
