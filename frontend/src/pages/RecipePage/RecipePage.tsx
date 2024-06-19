@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Recipe } from '../components/Recipe/Recipe'
-import { getRecipe } from '../services/recipe'
-import type { Recipe as RecipeType } from '../types'
+import { Recipe } from '../../components/Recipe/Recipe'
+import { getRecipe } from '../../services/recipe'
+import type { Recipe as RecipeType } from '../../types'
 import { useParams, useNavigate } from 'react-router-dom'
 
 const RecipePage: React.FC = () => {

@@ -1,19 +1,19 @@
 import './App.css'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { Container } from '@mui/material'
-import HomePage from '../../pages/HomePage'
-import RecipePage from '../../pages/RecipePage'
-import NotFoundPage from '../../pages/NotFoundPage'
-import RecipesPage from '../../pages/RecipesPage'
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
+import HomePage from './pages/HomePage/HomePage'
+import RecipePage from './pages/RecipePage/RecipePage'
+import RecipesPage from './pages/RecipesPage/RecipesPage'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Container maxWidth={false}>
+        <Container maxWidth={false} className="pageContainer">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes" element={<RecipesPage />} />

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { CreateRecipeForm } from '../components/CreateRecipeForm/CreateRecipeForm'
+import { CreateRecipeForm } from '../../components/CreateRecipeForm/CreateRecipeForm'
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate()

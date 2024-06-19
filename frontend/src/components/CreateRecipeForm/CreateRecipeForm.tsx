@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import { createRecipe } from '../../services/recipe'
+import './CreateRecipeForm.css'
 
 interface CreateRecipeFormProps {
   onCreateRecipe: (recipeId: string) => void
@@ -35,7 +36,11 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      className="create-recipe-form"
+    >
       <TextField
         label="Enter Recipe URL"
         variant="outlined"

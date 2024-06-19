@@ -6,6 +6,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import type { Recipe as RecipeType, Ingredient } from '../../types'
+import './Recipe.css'
 
 interface RecipeProps {
   recipe: RecipeType
@@ -17,7 +18,7 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className="recipe-container">
       <Table size="small">
         <TableHead>
           <TableRow>
