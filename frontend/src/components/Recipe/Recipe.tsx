@@ -29,6 +29,17 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
             <TableCell colSpan={2}>{recipe.description}</TableCell>
           </TableRow>
           <TableRow>
+            <TableCell colSpan={2}>
+              <a
+                href={recipe.SourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {recipe.SourceUrl}
+              </a>
+            </TableCell>
+          </TableRow>
+          <TableRow>
             <TableCell>Author:</TableCell>
             <TableCell>{recipe.author}</TableCell>
           </TableRow>
