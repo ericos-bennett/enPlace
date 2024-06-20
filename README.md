@@ -9,6 +9,7 @@ A better way to follow recipes found online
 3. Navigate to `/infra` and run `./local_stack_init.sh` to create a LocalStack container
 4. Run `terraform init` and `./local_deploy.sh` to launch the backend and infrastructure services in the above container
 5. Run `./local_frontend_config.sh` to save API environment variables in `/frontend/.env.local`
-6. Navigate to `/frontend` and run `npm install`
-7. Launch the frontend with `npm run dev`
-8. This project uses custom git hooks - you can enable them by navigating to `/cicd/git-hooks` and running `init.sh`
+6. Run `./local_dynamo_import.sh` to populate the database with sample recipe data
+7. Navigate to `/frontend` and run `npm install`
+8. Launch the frontend with `npm run dev`
+9. This project uses custom git hooks - you can enable them by navigating to `/cicd/git-hooks` and running `init.sh`

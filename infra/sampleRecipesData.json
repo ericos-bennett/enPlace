@@ -1,0 +1,1433 @@
+{
+    "Items": [
+        {
+            "servings": {
+                "N": "4"
+            },
+            "SourceUrl": {
+                "S": "https://tastesbetterfromscratch.com/pad-thai/"
+            },
+            "author": {
+                "S": "Lauren Allen"
+            },
+            "UserId": {
+                "N": "123"
+            },
+            "CreatedAt": {
+                "S": "2024-06-20T03:01:57.146Z"
+            },
+            "name": {
+                "S": "Pad Thai"
+            },
+            "description": {
+                "S": "A classic Thai noodle dish made with stir-fried rice noodles, eggs, tofu, shrimp, or chicken, tossed in a flavorful sauce."
+            },
+            "Id": {
+                "S": "4aed3417-af2c-4e45-a69d-fb9cf1dff7bc"
+            },
+            "steps": {
+                "L": [
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "8"
+                                            },
+                                            "ingredient": {
+                                                "S": "Rice Noodles"
+                                            },
+                                            "units": {
+                                                "S": "oz"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Prepare rice noodles according to package instructions."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "14"
+                                            },
+                                            "ingredient": {
+                                                "S": "Tofu"
+                                            },
+                                            "units": {
+                                                "S": "oz"
+                                            },
+                                            "preparation": {
+                                                "S": "Pressed and cubed"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "12"
+                                            },
+                                            "ingredient": {
+                                                "S": "Shrimp"
+                                            },
+                                            "units": {
+                                                "S": "oz"
+                                            },
+                                            "preparation": {
+                                                "S": "Peeled and deveined"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "12"
+                                            },
+                                            "ingredient": {
+                                                "S": "Chicken"
+                                            },
+                                            "units": {
+                                                "S": "oz"
+                                            },
+                                            "preparation": {
+                                                "S": "Thinly sliced"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Eggs"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Beaten"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "In a large wok or skillet, heat 1 Tbsp oil over medium-high heat. Add tofu, shrimp, or chicken and cook until cooked through. Move to side of pan."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Garlic"
+                                            },
+                                            "units": {
+                                                "S": "cloves"
+                                            },
+                                            "preparation": {
+                                                "S": "Minced"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "4"
+                                            },
+                                            "ingredient": {
+                                                "S": "Green Onions"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Add garlic and green onions to pan and cook for 1-2 minutes."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Bean Sprouts"
+                                            },
+                                            "units": {
+                                                "S": "cup"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Cilantro"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Peanuts"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Add bean sprouts, cilantro, and peanuts to the pan and cook for about 1 minute."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Vegetable Oil"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "3"
+                                            },
+                                            "ingredient": {
+                                                "S": "Fish Sauce"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "3"
+                                            },
+                                            "ingredient": {
+                                                "S": "Soy Sauce"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Rice Vinegar"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Sugar"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "In a small bowl, whisk together the sauce ingredients: vegetable oil, fish sauce, soy sauce, rice vinegar, and sugar."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": []
+                            },
+                            "instructions": {
+                                "S": "Add the cooked noodles, scrambled eggs, and sauce to the pan. Toss everything together to combine and heat through, about 1-2 minutes."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Lime"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Cut into wedges"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Cilantro"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Peanuts"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Top with additional lime, cilantro, and peanuts if desired. Serve hot and enjoy!"
+                            }
+                        }
+                    }
+                ]
+            },
+            "cookingTime": {
+                "N": "25"
+            },
+            "prepTime": {
+                "N": "20"
+            }
+        },
+        {
+            "servings": {
+                "N": "4"
+            },
+            "SourceUrl": {
+                "S": "https://www.allrecipes.com/recipe/257938/spicy-thai-basil-chicken-pad-krapow-gai/"
+            },
+            "author": {
+                "S": "Allrecipes"
+            },
+            "UserId": {
+                "N": "123"
+            },
+            "CreatedAt": {
+                "S": "2024-06-20T03:04:46.958Z"
+            },
+            "name": {
+                "S": "Spicy Thai Basil Chicken (Pad Krapow Gai)"
+            },
+            "description": {
+                "S": "Spicy and flavorful Thai dish with basil and chicken"
+            },
+            "Id": {
+                "S": "aa53e9c3-274e-464a-bc26-fa9068b85d72"
+            },
+            "steps": {
+                "L": [
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Canola Oil"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Heat oil in a large skillet over medium-high heat"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "3"
+                                            },
+                                            "ingredient": {
+                                                "S": "Garlic"
+                                            },
+                                            "units": {
+                                                "S": "cloves"
+                                            },
+                                            "preparation": {
+                                                "S": "Minced"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "4"
+                                            },
+                                            "ingredient": {
+                                                "S": "Thai Chilies"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Minced"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Cook garlic and Thai chilies in the hot oil until fragrant, about 1 minute"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Ground Chicken"
+                                            },
+                                            "units": {
+                                                "S": "lb"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Add ground chicken and cook, breaking it up with a spoon, until no longer pink, about 5 minutes"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Sugar"
+                                            },
+                                            "units": {
+                                                "S": "tsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Stir in sugar until dissolved"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Fish Sauce"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Soy Sauce"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Add fish sauce and soy sauce, stirring well to combine"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Fresh Basil Leaves"
+                                            },
+                                            "units": {
+                                                "S": "cups"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Mix in fresh basil leaves and cook until wilted, about 1 minute"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Red Bell Pepper"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Sliced"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Add red bell pepper slices and cook for an additional 2 minutes"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Fresh Thai Chilies"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Stir in fresh Thai chilies"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Water"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Pour in water and stir well to combine"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Cornstarch"
+                                            },
+                                            "units": {
+                                                "S": "tsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "In a small bowl, mix cornstarch with a splash of water to create a slurry"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "NULL": true
+                                            },
+                                            "ingredient": {
+                                                "S": "Cornstarch Slurry"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Stir in the cornstarch slurry to thicken the sauce"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Egg"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Optionally, make a well in the center of the pan and break an egg into the well, stirring to scramble and incorporating into the dish"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "NULL": true
+                                            },
+                                            "ingredient": {
+                                                "S": "Rice"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Cooked"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Serve the Spicy Thai Basil Chicken over hot cooked rice"
+                            }
+                        }
+                    }
+                ]
+            },
+            "cookingTime": {
+                "N": "45"
+            },
+            "prepTime": {
+                "N": "15"
+            }
+        },
+        {
+            "servings": {
+                "N": "4"
+            },
+            "SourceUrl": {
+                "S": "https://thecookingpat.wordpress.com/2015/04/15/mussels-with-celery-and-chilli/"
+            },
+            "author": {
+                "S": "The Cooking Pat"
+            },
+            "UserId": {
+                "N": "123"
+            },
+            "CreatedAt": {
+                "S": "2024-06-20T03:03:42.802Z"
+            },
+            "name": {
+                "S": "Mussels with Celery and Chilli"
+            },
+            "description": {
+                "S": "Delicious mussels cooked with celery and chili for a flavorful dish."
+            },
+            "Id": {
+                "S": "2820c575-a9da-4d34-818f-b8d474131776"
+            },
+            "steps": {
+                "L": [
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Olive Oil"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Heat oil in pan"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2.5"
+                                            },
+                                            "ingredient": {
+                                                "S": "Mussels"
+                                            },
+                                            "units": {
+                                                "S": "lbs"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Celery"
+                                            },
+                                            "units": {
+                                                "S": "Stalks"
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Chili Flakes"
+                                            },
+                                            "units": {
+                                                "S": "tsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Add mussels, celery, and chili flakes to the pan and cook until mussels have opened"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "0.5"
+                                            },
+                                            "ingredient": {
+                                                "S": "White Wine"
+                                            },
+                                            "units": {
+                                                "S": "cup"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Lemon Juice"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "S": "Freshly squeezed"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Pour in white wine and lemon juice, then cover and simmer for 5 minutes"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Fresh Parsley"
+                                            },
+                                            "units": {
+                                                "S": "Tbsp"
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Sprinkle parsley over the cooked mussels before serving"
+                            }
+                        }
+                    }
+                ]
+            },
+            "cookingTime": {
+                "N": "45"
+            },
+            "prepTime": {
+                "N": "15"
+            }
+        },
+        {
+            "servings": {
+                "N": "4"
+            },
+            "SourceUrl": {
+                "S": "https://www.thespruceeats.com/mango-sticky-rice-dessert-3217361"
+            },
+            "author": {
+                "S": "Lorna Kring"
+            },
+            "UserId": {
+                "N": "123"
+            },
+            "CreatedAt": {
+                "S": "2024-06-20T03:04:10.154Z"
+            },
+            "name": {
+                "S": "Mango Sticky Rice Dessert"
+            },
+            "description": {
+                "S": "A sweet and tropical dessert made with sticky rice and fresh mango"
+            },
+            "Id": {
+                "S": "6970d378-0c45-4105-a806-4d563732b343"
+            },
+            "steps": {
+                "L": [
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Sticky rice"
+                                            },
+                                            "units": {
+                                                "S": "cup"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1.5"
+                                            },
+                                            "ingredient": {
+                                                "S": "Water"
+                                            },
+                                            "units": {
+                                                "S": "cups"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Rinse the sticky rice under cold water until the water runs clear. Soak the rice in water for at least 4 hours or overnight."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Coconut milk"
+                                            },
+                                            "units": {
+                                                "S": "cup"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1.5"
+                                            },
+                                            "ingredient": {
+                                                "S": "Sugar"
+                                            },
+                                            "units": {
+                                                "S": "cups"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "0.25"
+                                            },
+                                            "ingredient": {
+                                                "S": "Salt"
+                                            },
+                                            "units": {
+                                                "S": "tsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "In a saucepan, combine the coconut milk, sugar, and salt. Cook over medium heat, stirring constantly, until the mixture comes to a gentle boil and the sugar has dissolved."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "2"
+                                            },
+                                            "ingredient": {
+                                                "S": "Mangoes"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Ripe, peeled, and sliced"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Peel and slice the mangoes. Set aside."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Toasted sesame seeds"
+                                            },
+                                            "units": {
+                                                "S": "tbsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Coconut cream"
+                                            },
+                                            "units": {
+                                                "S": "cup"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Toast the sesame seeds in a dry pan over medium heat until fragrant. Set aside. Spoon the warm sticky rice into serving bowls. Place mango slices on top and pour the coconut sauce over the top."
+                            }
+                        }
+                    }
+                ]
+            },
+            "cookingTime": {
+                "N": "30"
+            },
+            "prepTime": {
+                "N": "15"
+            }
+        },
+        {
+            "servings": {
+                "N": "6"
+            },
+            "SourceUrl": {
+                "S": "https://cookieandkate.com/classic-pico-de-gallo-recipe/"
+            },
+            "author": {
+                "S": "Cookie and Kate"
+            },
+            "UserId": {
+                "N": "123"
+            },
+            "CreatedAt": {
+                "S": "2024-06-20T03:03:00.005Z"
+            },
+            "name": {
+                "S": "Classic Pico de Gallo"
+            },
+            "description": {
+                "S": "A fresh and flavorful salsa"
+            },
+            "Id": {
+                "S": "0b1dbfa9-8471-4eda-bc52-3a62b4d522bc"
+            },
+            "steps": {
+                "L": [
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "4"
+                                            },
+                                            "ingredient": {
+                                                "S": "Tomatoes"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Diced"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Red Onion"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Diced"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Jalapeño"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Seeded and minced"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Cilantro"
+                                            },
+                                            "units": {
+                                                "S": "cup"
+                                            },
+                                            "preparation": {
+                                                "S": "Chopped"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Lime"
+                                            },
+                                            "units": {
+                                                "NULL": true
+                                            },
+                                            "preparation": {
+                                                "S": "Juiced"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "0.5"
+                                            },
+                                            "ingredient": {
+                                                "S": "Salt"
+                                            },
+                                            "units": {
+                                                "S": "tsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "In a medium bowl, combine the tomatoes, onion, jalapeño, cilantro, lime juice, and salt."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "1"
+                                            },
+                                            "ingredient": {
+                                                "S": "Garlic"
+                                            },
+                                            "units": {
+                                                "S": "clove"
+                                            },
+                                            "preparation": {
+                                                "S": "Minced"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Add the minced garlic and stir to combine."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": [
+                                    {
+                                        "M": {
+                                            "amount": {
+                                                "N": "0.25"
+                                            },
+                                            "ingredient": {
+                                                "S": "Salt"
+                                            },
+                                            "units": {
+                                                "S": "tsp"
+                                            },
+                                            "preparation": {
+                                                "NULL": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "instructions": {
+                                "S": "Season with more salt to taste."
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "ingredients": {
+                                "L": []
+                            },
+                            "instructions": {
+                                "S": "Serve immediately, or let it marinate for about 30 minutes before serving."
+                            }
+                        }
+                    }
+                ]
+            },
+            "cookingTime": {
+                "N": "0"
+            },
+            "prepTime": {
+                "N": "15"
+            }
+        }
+    ],
+    "Count": 5,
+    "ScannedCount": 5,
+    "ConsumedCapacity": null
+}
