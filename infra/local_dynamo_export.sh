@@ -8,9 +8,7 @@ REGION="us-east-1"
 TABLE_NAME="Recipes"
 OUTPUT_FILE="sampleRecipesData.json"
 
-# Export data from DynamoDB table
 echo ">>> Exporting data from $TABLE_NAME..."
-
 awslocal dynamodb scan \
     --endpoint-url $ENDPOINT_URL \
     --region $REGION \

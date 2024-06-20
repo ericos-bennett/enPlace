@@ -12,7 +12,6 @@ echo ">>> Formatting $INPUT_FILE"
 ITEMS_JSON=$(jq -c '.Items | map({"PutRequest": {"Item": .}})' $INPUT_FILE)
 BATCH_JSON=$(jq -n --argjson items "$ITEMS_JSON" '{"'$TABLE_NAME'": $items}')
 
-
 echo ">>> Importing data to $TABLE_NAME"
 aws dynamodb batch-write-item \
     --region $REGION \
