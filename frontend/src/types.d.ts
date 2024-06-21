@@ -8,7 +8,6 @@ export type RecipeMeta = {
 
 export type Recipe = RecipeMeta & {
   description: string
-  author: string
   servings: number
   prepTime: number
   cookingTime: number
