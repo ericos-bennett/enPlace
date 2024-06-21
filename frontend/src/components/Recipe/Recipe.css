@@ -3,3 +3,21 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
+.recipe-stats {
+  margin: 16px 0;
+  display: flex;
+  gap: 2rem;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
+.recipe-steps {
+  ul {
+    padding: inherit;
+  }
+}

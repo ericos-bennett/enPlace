@@ -1,3 +1,4 @@
+import Container from '@mui/material/Container'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -6,6 +7,8 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import type { Recipe as RecipeType, Ingredient } from '../../types'
+import cutlery from '~assets/icons/cutlery.jpeg'
+import clock from '~assets/icons/clock.jpeg'
 import './Recipe.css'
 
 interface RecipeProps {
@@ -18,60 +21,57 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
   }
 
   return (
-    <TableContainer component={Paper} className="recipe-container">
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell colSpan={2}>{recipe.name}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell colSpan={2}>{recipe.description}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2}>
-              <a
-                href={recipe.SourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {recipe.SourceUrl}
-              </a>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Author:</TableCell>
-            <TableCell>{recipe.author}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Servings:</TableCell>
-            <TableCell>{recipe.servings}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Prep Time:</TableCell>
-            <TableCell>{recipe.prepTime} minutes</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Cooking Time:</TableCell>
-            <TableCell>{recipe.cookingTime} minutes</TableCell>
-          </TableRow>
-          {recipe.steps.map((step, stepIndex) => {
-            return (
-              <TableRow key={stepIndex}>
-                {step.ingredients?.map((ingredient, ingredientIndex) => (
-                  <TableRow key={ingredientIndex}>
-                    <TableCell>{formatIngredient(ingredient)}</TableCell>
-                  </TableRow>
-                ))}
-                <TableCell>
-                  {stepIndex + 1}. {step.instructions}
-                </TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Container className="recipe-container">
+      <h2>
+        <a href={recipe.SourceUrl} target="_blank" rel="noopener noreferrer">
+          {recipe.name}
+        </a>
+      </h2>
+      <p>{recipe.description}</p>
+      <div className="recipe-stats">
+        <div>
+          <img src={cutlery} height="20" alt="Servings" />
+          <strong>Servings:</strong> {recipe.servings}
+        </div>
+        <div>
+          <img src={clock} height="20" alt="Prep Time" />
+          <strong>Prep Time:</strong> {recipe.prepTime}min
+        </div>
+        <div>
+          <img src={clock} height="20" alt="Cooking Time" />
+          <strong>Cooking Time:</strong> {recipe.cookingTime}min
+        </div>
+      </div>
+      <TableContainer component={Paper} className="recipe-steps">
+        <Table size="small" stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell>Ingredients:</TableCell>
+              <TableCell>Steps:</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {recipe.steps.map((step, stepIndex) => {
+              return (
+                <TableRow key={stepIndex}>
+                  <TableCell>
+                    <ul>
+                      {step.ingredients?.map((ingredient, ingredientIndex) => (
+                        <li key={ingredientIndex}>
+                          {formatIngredient(ingredient)}
+                        </li>
+                      ))}
+                    </ul>
+                  </TableCell>
+                  <TableCell>
+                    {stepIndex + 1}. {step.instructions}
+                  </TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Container>
   )
 }
