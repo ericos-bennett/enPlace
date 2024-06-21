@@ -25,12 +25,14 @@ export const handler = async (event) => {
       endpoint: dynamoDbEndpoint,
     });
     const { recipeUrl } = JSON.parse(event.body);
+    console.log(`Processing request: ${{ userId, recipeUrl }}`);
+
     // Validate URL input
     try {
       new URL(recipeUrl); // This will throw a ERR_INVALID_URL error if the input string is invalid
       const urlPing = await fetch(recipeUrl); // This will throw a ENOTFOUND error if the DNS lookup fails
       if (!urlPing.ok) {
-        throw new Error(`URL Validation: invalid response from ${recipeUrl}`);
+        throw new Error(`URL Validation: non-2XX response from ${recipeUrl}`);
       }
     } catch (error) {
       return clientResponse(400, "Invalid recipe URL");
@@ -63,16 +65,26 @@ export const handler = async (event) => {
     const openai = new OpenAI({ apiKey });
 
     // Get the recipe object from the OpenAI API
-    const prompt = `Return the recipe from: ${recipeUrl} as a VALID JSON following this format: ${JSON.stringify(
-      exampleRecipe
-    )}. Don't add newlines. Save all amounts as decimals. Create a separate step for each instruction in the recipe and do not duplicate ingredients.`;
+    const noRecipeReturnValue = "NO_RECIPE";
+    const promptInstructions = [
+      `Return the recipe from: ${recipeUrl} as a VALID JSON following this format: ${JSON.stringify(
+        exampleRecipe
+      )}`,
+      `Don't add newlines.`,
+      `Save all amounts as decimals.`,
+      `Create a separate step for each instruction in the recipe and do not duplicate ingredients.`,
+      `If there is no recipe on the page, return the string "${noRecipeReturnValue}"`,
+    ];
     const completion = await openai.chat.completions.create({
-      messages: [{ role: "system", content: prompt }],
+      messages: [{ role: "system", content: promptInstructions.join(" ") }],
       model: "gpt-3.5-turbo",
     });
     console.log(`OpenAI API Usage: ${JSON.stringify(completion.usage)}`);
     const openAiResponse = completion.choices[0].message.content;
-    console.log(openAiResponse);
+    console.log({ openAiResponse });
+    if (openAiResponse.includes(noRecipeReturnValue)) {
+      return clientResponse(400, "This URL does not contain a recipe");
+    }
     const recipeItem = JSON.parse(openAiResponse);
 
     // Add extra properties to the recipe
