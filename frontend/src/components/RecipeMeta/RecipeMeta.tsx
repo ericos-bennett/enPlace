@@ -1,7 +1,7 @@
 import { ListItemButton, ListItemText } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
-import type { RecipeMeta as RecipeMetaType } from '../../types'
+import type { RecipeMeta as RecipeMetaType } from '~/types'
 
 interface RecipeMetaProps {
   recipeMeta: RecipeMetaType

@@ -1,4 +1,4 @@
-import { CreateRecipeResponse, Recipe, RecipeMeta } from '../types'
+import { Recipe, RecipeMeta, CreateRecipeResponse } from '~/types'
 
 const recipesEndpoint = `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_API_STAGE}/recipes`
 

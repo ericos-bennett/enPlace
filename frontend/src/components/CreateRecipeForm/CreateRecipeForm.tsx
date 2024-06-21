@@ -1,8 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
-import { createRecipe } from '../../services/recipe'
+import { Box, Button, TextField } from '@mui/material'
+import { createRecipe } from '~/services/recipe'
 import './CreateRecipeForm.css'
 
 interface CreateRecipeFormProps {
