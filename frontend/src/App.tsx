@@ -13,7 +13,7 @@ const App: React.FC = () => {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Container maxWidth={false} className="pageContainer">
+        <Container maxWidth={false} className="page-container">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes" element={<RecipesPage />} />

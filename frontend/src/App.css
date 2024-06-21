@@ -1,3 +1,7 @@
 #root {
   width: 100%;
 }
+
+.page-container {
+  margin: 56px 0;
+}

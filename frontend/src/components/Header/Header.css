@@ -6,6 +6,8 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
+  height: 24px;
+  z-index: 99;
 
   ul {
     list-style-type: none;
