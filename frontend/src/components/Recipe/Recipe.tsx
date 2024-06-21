@@ -1,14 +1,15 @@
-import Container from '@mui/material/Container'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import type { Recipe as RecipeType, Ingredient } from '../../types'
-import cutlery from '~assets/icons/cutlery.jpeg'
-import clock from '~assets/icons/clock.jpeg'
+import {
+  Container,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material'
+import type { Recipe as RecipeType, Ingredient } from '~/types'
+import cutlery from '~/assets/icons/cutlery.jpeg'
+import clock from '~/assets/icons/clock.jpeg'
 import './Recipe.css'
 
 interface RecipeProps {
@@ -42,7 +43,7 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
           <strong>Cooking Time:</strong> {recipe.cookingTime}min
         </div>
       </div>
-      <TableContainer component={Paper} className="recipe-steps">
+      <TableContainer className="recipe-steps">
         <Table size="small" stickyHeader>
           <TableHead>
             <TableRow>
