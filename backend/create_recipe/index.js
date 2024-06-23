@@ -25,7 +25,6 @@ export const handler = async (event) => {
       endpoint: dynamoDbEndpoint,
     });
     const { recipeUrl } = JSON.parse(event.body);
-    console.log(`Processing request: ${{ userId, recipeUrl }}`);
 
     // Validate URL input
     try {

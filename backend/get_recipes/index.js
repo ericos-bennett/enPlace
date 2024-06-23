@@ -3,6 +3,14 @@ import AWS from "aws-sdk";
 const region = process.env.AWS_REGION;
 const dynamoDbEndpoint = process.env.LAMBDA_DYNAMODB_ENDPOINT;
 
+const clientResponse = (statusCode, body) => {
+  return {
+    statusCode,
+    body,
+    headers: { "Access-Control-Allow-Origin": "*" },
+  };
+};
+
 export const handler = async (event) => {
   const userId = 123;
   const headers = {
@@ -29,17 +37,9 @@ export const handler = async (event) => {
     result.Items.sort((a, b) => {
       return new Date(b.CreatedAt) - new Date(a.CreatedAt);
     });
-    return {
-      statusCode: 200,
-      body: JSON.stringify(result.Items),
-      headers,
-    };
+    return clientResponse(200, JSON.stringify(result.Items));
   } catch (error) {
     console.log(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify(error),
-      headers,
-    };
+    return clientResponse(500, { errorMessage: error.message });
   }
 };

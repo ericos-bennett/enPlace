@@ -28,7 +28,7 @@ docker run -d \
     --name $CONTAINER_NAME \
     --network $NETWORK_NAME \
     -p 4566:4566 -p 4571:4571 \
-    -e SERVICES=iam,apigateway,secretsmanager,lambda,dynamodb \
+    -e SERVICES=iam,apigateway,secretsmanager,lambda,dynamodb,logs \
     -e DEBUG=1 \
     -e LAMBDA_EXECUTOR=docker \
     -v /var/run/docker.sock:/var/run/docker.sock \

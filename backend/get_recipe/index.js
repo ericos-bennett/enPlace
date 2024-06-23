@@ -1,43 +1,40 @@
-import AWS from 'aws-sdk'
+import AWS from "aws-sdk";
 
-const region = process.env.AWS_REGION
-const dynamoDbEndpoint = process.env.LAMBDA_DYNAMODB_ENDPOINT
+const region = process.env.AWS_REGION;
+const dynamoDbEndpoint = process.env.LAMBDA_DYNAMODB_ENDPOINT;
+
+const clientResponse = (statusCode, body) => {
+  return {
+    statusCode,
+    body,
+    headers: { "Access-Control-Allow-Origin": "*" },
+  };
+};
 
 export const handler = async (event) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*'
-  }
-
   try {
-    const { recipeId } = event.pathParameters
+    const { recipeId } = event.pathParameters;
     const params = {
-      TableName: 'Recipes',
-      KeyConditionExpression: 'Id = :id',
+      TableName: "Recipes",
+      KeyConditionExpression: "Id = :id",
       ExpressionAttributeValues: {
-        ':id': recipeId
-      }
-    }
+        ":id": recipeId,
+      },
+    };
 
-    const dynamodb = new AWS.DynamoDB.DocumentClient({ region, endpoint: dynamoDbEndpoint })
-    const { Items } = await dynamodb.query(params).promise()
-    console.log(JSON.stringify(Items))
+    const dynamodb = new AWS.DynamoDB.DocumentClient({
+      region,
+      endpoint: dynamoDbEndpoint,
+    });
+    const { Items } = await dynamodb.query(params).promise();
     if (Items.length == 0) {
-      return {
-        statusCode: 404,
-        headers
-      }
+      return clientResponse(404, {
+        errorMessage: "No recipe with the specified ID",
+      });
     }
-    return {
-      statusCode: 200,
-      body: JSON.stringify(Items[0]),
-      headers
-    }
+    return clientResponse(200, JSON.stringify(Items[0]));
   } catch (error) {
     console.log(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify(error),
-      headers
-    }
+    return clientResponse(500, { errorMessage: error.message });
   }
-}
+};
