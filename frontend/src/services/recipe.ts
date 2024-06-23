@@ -29,7 +29,8 @@ export const createRecipe = async (
     return response.json()
   }
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`)
+    const { errorMessage } = await response.json()
+    throw new Error(errorMessage)
   }
   return response.json()
 }

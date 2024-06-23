@@ -35,7 +35,7 @@ export const handler = async (event) => {
         throw new Error(`URL Validation: non-2XX response from ${recipeUrl}`);
       }
     } catch (error) {
-      return clientResponse(400, "Invalid recipe URL");
+      return clientResponse(400, { errorMessage: error.message });
     }
 
     // Check if URL already exists in DB
@@ -83,7 +83,9 @@ export const handler = async (event) => {
     const openAiResponse = completion.choices[0].message.content;
     console.log({ openAiResponse });
     if (openAiResponse.includes(noRecipeReturnValue)) {
-      return clientResponse(400, "This URL does not contain a recipe");
+      return clientResponse(400, {
+        errorMessage: "This URL does not contain a recipe",
+      });
     }
     const recipeItem = JSON.parse(openAiResponse);
 
@@ -104,6 +106,6 @@ export const handler = async (event) => {
     return clientResponse(201, { recipeId: recipeItem.Id });
   } catch (error) {
     console.log(error);
-    return clientResponse(500, JSON.stringify(error));
+    return clientResponse(500, { errorMessage: error.message });
   }
 };

@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
-import { Box, Button, TextField } from '@mui/material'
+import { Box, Button, TextField, Alert } from '@mui/material'
 import { createRecipe } from '~/services/recipe'
 import './CreateRecipeForm.css'
 
@@ -10,8 +10,9 @@ interface CreateRecipeFormProps {
 export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
   onCreateRecipe,
 }) => {
-  const [inputValue, setInputValue] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [inputValue, setInputValue] = useState<string>('')
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null) // State to hold error message
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
@@ -21,12 +22,13 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
     event.preventDefault()
     if (isSubmitting) return
     setIsSubmitting(true)
+    setError(null)
 
     try {
       const { recipeId } = await createRecipe(inputValue)
       onCreateRecipe(recipeId)
-    } catch (error) {
-      console.log(`Error creating recipe with input '${inputValue}':`, error)
+    } catch (error: any) {
+      setError(error.message)
     } finally {
       setInputValue('')
       setIsSubmitting(false)
@@ -39,6 +41,7 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
       onSubmit={handleSubmit}
       className="create-recipe-form"
     >
+      {error && <Alert severity="warning">{error}</Alert>}
       <TextField
         label="Enter Recipe URL"
         variant="outlined"
