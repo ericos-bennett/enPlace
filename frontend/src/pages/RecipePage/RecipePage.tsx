@@ -21,9 +21,7 @@ const RecipePage: React.FC = () => {
       })
   }, [recipeId, navigate])
 
-  return (
-    <>{!recipe ? <div>Loading...</div> : <Recipe recipe={recipe}></Recipe>}</>
-  )
+  return <>{recipe && <Recipe recipe={recipe}></Recipe>}</>
 }
 
 export default RecipePage

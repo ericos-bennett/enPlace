@@ -15,9 +15,7 @@ const RecipesPage: React.FC = () => {
 
   return (
     <>
-      {!recipeMetas ? (
-        <div>Loading...</div>
-      ) : (
+      {recipeMetas && (
         <div id="recipe-container">
           {recipeMetas.map((recipeMeta, index) => (
             <RecipeMeta recipeMeta={recipeMeta} key={index}></RecipeMeta>
