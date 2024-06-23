@@ -16,7 +16,7 @@ export const RecipesPage: React.FC = () => {
   return (
     <>
       {recipeMetas && (
-        <div id="recipe-container">
+        <div className="recipe-container">
           {recipeMetas.map((recipeMeta, index) => (
             <RecipeMeta recipeMeta={recipeMeta} key={index}></RecipeMeta>
           ))}
