@@ -4,7 +4,7 @@ import { Recipe } from '~/components/Recipe/Recipe'
 import { getRecipe } from '~/services/recipe'
 import type { Recipe as RecipeType } from '~/types'
 
-const RecipePage: React.FC = () => {
+export const RecipePage: React.FC = () => {
   const navigate = useNavigate()
   const { recipeId } = useParams() as { recipeId: string }
   const [recipe, setRecipe] = useState<RecipeType | null>(null)
@@ -23,5 +23,3 @@ const RecipePage: React.FC = () => {
 
   return <>{recipe && <Recipe recipe={recipe}></Recipe>}</>
 }
-
-export default RecipePage

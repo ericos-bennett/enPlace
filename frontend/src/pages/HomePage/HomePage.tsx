@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { CreateRecipeForm } from '~/components/CreateRecipeForm/CreateRecipeForm'
 
-const HomePage: React.FC = () => {
+export const HomePage: React.FC = () => {
   const navigate = useNavigate()
 
   const handleCreateRecipe = (recipeId: string) => {
@@ -14,5 +14,3 @@ const HomePage: React.FC = () => {
     </>
   )
 }
-
-export default HomePage

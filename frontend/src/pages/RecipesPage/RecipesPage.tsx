@@ -4,7 +4,7 @@ import { getRecipeMetas } from '~/services/recipe'
 import type { RecipeMeta as RecipeMetaType } from '~/types'
 import './RecipePage.css'
 
-const RecipesPage: React.FC = () => {
+export const RecipesPage: React.FC = () => {
   const [recipeMetas, setRecipeMetas] = useState<RecipeMetaType[] | null>(null)
 
   useEffect(() => {
@@ -25,5 +25,3 @@ const RecipesPage: React.FC = () => {
     </>
   )
 }
-
-export default RecipesPage

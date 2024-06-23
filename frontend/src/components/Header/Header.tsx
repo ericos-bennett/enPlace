@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Header.css'
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   return (
     <header>
       <nav>
@@ -17,5 +17,3 @@ const Header: React.FC = () => {
     </header>
   )
 }
-
-export default Header
