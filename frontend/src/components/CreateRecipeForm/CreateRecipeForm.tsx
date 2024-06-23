@@ -41,7 +41,11 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
       onSubmit={handleSubmit}
       className="create-recipe-form"
     >
-      {error && <Alert severity="warning">{error}</Alert>}
+      {error && (
+        <Alert severity="warning" className="create-recipe-alert">
+          {error}
+        </Alert>
+      )}
       <TextField
         label="Enter Recipe URL"
         variant="outlined"

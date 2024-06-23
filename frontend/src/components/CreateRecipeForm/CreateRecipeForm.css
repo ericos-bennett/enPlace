@@ -4,4 +4,11 @@
   gap: 1rem;
   max-width: 400px;
   margin: 0 auto;
+  position: relative;
+}
+
+.create-recipe-alert {
+  position: absolute;
+  width: calc(100% - 32px);
+  bottom: calc(100% + 1rem);
 }
