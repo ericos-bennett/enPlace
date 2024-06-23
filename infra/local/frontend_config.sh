@@ -3,6 +3,7 @@ set -e
 
 # Configure frontend to connect to API
 echo ">>> Creating frontend .env.local file"
+cd ..
 OUTPUTS=$(terraform output -json)
 API_ID=$(echo "$OUTPUTS" | jq -r '.api_gateway_id.value')
 STAGE_NAME=$(echo "$OUTPUTS" | jq -r '.api_gateway_stage_name.value')

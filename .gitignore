@@ -17,5 +17,5 @@ dist-ssr
 .terraform.lock.hcl
 .terraformrc
 .terraform-version
-infra/*.zip
+infra/local/*.zip
 infra/output.json

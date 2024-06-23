@@ -1,11 +1,11 @@
 aws_access_key = "mock_access_key"
 aws_secret_key = "mock_secret_key"
 aws_region     = "us-east-1"
+environment    = "local"
 
 iam_endpoint = "http://localhost:4566"
 
 apigateway_endpoint = "http://localhost:4566"
-apigateway_stage    = "local"
 
 secretsmanager_endpoint = "http://localhost:4566"
 
