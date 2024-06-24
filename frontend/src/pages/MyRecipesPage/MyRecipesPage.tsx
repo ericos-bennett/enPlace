@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { RecipeMeta } from '~/components/RecipeMeta/RecipeMeta'
 import { getRecipeMetas } from '~/services/recipe'
 import type { RecipeMeta as RecipeMetaType } from '~/types'
-import './RecipePage.css'
+import './MyRecipesPage.css'
 
-export const RecipesPage: React.FC = () => {
+export const MyRecipesPage: React.FC = () => {
   const [recipeMetas, setRecipeMetas] = useState<RecipeMetaType[] | null>(null)
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export const RecipesPage: React.FC = () => {
   return (
     <>
       {recipeMetas && (
-        <div className="recipe-container">
+        <div className="my-recipes-container">
           {recipeMetas.map((recipeMeta, index) => (
             <RecipeMeta recipeMeta={recipeMeta} key={index}></RecipeMeta>
           ))}
