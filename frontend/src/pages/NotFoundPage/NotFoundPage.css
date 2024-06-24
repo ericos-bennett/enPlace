@@ -1,3 +1,8 @@
-.not-found-page {
+.not-found-container {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
   text-align: center;
 }
