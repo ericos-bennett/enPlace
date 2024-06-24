@@ -1,5 +1,16 @@
 .my-recipes-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+}
+
+.my-recipes-title {
+  position: fixed;
+  min-width: 800px;
+  z-index: 999;
+  background-color: white;
+}
+
+.recipe-metas {
+  margin-top: 200px;
 }

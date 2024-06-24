@@ -48,10 +48,11 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
       )}
       <TextField
         label="Enter Recipe URL"
-        variant="outlined"
         value={inputValue}
         onChange={handleInputChange}
         disabled={isSubmitting}
+        autoComplete="off"
+        variant="outlined"
       />
       <Button
         variant="contained"

@@ -1,3 +1,4 @@
+import { Container } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { CreateRecipeForm } from '~/components/CreateRecipeForm/CreateRecipeForm'
 
@@ -10,7 +11,9 @@ export const HomePage: React.FC = () => {
 
   return (
     <>
-      <CreateRecipeForm onCreateRecipe={handleCreateRecipe} />
+      <Container className="home-container">
+        <CreateRecipeForm onCreateRecipe={handleCreateRecipe} />
+      </Container>
     </>
   )
 }
