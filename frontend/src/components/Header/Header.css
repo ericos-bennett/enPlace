@@ -1,13 +1,11 @@
 header {
+  height: 100%;
   background-color: #c3daf5;
   color: white;
-  text-align: center;
-  padding: 1rem;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 24px;
-  z-index: 99;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 
   ul {
     list-style-type: none;

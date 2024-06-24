@@ -1,8 +1,40 @@
-#root {
-  width: 100%;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  body {
+    margin: 0;
+  }
+
+  a {
+    font-weight: 500;
+    text-decoration: inherit;
+  }
 }
 
-.page-container {
-  margin: 56px 0;
-  height: calc(100vh - 112px);
+#page-header {
+  position: fixed;
+  top: 0;
+  height: 4rem;
+  width: 100%;
+  z-index: 99;
+}
+
+#page-container {
+  margin: 4rem 0;
+  height: calc(100vh - 8rem);
+}
+
+#page-footer {
+  position: fixed;
+  bottom: 0;
+  height: 4rem;
+  width: 100%;
+  z-index: 99;
 }

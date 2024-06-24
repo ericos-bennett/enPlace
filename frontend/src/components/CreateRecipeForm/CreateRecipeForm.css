@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
   position: relative;
 }
 
 .create-recipe-alert {
   position: absolute;
-  width: calc(100% - 32px);
+  width: calc(100% - 2rem);
   bottom: calc(100% + 1rem);
 }
