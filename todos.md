@@ -18,8 +18,9 @@
 - [x] Add script to bootstrap DB
 - [x] Improve precision of prompt (e.g. ask for specific response if URL is not a recipe)
 - [x] Alert user if create URL returns 400
+- [x] Add CloudWatch logs for Lambdas
 - [ ] Improve FE design
+- [ ] Use MUI components wherever possible
+- [ ] Add auth - pass encrypted userId from FE when querying for recipes (AuthO/Cognito, JWT)
 - [ ] Prevent redundant lambda updates when source code is unchanged but hash is different
 - [ ] Format /backend automatically
-- [ ] Add auth - pass encrypted userId from FE when querying for recipes (AuthO/Cognito, JWT)
-- [ ] Add CloudFront logs for Lambdas

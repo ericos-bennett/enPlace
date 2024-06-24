@@ -15,13 +15,16 @@ export const MyRecipesPage: React.FC = () => {
 
   return (
     <>
-      {recipeMetas && (
-        <div className="my-recipes-container">
-          {recipeMetas.map((recipeMeta, index) => (
-            <RecipeMeta recipeMeta={recipeMeta} key={index}></RecipeMeta>
-          ))}
-        </div>
-      )}
+      <div className="my-recipes-container">
+        <h1>My Recipes</h1>
+        {recipeMetas && (
+          <div>
+            {recipeMetas.map((recipeMeta, index) => (
+              <RecipeMeta recipeMeta={recipeMeta} key={index}></RecipeMeta>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   )
 }
