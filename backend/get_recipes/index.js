@@ -13,9 +13,6 @@ const clientResponse = (statusCode, body) => {
 
 export const handler = async (event) => {
   const userId = 123;
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-  };
 
   try {
     const params = {
@@ -32,11 +29,6 @@ export const handler = async (event) => {
       endpoint: dynamoDbEndpoint,
     });
     const result = await dynamodb.query(params).promise();
-
-    // Sort items by descending creation time
-    result.Items.sort((a, b) => {
-      return new Date(b.CreatedAt) - new Date(a.CreatedAt);
-    });
     return clientResponse(200, JSON.stringify(result.Items));
   } catch (error) {
     console.log(error);

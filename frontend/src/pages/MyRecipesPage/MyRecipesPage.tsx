@@ -22,11 +22,16 @@ export const MyRecipesPage: React.FC = () => {
   const filteredRecipeMetas = (
     recipeMetas: RecipeMetaType[]
   ): RecipeMetaType[] => {
-    return recipeMetas.filter((recipeMeta) =>
-      recipeMeta.name
-        .toLocaleLowerCase()
-        .includes(searchTerm.toLocaleLowerCase())
-    )
+    return recipeMetas
+      .filter((recipeMeta) =>
+        recipeMeta.name
+          .toLocaleLowerCase()
+          .includes(searchTerm.toLocaleLowerCase())
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime()
+      )
   }
 
   return (
