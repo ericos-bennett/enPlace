@@ -12,9 +12,13 @@ const clientResponse = (statusCode, body) => {
 };
 
 export const handler = async (event) => {
-  const userId = 123;
-
   try {
+    const userId = 123;
+    const dynamodb = new AWS.DynamoDB.DocumentClient({
+      region,
+      endpoint: dynamoDbEndpoint,
+    });
+
     const params = {
       TableName: "Recipes",
       IndexName: "UserIdIndex",
@@ -24,12 +28,8 @@ export const handler = async (event) => {
       },
     };
 
-    const dynamodb = new AWS.DynamoDB.DocumentClient({
-      region,
-      endpoint: dynamoDbEndpoint,
-    });
-    const result = await dynamodb.query(params).promise();
-    return clientResponse(200, JSON.stringify(result.Items));
+    const { Items } = await dynamodb.query(params).promise();
+    return clientResponse(200, JSON.stringify(Items));
   } catch (error) {
     console.log(error);
     return clientResponse(500, { errorMessage: error.message });

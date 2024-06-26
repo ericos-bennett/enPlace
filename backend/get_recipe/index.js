@@ -14,6 +14,11 @@ const clientResponse = (statusCode, body) => {
 export const handler = async (event) => {
   try {
     const { recipeId } = event.pathParameters;
+    const dynamodb = new AWS.DynamoDB.DocumentClient({
+      region,
+      endpoint: dynamoDbEndpoint,
+    });
+
     const params = {
       TableName: "Recipes",
       KeyConditionExpression: "Id = :id",
@@ -22,10 +27,6 @@ export const handler = async (event) => {
       },
     };
 
-    const dynamodb = new AWS.DynamoDB.DocumentClient({
-      region,
-      endpoint: dynamoDbEndpoint,
-    });
     const { Items } = await dynamodb.query(params).promise();
     if (Items.length == 0) {
       return clientResponse(404, {
