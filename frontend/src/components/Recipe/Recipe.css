@@ -2,6 +2,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+  height: 100%;
+  overflow: auto;
 }
 
 .recipe-stats {
@@ -17,6 +19,8 @@
 }
 
 .recipe-steps {
+  margin-bottom: 1rem;
+
   ul {
     padding: inherit;
   }
