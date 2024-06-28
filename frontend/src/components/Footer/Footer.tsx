@@ -1,9 +1,10 @@
+import { Typography } from '@mui/material'
 import './Footer.css'
 
 export const Footer: React.FC = () => {
   return (
     <footer>
-      <p>Footer Content</p>
+      <Typography variant="body1">Footer Content</Typography>
     </footer>
   )
 }

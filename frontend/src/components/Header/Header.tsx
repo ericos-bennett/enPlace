@@ -1,13 +1,20 @@
 import { Link } from 'react-router-dom'
 import './Header.css'
+import { Typography } from '@mui/material'
 
 export const Header: React.FC = () => {
   return (
     <header>
-      <Link to="/">Menu</Link>
+      <Typography variant="body1">
+        <Link to="/">Menu</Link>
+      </Typography>
       <nav>
-        <Link to="/recipes">My Recipes</Link>
-        <Link to="/">Login</Link>
+        <Typography variant="body1">
+          <Link to="/recipes">My Recipes</Link>
+        </Typography>
+        <Typography variant="body1">
+          <Link to="/">Login</Link>
+        </Typography>
       </nav>
     </header>
   )
