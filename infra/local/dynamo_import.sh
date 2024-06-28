@@ -16,6 +16,6 @@ echo ">>> Importing data to $TABLE_NAME"
 aws dynamodb batch-write-item \
     --region $REGION \
     --endpoint-url $ENDPOINT_URL \
-    --request-items "$BATCH_JSON"
+    --request-items "$BATCH_JSON" > /dev/null
 
 echo ">>> Data bootstrapped successfully to $TABLE_NAME table"
