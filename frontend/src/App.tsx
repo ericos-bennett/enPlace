@@ -6,7 +6,7 @@ import { MyRecipesPage } from '~/pages/MyRecipesPage/MyRecipesPage'
 import { NotFoundPage } from '~/pages/NotFoundPage/NotFoundPage'
 import { Header } from '~/components/Header/Header'
 import { Footer } from '~/components/Footer/Footer'
-import './App.css'
+import '~/App.css'
 
 export const App: React.FC = () => {
   return (

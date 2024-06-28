@@ -1,6 +1,6 @@
 header {
   height: 100%;
-  background-color: #c3daf5;
+  background-color: var(--primary-color);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -10,7 +10,7 @@ header {
   a:visited,
   a:hover,
   a:active {
-    color: #212427;
+    color: var(--font-color);
   }
 
   nav {
