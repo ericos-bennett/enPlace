@@ -1,7 +1,18 @@
 .home-container {
   height: 100%;
-  display: flex;
+  display: flex !important;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.home-headline {
+  text-align: center;
+}
+
+.home-image {
+  display: block;
+  margin: 0 auto;
 }

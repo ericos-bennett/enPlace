@@ -53,6 +53,7 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
         disabled={isSubmitting}
         autoComplete="off"
         variant="outlined"
+        className="create-recipe-form-input"
       />
       <Button
         variant="contained"
@@ -60,7 +61,7 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
         type="submit"
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Submitting...' : 'Create'}
+        {isSubmitting ? 'Submitting' : 'Create'}
       </Button>
     </Box>
   )

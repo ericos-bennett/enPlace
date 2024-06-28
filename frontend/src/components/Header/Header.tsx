@@ -4,15 +4,10 @@ import './Header.css'
 export const Header: React.FC = () => {
   return (
     <header>
+      <Link to="/">Menu</Link>
       <nav>
-        <ul>
-          <li>
-            <Link to="/">Create Recipe</Link>
-          </li>
-          <li>
-            <Link to="/recipes">My List</Link>
-          </li>
-        </ul>
+        <Link to="/recipes">My Recipes</Link>
+        <Link to="/">Login</Link>
       </nav>
     </header>
   )
