@@ -20,7 +20,12 @@
 - [x] Alert user if create URL returns 400
 - [x] Add CloudWatch logs for Lambdas
 - [x] Prevent redundant lambda updates when source code is unchanged but hash is different
-- [ ] Add auth - pass encrypted userId from FE when querying for recipes (AWS Cognito)
+- [x] Split terraform into one file per service
+- [ ] Add Frontend infrastructure - S3 bucket & Cloudfront
+- [ ] Add Cognito auth and connect to API gateway
+- [ ] Buy domain name
+- [ ] Add Route 53 infrastructure
+- [ ] Deploy to AWS!
 - [ ] Improve FE design
 - [ ] Use MUI components wherever possible
 - [ ] Format /backend automatically
