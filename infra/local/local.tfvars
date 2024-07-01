@@ -5,6 +5,10 @@ environment    = "local"
 
 iam_endpoint = "http://localhost:4566"
 
+cloudfront_endpoint = "http://localhost:4566"
+
+s3_endpoint = "http://localhost:4566"
+
 apigateway_endpoint = "http://localhost:4566"
 
 secretsmanager_endpoint = "http://localhost:4566"

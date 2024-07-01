@@ -23,6 +23,14 @@ variable "iam_endpoint" {
   type     = string
   nullable = false
 }
+variable "cloudfront_endpoint" {
+  type     = string
+  nullable = false
+}
+variable "s3_endpoint" {
+  type     = string
+  nullable = false
+}
 variable "apigateway_endpoint" {
   type     = string
   nullable = false

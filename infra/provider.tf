@@ -6,6 +6,8 @@ provider "aws" {
   skip_metadata_api_check     = true
   endpoints {
     iam            = var.iam_endpoint
+    cloudfront     = var.cloudfront_endpoint
+    s3             = var.s3_endpoint
     apigateway     = var.apigateway_endpoint
     secretsmanager = var.secretsmanager_endpoint
     lambda         = var.lambda_endpoint
