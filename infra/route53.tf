@@ -1,5 +1,5 @@
 resource "aws_route53_zone" "enplace" {
-  name = "enplace.xyz"
+  name = var.domain_name
 }
 
 resource "aws_route53_record" "enpalce_fe" {

@@ -7,3 +7,7 @@ variable "environment" {
   type     = string
   nullable = false
 }
+variable "domain_name" {
+  type     = string
+  nullable = false
+}
