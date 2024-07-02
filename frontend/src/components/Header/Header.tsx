@@ -6,7 +6,7 @@ export const Header: React.FC = () => {
   return (
     <header>
       <Typography variant="body1">
-        <Link to="/">Menu</Link>
+        <Link to="/">enPlace</Link>
       </Typography>
       <nav>
         <Typography variant="body1">

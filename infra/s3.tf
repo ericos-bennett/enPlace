@@ -1,9 +1,9 @@
-resource "aws_s3_bucket" "menu" {
-  bucket = "menu-frontend"
+resource "aws_s3_bucket" "enplace" {
+  bucket = "enplace-frontend"
 }
 
-resource "aws_s3_bucket_policy" "menu" {
-  bucket = aws_s3_bucket.menu.id
+resource "aws_s3_bucket_policy" "enplace" {
+  bucket = aws_s3_bucket.enplace.id
 
   policy = jsonencode({
     Version   = "2012-10-17"
@@ -14,15 +14,15 @@ resource "aws_s3_bucket_policy" "menu" {
           Service = "cloudfront.amazonaws.com"
         }
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.menu.arn}/*"
+        Resource  = "${aws_s3_bucket.enplace.arn}/*"
         Condition = {
           StringEquals = {
-            "AWS:SourceArn" = aws_cloudfront_distribution.menu.arn
+            "AWS:SourceArn" = aws_cloudfront_distribution.enplace.arn
           }
         }
       }
     ]
   })
 
-  depends_on = [ aws_cloudfront_distribution.menu ]
+  depends_on = [ aws_cloudfront_distribution.enplace ]
 }

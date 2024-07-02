@@ -1,4 +1,4 @@
-# Menu
+# enPlace
 
 A better way to save and follow recipes. Built with a serverless architecture on AWS (API Gateway, Lambdas, DynamoDB), the OpenAI API, React, and Terraform.
 
