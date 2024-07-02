@@ -12,7 +12,7 @@ resource "aws_s3_bucket_website_configuration" "enplace" {
 
 resource "aws_s3_object" "static_site_upload_object" {
   for_each     = fileset("${path.module}/${var.environment}/frontend", "*")
-  bucket       = aws_s3_bucket.jokes_website_bucket.id
+  bucket       = aws_s3_bucket.enplace.id
   key          = each.value
   source       = "${path.module}/${var.environment}/frontend/${each.value}"
   etag         = filemd5("${path.module}/${var.environment}/frontend/${each.value}")
