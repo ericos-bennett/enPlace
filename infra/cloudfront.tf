@@ -1,4 +1,4 @@
-resource "aws_cloudfront_origin_access_control" "enplace" {
+resource "aws_cloudfront_origin_access_control" "enplace_fe" {
   name                              = "enplace-frontend"
   description                       = "Origin Access Control for the enplace frontend"
   origin_access_control_origin_type = "s3"
@@ -6,14 +6,14 @@ resource "aws_cloudfront_origin_access_control" "enplace" {
   signing_protocol                  = "sigv4"
 }
 
-resource "aws_cloudfront_distribution" "enplace" {
+resource "aws_cloudfront_distribution" "enplace_fe" {
   enabled = true
 
   origin {
     domain_name = aws_s3_bucket.enplace.bucket_regional_domain_name
     origin_id   = "S3-enplace-frontend"
 
-    origin_access_control_id = aws_cloudfront_origin_access_control.enplace.id
+    origin_access_control_id = aws_cloudfront_origin_access_control.enplace_fe.id
   }
 
   default_cache_behavior {

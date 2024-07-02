@@ -3,6 +3,11 @@ resource "aws_api_gateway_rest_api" "enplace" {
   description = "API for the enplace app"
 }
 
+resource "aws_api_gateway_domain_name" "enplace" {
+  certificate_arn = aws_acm_certificate_validation.enplace.certificate_arn
+  domain_name     = "www.api.${aws_route53_zone.enplace.name}"
+}
+
 resource "aws_api_gateway_deployment" "enplace" {
   depends_on = [
     aws_api_gateway_integration.get_recipe,

@@ -34,7 +34,7 @@ resource "aws_s3_bucket_policy" "enplace" {
         Resource = "${aws_s3_bucket.enplace.arn}/*"
         Condition = {
           StringEquals = {
-            "AWS:SourceArn" = aws_cloudfront_distribution.enplace.arn
+            "AWS:SourceArn" = aws_cloudfront_distribution.enplace_fe.arn
           }
         }
       }
