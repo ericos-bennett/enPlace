@@ -6,10 +6,13 @@ echo ">>> Running pre-commit git hook"
 # Save a list of staged files
 staged_files=$(git diff --cached --name-only --diff-filter=AM)
 
+echo ">>> Formatting frontend code"
 cd frontend || exit 1
-
 npm run format
 
+echo ">>> Formatting infra code"
+cd ../infra || exit 1
+terraform fmt
 cd ..
 
 # Add formatting changes for staged files to the commit
