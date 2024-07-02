@@ -40,6 +40,4 @@ resource "aws_s3_bucket_policy" "enplace" {
       }
     ]
   })
-
-  depends_on = [aws_cloudfront_distribution.enplace]
 }
