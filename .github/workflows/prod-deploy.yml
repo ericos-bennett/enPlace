@@ -44,9 +44,17 @@ jobs:
         run: terraform validate
         working-directory: ./infra
 
+      - name: Package Frontend
+        run: ./package_frontend.sh
+        working-directory: ./infra/prod
+
+      - name: Package Lambdas
+        run: ./package_lambdas.sh
+        working-directory: ./infra/prod
+
       - name: Plan Terraform
         id: plan
-        run: cd prod && ./package_lambdas.sh && cd .. && terraform plan -var-file="prod/prod.tfvars"
+        run: terraform plan -var-file="prod/prod.tfvars"
         working-directory: ./infra
 
       - name: Terraform Plan Status

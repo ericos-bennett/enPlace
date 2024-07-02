@@ -2,6 +2,23 @@ resource "aws_s3_bucket" "enplace" {
   bucket = "enplace-frontend"
 }
 
+resource "aws_s3_bucket_website_configuration" "enplace" {
+  bucket = aws_s3_bucket.enplace.id
+
+  index_document {
+    suffix = "index.html"
+  }
+}
+
+resource "aws_s3_object" "static_site_upload_object" {
+  for_each     = fileset("${path.module}/${var.environment}/frontend", "*")
+  bucket       = aws_s3_bucket.jokes_website_bucket.id
+  key          = each.value
+  source       = "${path.module}/${var.environment}/frontend/${each.value}"
+  etag         = filemd5("${path.module}/${var.environment}/frontend/${each.value}")
+  content_type = "text/html"
+}
+
 resource "aws_s3_bucket_policy" "enplace" {
   bucket = aws_s3_bucket.enplace.id
 
