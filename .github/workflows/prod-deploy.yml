@@ -46,7 +46,7 @@ jobs:
 
       - name: Plan Terraform
         id: plan
-        run: terraform plan -var-file="prod.tfvars"
+        run: cd prod && ./package_lambdas.sh && cd .. && terraform plan -var-file="prod/prod.tfvars"
         working-directory: ./infra
 
       - name: Terraform Plan Status
