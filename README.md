@@ -10,4 +10,4 @@ A better way to save and follow recipes. Built with a serverless architecture on
 4. Navigate to `/infra/local` and run `init.sh` to launch the backend services in a LocalStack contaner
 5. Navigate to `/frontend` and run `npm install`
 6. Launch the frontend with `npm run dev`
-7. This project uses custom git hooks - you can enable them by navigating to `/cicd/git-hooks` and running `init.sh`
+7. This project uses custom git hooks - you can enable them by navigating to `.githooks` and running `init.sh`
