@@ -46,7 +46,7 @@ jobs:
 
       - name: Plan Terraform
         id: plan
-        run: terraform plan
+        run: terraform plan -var-file="prod.tfvars"
         working-directory: ./infra
 
       - name: Terraform Plan Status
