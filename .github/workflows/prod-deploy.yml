@@ -23,8 +23,8 @@ jobs:
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${AWS_ROLE}
-          aws-region: ${AWS_REGION}
+          role-to-assume: ${{AWS_ROLE}}
+          aws-region: ${{AWS_REGION}}
           role-session-name: GitHub-OIDC-TERRAFORM
 
       - name: Setup Terraform
@@ -33,7 +33,7 @@ jobs:
           terraform_version: 1.9.0
 
       - name: Initialize Terraform
-        run: terraform init -backend-config="bucket=${AWS_TFSTATE_BUCKET_NAME}" -backend-config="key=${AWS_TFSTATE_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
+        run: terraform init -backend-config="bucket=${{AWS_TFSTATE_BUCKET_NAME}}" -backend-config="key=${{AWS_TFSTATE_BUCKET_KEY_NAME}}" -backend-config="region=${{AWS_REGION}}"
 
       - name: Validate Terraform
         run: terraform validate
