@@ -1,8 +1,5 @@
 import AWS from "aws-sdk";
 
-const region = process.env.AWS_REGION;
-const dynamoDbEndpoint = process.env.LAMBDA_DYNAMODB_ENDPOINT;
-
 const clientResponse = (statusCode, body) => {
   return {
     statusCode,
@@ -14,10 +11,7 @@ const clientResponse = (statusCode, body) => {
 export const handler = async (event) => {
   try {
     const { recipeId } = event.pathParameters;
-    const dynamodb = new AWS.DynamoDB.DocumentClient({
-      region,
-      endpoint: dynamoDbEndpoint,
-    });
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
     const params = {
       TableName: "Recipes",
