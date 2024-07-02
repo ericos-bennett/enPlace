@@ -20,6 +20,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Debug Environment Variables
+        run: |
+          echo "AWS_REGION: ${{ env.AWS_REGION }}"
+          echo "AWS_ROLE: ${{ env.AWS_ROLE }}"
+        shell: bash
+
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v1
         with:
