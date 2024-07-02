@@ -15,7 +15,16 @@ deterministic-zip -q -r ../../infra/local/create_recipe.zip .
 cd ../../infra
 echo ">>> Lambda code updated"
 
+# Move .tf files we want to exclude for local deployment
+mv s3.tf ../
+mv cloudfront.tf ../
+
 # Apply terraform
 echo ">>> Applying terraform locally..."
 terraform apply -auto-approve -var-file="local/local.tfvars"
 echo ">>> Terraform applied"
+
+
+# Move .tf files back
+mv ../s3.tf ./
+mv ../cloudfront.tf ./
