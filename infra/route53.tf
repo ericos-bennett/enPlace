@@ -16,7 +16,7 @@ resource "aws_route53_record" "enpalce_fe" {
 
 resource "aws_route53_record" "enplace_api" {
   zone_id = aws_route53_zone.enplace.zone_id
-  name    = "www.api.${aws_route53_zone.enplace.name}"
+  name    = aws_api_gateway_domain_name.enplace.domain_name
   type    = "A"
 
   alias {

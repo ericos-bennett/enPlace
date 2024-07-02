@@ -5,7 +5,7 @@ resource "aws_api_gateway_rest_api" "enplace" {
 
 resource "aws_api_gateway_domain_name" "enplace" {
   certificate_arn = aws_acm_certificate.enplace_api.arn
-  domain_name     = aws_route53_record.enplace_api.name
+  domain_name     = "www.api.${aws_route53_zone.enplace.name}"
 }
 
 resource "aws_api_gateway_deployment" "enplace" {
