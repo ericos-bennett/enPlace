@@ -38,13 +38,16 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init -backend-config="bucket=${{env.AWS_TFSTATE_BUCKET_NAME}}" -backend-config="key=${{env.AWS_TFSTATE_BUCKET_KEY_NAME}}" -backend-config="region=${{env.AWS_REGION}}"
+        working-directory: ./infra
 
       - name: Validate Terraform
         run: terraform validate
+        working-directory: ./infra
 
       - name: Plan Terraform
         id: plan
         run: terraform plan
+        working-directory: ./infra
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
