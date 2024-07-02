@@ -21,9 +21,9 @@
 - [x] Add CloudWatch logs for Lambdas
 - [x] Prevent redundant lambda updates when source code is unchanged but hash is different
 - [x] Split terraform into one file per service
+- [x] Buy domain name
 - [ ] Add Frontend infrastructure - S3 bucket & Cloudfront
 - [ ] Add Cognito auth and connect to API gateway
-- [ ] Buy domain name
 - [ ] Add Route 53 infrastructure
 - [ ] Deploy to AWS!
 - [ ] Improve FE design
