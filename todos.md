@@ -22,9 +22,10 @@
 - [x] Prevent redundant lambda updates when source code is unchanged but hash is different
 - [x] Split terraform into one file per service
 - [x] Buy domain name
-- [ ] Add Frontend infrastructure - S3 bucket & Cloudfront
+- [x] Add Frontend infrastructure - S3 bucket & Cloudfront
+- [x] Add Route 53 infrastructure
+- [ ] Pass required endpoint and region variables to lambdas for local
 - [ ] Add Cognito auth and connect to API gateway
-- [ ] Add Route 53 infrastructure
 - [ ] Deploy to AWS!
 - [ ] Improve FE design
 - [ ] Use MUI components wherever possible

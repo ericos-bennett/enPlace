@@ -25,3 +25,8 @@ resource "aws_route53_record" "enplace_api" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_api_gateway_domain_name" "enplace" {
+  certificate_arn = aws_acm_certificate.enplace_api.arn
+  domain_name     = "www.api.${aws_route53_zone.enplace.name}"
+}
