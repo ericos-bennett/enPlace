@@ -96,7 +96,8 @@ resource "aws_api_gateway_method" "get_recipe" {
   rest_api_id   = aws_api_gateway_rest_api.enplace.id
   resource_id   = aws_api_gateway_resource.recipe.id
   http_method   = "GET"
-  authorization = "NONE"
+  authorization = "COGNITO_USER_POOLS"
+  authorizer_id = aws_api_gateway_authorizer.cognito_authorizer.id
 
   request_parameters = {
     "method.request.path.recipeId" = true
@@ -121,7 +122,8 @@ resource "aws_api_gateway_method" "get_recipes" {
   rest_api_id   = aws_api_gateway_rest_api.enplace.id
   resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "GET"
-  authorization = "NONE"
+  authorization = "COGNITO_USER_POOLS"
+  authorizer_id = aws_api_gateway_authorizer.cognito_authorizer.id
 }
 
 resource "aws_api_gateway_integration" "get_recipes" {
@@ -138,7 +140,8 @@ resource "aws_api_gateway_method" "create_recipe" {
   rest_api_id   = aws_api_gateway_rest_api.enplace.id
   resource_id   = aws_api_gateway_resource.recipes.id
   http_method   = "POST"
-  authorization = "NONE"
+  authorization = "COGNITO_USER_POOLS"
+  authorizer_id = aws_api_gateway_authorizer.cognito_authorizer.id
 }
 
 resource "aws_api_gateway_integration" "create_recipe" {

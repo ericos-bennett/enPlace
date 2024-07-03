@@ -4,7 +4,7 @@ resource "aws_route53_zone" "enplace" {
 
 resource "aws_route53_record" "enpalce_fe" {
   zone_id = aws_route53_zone.enplace.zone_id
-  name    = "www.${aws_route53_zone.enplace.name}"
+  name    = aws_route53_zone.enplace.name
   type    = "A"
 
   alias {
@@ -12,6 +12,11 @@ resource "aws_route53_record" "enpalce_fe" {
     zone_id                = aws_cloudfront_distribution.enplace_fe.hosted_zone_id
     evaluate_target_health = false
   }
+}
+
+resource "aws_api_gateway_domain_name" "enplace" {
+  domain_name     = "api.${aws_route53_zone.enplace.name}"
+  certificate_arn = aws_acm_certificate.enplace_api.arn
 }
 
 resource "aws_route53_record" "enplace_api" {
@@ -26,7 +31,20 @@ resource "aws_route53_record" "enplace_api" {
   }
 }
 
-resource "aws_api_gateway_domain_name" "enplace" {
-  certificate_arn = aws_acm_certificate.enplace_api.arn
-  domain_name     = "www.api.${aws_route53_zone.enplace.name}"
+resource "aws_route53_record" "enplace_auth" {
+  zone_id = aws_route53_zone.enplace.zone_id
+  name    = aws_cognito_user_pool_domain.enplace.domain
+  type    = "A"
+
+  alias {
+    name                   = aws_cognito_user_pool_domain.enplace.cloudfront_distribution
+    zone_id                = aws_cognito_user_pool_domain.enplace.cloudfront_distribution_zone_id
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_cognito_user_pool_domain" "enplace" {
+  domain          = "auth.${aws_route53_zone.enplace.name}"
+  certificate_arn = aws_acm_certificate.enplace_auth.arn
+  user_pool_id    = aws_cognito_user_pool.enplace.id
 }
