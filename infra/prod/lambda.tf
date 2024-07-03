@@ -1,9 +1,9 @@
 resource "aws_lambda_function" "get_recipe" {
-  filename         = "${path.module}/${var.environment}/get_recipe.zip"
+  filename         = "${path.module}/get_recipe.zip"
   function_name    = "GetRecipe"
   role             = aws_iam_role.get_recipe.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("${path.module}/${var.environment}/get_recipe.zip")
+  source_code_hash = filebase64sha256("${path.module}/get_recipe.zip")
   runtime          = "nodejs20.x"
   timeout          = 30
 }
@@ -16,11 +16,11 @@ resource "aws_lambda_permission" "get_recipe" {
 }
 
 resource "aws_lambda_function" "get_recipes" {
-  filename         = "${path.module}/${var.environment}/get_recipes.zip"
+  filename         = "${path.module}/get_recipes.zip"
   function_name    = "GetRecipes"
   role             = aws_iam_role.get_recipes.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("${path.module}/${var.environment}/get_recipes.zip")
+  source_code_hash = filebase64sha256("${path.module}/get_recipes.zip")
   runtime          = "nodejs20.x"
   timeout          = 30
 }
@@ -33,11 +33,11 @@ resource "aws_lambda_permission" "get_recipes" {
 }
 
 resource "aws_lambda_function" "create_recipe" {
-  filename         = "${path.module}/${var.environment}/create_recipe.zip"
+  filename         = "${path.module}/create_recipe.zip"
   function_name    = "CreateRecipe"
   role             = aws_iam_role.create_recipe.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("${path.module}/${var.environment}/create_recipe.zip")
+  source_code_hash = filebase64sha256("${path.module}/create_recipe.zip")
   runtime          = "nodejs20.x"
   timeout          = 30
   environment {

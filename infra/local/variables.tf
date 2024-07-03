@@ -3,6 +3,10 @@ variable "openai_api_key" {
   nullable  = false
   sensitive = true
 }
+variable "environment" {
+  type     = string
+  nullable = false
+}
 variable "aws_access_key" {
   type     = string
   nullable = false
@@ -15,19 +19,7 @@ variable "aws_region" {
   type     = string
   nullable = false
 }
-variable "environment" {
-  type     = string
-  nullable = false
-}
 variable "iam_endpoint" {
-  type     = string
-  nullable = false
-}
-variable "cloudfront_endpoint" {
-  type     = string
-  nullable = false
-}
-variable "s3_endpoint" {
   type     = string
   nullable = false
 }
