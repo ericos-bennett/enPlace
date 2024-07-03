@@ -42,14 +42,14 @@ jobs:
       - name: Initialize Terraform
         run: terraform init -backend-config="bucket=${{env.AWS_TFSTATE_BUCKET_NAME}}" -backend-config="key=${{env.AWS_TFSTATE_BUCKET_KEY_NAME}}" -backend-config="region=${{env.AWS_REGION}}"
 
-      - name: Validate Terraform
-        run: terraform validate
-
       - name: Package Frontend
         run: ./package_frontend.sh
 
       - name: Package Lambdas
         run: ./package_lambdas.sh
+
+      - name: Validate Terraform
+        run: terraform validate
 
       - name: Plan Terraform
         id: plan
