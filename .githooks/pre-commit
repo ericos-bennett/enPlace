@@ -11,9 +11,11 @@ cd frontend || exit 1
 npm run format
 
 echo ">>> Formatting infra code"
-cd ../infra || exit 1
+cd ../infra/local || exit 1
 terraform fmt
-cd ..
+cd ../prod || exit 1
+terraform fmt
+cd ../..
 
 # Add formatting changes for staged files to the commit
 for file in $staged_files; do

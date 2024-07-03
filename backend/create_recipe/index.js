@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import fetch from "node-fetch";
 import exampleRecipe from "./exampleRecipe.json" assert { type: "json" };
 
+const endpoint =
+  process.env.NODE_ENV === "production" ? undefined : "http://localstack:4566";
 const clientResponse = (statusCode, body) => {
   return {
     statusCode,
@@ -15,7 +17,7 @@ const clientResponse = (statusCode, body) => {
 export const handler = async (event) => {
   try {
     const userId = 123;
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
+    const dynamodb = new AWS.DynamoDB.DocumentClient({ endpoint });
     const { recipeUrl } = JSON.parse(event.body);
 
     // Validate URL input
@@ -45,7 +47,7 @@ export const handler = async (event) => {
     }
 
     // Get OpenAI secret and start client
-    const secretsManager = new AWS.SecretsManager();
+    const secretsManager = new AWS.SecretsManager({ endpoint });
     const secretData = await secretsManager
       .getSecretValue({ SecretId: process.env.OPENAI_API_KEY_ID })
       .promise();
