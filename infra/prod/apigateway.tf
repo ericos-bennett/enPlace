@@ -10,7 +10,23 @@ resource "aws_api_gateway_deployment" "enplace" {
     aws_api_gateway_integration.create_recipe
   ]
   rest_api_id = aws_api_gateway_rest_api.enplace.id
-  stage_name  = var.environment
+}
+
+resource "aws_api_gateway_stage" "enplace" {
+  deployment_id = aws_api_gateway_deployment.enplace.id
+  rest_api_id   = aws_api_gateway_rest_api.enplace.id
+  stage_name    = var.environment
+}
+
+resource "aws_api_gateway_method_settings" "enplace" {
+  rest_api_id = aws_api_gateway_rest_api.enplace.id
+  stage_name  = aws_api_gateway_stage.enplace.stage_name
+  method_path = "*/*"
+
+  settings {
+    throttling_burst_limit = 40
+    throttling_rate_limit  = 20
+  }
 }
 
 resource "aws_api_gateway_resource" "recipes" {

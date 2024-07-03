@@ -24,7 +24,8 @@
 - [x] Buy domain name
 - [x] Add Frontend infrastructure - S3 bucket & Cloudfront
 - [x] Add Route 53 infrastructure
-- [ ] Pass required endpoint and region variables to lambdas for local
+- [x] Pass required endpoint and region variables to lambdas for local
+- [x] Add rate limiting to API Gateway
 - [ ] Add Cognito auth and connect to API gateway
 - [ ] Deploy to AWS!
 - [ ] Improve FE design
