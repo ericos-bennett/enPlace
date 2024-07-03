@@ -19,6 +19,9 @@ jobs:
   terraform:
     name: Terraform Deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./infra/prod
 
     steps:
       - name: Checkout repository
@@ -38,24 +41,19 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init -backend-config="bucket=${{env.AWS_TFSTATE_BUCKET_NAME}}" -backend-config="key=${{env.AWS_TFSTATE_BUCKET_KEY_NAME}}" -backend-config="region=${{env.AWS_REGION}}"
-        working-directory: ./infra
 
       - name: Validate Terraform
         run: terraform validate
-        working-directory: ./infra
 
       - name: Package Frontend
         run: ./package_frontend.sh
-        working-directory: ./infra/prod
 
       - name: Package Lambdas
         run: ./package_lambdas.sh
-        working-directory: ./infra/prod
 
       - name: Plan Terraform
         id: plan
-        run: terraform plan -var-file="prod/prod.tfvars"
-        working-directory: ./infra
+        run: terraform plan -var-file="prod.tfvars"
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
