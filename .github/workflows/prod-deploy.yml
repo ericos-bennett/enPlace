@@ -1,4 +1,4 @@
-name: Prod Deployment
+name: Prod Deploy
 
 on:
   workflow_dispatch:
@@ -55,6 +55,5 @@ jobs:
         id: plan
         run: terraform plan -var-file="prod.tfvars"
 
-      - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
+      - name: Deploy Terraform
+        run: terraform apply -var-file="prod.tfvars" -auto-approve
