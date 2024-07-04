@@ -7,6 +7,7 @@ resource "aws_route53_record" "enplace_fe" {
   name    = var.domain_name
   type    = "A"
 
+  ttl     = 300
   records = ["127.0.0.1"]
   # alias {
   #   name                   = aws_cloudfront_distribution.enplace_fe.domain_name
@@ -20,6 +21,7 @@ resource "aws_route53_record" "enplace_fe_www" {
   name    = "www.${var.domain_name}"
   type    = "A"
 
+  ttl     = 300
   records = ["127.0.0.1"]
   # alias {
   #   name                   = aws_cloudfront_distribution.enplace_fe.domain_name
@@ -38,6 +40,7 @@ resource "aws_route53_record" "enplace_api" {
   name    = "api.${var.domain_name}"
   type    = "A"
 
+  ttl     = 300
   records = ["127.0.0.1"]
   # alias {
   #   name                   = aws_api_gateway_domain_name.enplace.cloudfront_domain_name
@@ -57,6 +60,7 @@ resource "aws_route53_record" "enplace_auth" {
   name    = "auth.${var.domain_name}"
   type    = "A"
 
+  ttl     = 300
   records = ["127.0.0.1"]
   # alias {
   #   name                   = aws_cognito_user_pool_domain.enplace.cloudfront_distribution
