@@ -10,8 +10,8 @@ resource "aws_s3_bucket_website_configuration" "enplace" {
   }
 }
 
-resource "aws_s3_object" "static_site_upload_object" {
-  for_each     = fileset("${path.module}/frontend", "*")
+resource "aws_s3_object" "enplace" {
+  for_each     = fileset("${path.module}/frontend", "**/*")
   bucket       = aws_s3_bucket.enplace.id
   key          = each.value
   source       = "${path.module}/frontend/${each.value}"
