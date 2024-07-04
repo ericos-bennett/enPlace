@@ -4,7 +4,7 @@ resource "aws_route53_zone" "enplace" {
 
 resource "aws_route53_record" "enpalce_fe" {
   zone_id = aws_route53_zone.enplace.zone_id
-  name    = aws_route53_zone.enplace.name
+  name    = var.domain_name
   type    = "A"
 
   alias {
@@ -15,7 +15,7 @@ resource "aws_route53_record" "enpalce_fe" {
 }
 
 resource "aws_api_gateway_domain_name" "enplace" {
-  domain_name     = "api.${aws_route53_zone.enplace.name}"
+  domain_name     = "api.${var.domain_name}"
   certificate_arn = aws_acm_certificate.enplace_api.arn
 }
 
@@ -31,6 +31,12 @@ resource "aws_route53_record" "enplace_api" {
   }
 }
 
+resource "aws_cognito_user_pool_domain" "enplace" {
+  domain          = "auth.${var.domain_name}"
+  certificate_arn = aws_acm_certificate.enplace_auth.arn
+  user_pool_id    = aws_cognito_user_pool.enplace.id
+}
+
 resource "aws_route53_record" "enplace_auth" {
   zone_id = aws_route53_zone.enplace.zone_id
   name    = aws_cognito_user_pool_domain.enplace.domain
@@ -43,8 +49,3 @@ resource "aws_route53_record" "enplace_auth" {
   }
 }
 
-resource "aws_cognito_user_pool_domain" "enplace" {
-  domain          = "auth.${aws_route53_zone.enplace.name}"
-  certificate_arn = aws_acm_certificate.enplace_auth.arn
-  user_pool_id    = aws_cognito_user_pool.enplace.id
-}
