@@ -29,12 +29,11 @@ resource "aws_route53_record" "enplace_fe_www" {
 resource "aws_api_gateway_domain_name" "enplace" {
   domain_name     = "api.${var.domain_name}"
   certificate_arn = aws_acm_certificate.enplace.arn
-  depends_on      = [aws_acm_certificate.enplace]
 }
 
 resource "aws_route53_record" "enplace_api" {
   zone_id = aws_route53_zone.enplace.zone_id
-  name    = aws_api_gateway_domain_name.enplace.domain_name
+  name    = "api.${var.domain_name}"
   type    = "A"
 
   alias {
@@ -48,12 +47,11 @@ resource "aws_cognito_user_pool_domain" "enplace" {
   domain          = "auth.${var.domain_name}"
   user_pool_id    = aws_cognito_user_pool.enplace.id
   certificate_arn = aws_acm_certificate.enplace.arn
-  depends_on      = [aws_acm_certificate.enplace]
 }
 
 resource "aws_route53_record" "enplace_auth" {
   zone_id = aws_route53_zone.enplace.zone_id
-  name    = aws_cognito_user_pool_domain.enplace.domain
+  name    = "auth.${var.domain_name}"
   type    = "A"
 
   alias {

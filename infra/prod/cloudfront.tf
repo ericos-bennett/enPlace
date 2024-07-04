@@ -45,6 +45,4 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
     acm_certificate_arn = aws_acm_certificate.enplace.arn
     ssl_support_method  = "sni-only"
   }
-
-  depends_on = [aws_acm_certificate.enplace]
 }
