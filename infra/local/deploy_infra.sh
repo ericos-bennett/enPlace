@@ -15,7 +15,7 @@ deterministic-zip -q -r ../../infra/local/create_recipe.zip .
 cd ../../infra/local
 echo ">>> Lambda code updated"
 
-# Copy terraform files that we want to use for the  local deployment
+# Copy terraform files that we want to use for the local deployment
 echo ">>> Copying terraform resource files to local directory"
 cp ../prod/iam.tf .
 cp ../prod/secretsmanager.tf .
