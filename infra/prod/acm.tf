@@ -7,4 +7,6 @@ resource "aws_acm_certificate" "enplace" {
     "api.${var.domain_name}",
     "auth.${var.domain_name}",
   ]
+
+  depends_on = [aws_route53_record.enplace_fe, aws_route53_record.enplace_fe_www, aws_route53_record.enplace_api, aws_route53_record.enplace_auth]
 }
