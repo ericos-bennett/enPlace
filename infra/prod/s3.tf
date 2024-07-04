@@ -10,13 +10,19 @@ resource "aws_s3_bucket_website_configuration" "enplace" {
   }
 }
 
+module "template_files" {
+  source   = "hashicorp/dir/template"
+  base_dir = "${path.module}/frontend"
+}
+
 resource "aws_s3_object" "enplace" {
-  for_each     = fileset("${path.module}/frontend", "**/*")
+  for_each     = module.template_files.files
   bucket       = aws_s3_bucket.enplace.id
-  key          = each.value
-  source       = "${path.module}/frontend/${each.value}"
-  etag         = filemd5("${path.module}/frontend/${each.value}")
-  content_type = "text/html"
+  source       = each.value.source_path
+  key          = each.key
+  content      = each.value.content
+  content_type = each.value.content_type
+  etag         = each.value.digests.md5
 }
 
 resource "aws_s3_bucket_policy" "enplace" {
