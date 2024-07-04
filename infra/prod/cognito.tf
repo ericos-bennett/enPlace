@@ -9,8 +9,8 @@ resource "aws_cognito_user_pool_client" "enplace" {
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["openid", "email"]
   supported_identity_providers         = ["COGNITO"]
-  callback_urls                        = ["https://${aws_route53_record.enpalce_fe.name}/callback"]
-  logout_urls                          = ["https://${aws_route53_record.enpalce_fe.name}/logout"]
+  callback_urls                        = ["https://${var.domain_name}/callback"]
+  logout_urls                          = ["https://${var.domain_name}/logout"]
 }
 
 resource "aws_api_gateway_authorizer" "cognito_authorizer" {
