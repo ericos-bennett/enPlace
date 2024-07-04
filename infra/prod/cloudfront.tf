@@ -47,5 +47,5 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
     ssl_support_method             = "sni-only"
   }
 
-  depends_on = [aws_route53_record.enplace_fe, aws_route53_record.enplace_fe_www, aws_acm_certificate.enplace.arn]
+  depends_on = [aws_route53_record.enplace_fe, aws_route53_record.enplace_fe_www, aws_acm_certificate.enplace]
 }

@@ -33,7 +33,7 @@ resource "aws_route53_record" "enplace_fe_www" {
 resource "aws_api_gateway_domain_name" "enplace" {
   domain_name     = "api.${var.domain_name}"
   certificate_arn = aws_acm_certificate.enplace.arn
-  depends_on      = [aws_route53_record.enplace_api, aws_acm_certificate.enplace.arn]
+  depends_on      = [aws_route53_record.enplace_api, aws_acm_certificate.enplace]
 }
 
 resource "aws_route53_record" "enplace_api" {
@@ -54,7 +54,7 @@ resource "aws_cognito_user_pool_domain" "enplace" {
   domain          = "auth.${var.domain_name}"
   user_pool_id    = aws_cognito_user_pool.enplace.id
   certificate_arn = aws_acm_certificate.enplace.arn
-  depends_on      = [aws_route53_record.enplace_auth, aws_acm_certificate.enplace.arn]
+  depends_on      = [aws_route53_record.enplace_auth, aws_acm_certificate.enplace]
 }
 
 resource "aws_route53_record" "enplace_auth" {
