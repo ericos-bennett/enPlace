@@ -26,8 +26,12 @@
 - [x] Add Route 53 infrastructure
 - [x] Pass required endpoint and region variables to lambdas for local
 - [x] Add rate limiting to API Gateway
-- [ ] Add Cognito auth and connect to API gateway
-- [ ] Deploy to AWS!
+- [x] Add Cognito auth and connect to API gateway
+- [x] Deploy to AWS!
+- [ ] Get FE to load
+- [ ] Get auth subdomain to load
+- [ ] Create log in button which redirects to auth subdomain and adds token to subsequent API calls
+- [ ] Test on AWS
 - [ ] Improve FE design
 - [ ] Use MUI components wherever possible
 - [ ] Format /backend automatically
