@@ -2,7 +2,7 @@ resource "aws_route53_zone" "enplace" {
   name = var.domain_name
 }
 
-resource "aws_route53_record" "enpalce_fe" {
+resource "aws_route53_record" "enplace_fe" {
   zone_id = aws_route53_zone.enplace.zone_id
   name    = var.domain_name
   type    = "A"
@@ -14,10 +14,22 @@ resource "aws_route53_record" "enpalce_fe" {
   }
 }
 
+resource "aws_route53_record" "enplace_fe_www" {
+  zone_id = aws_route53_zone.enplace.zone_id
+  name    = "www.${var.domain_name}"
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.enplace_fe.domain_name
+    zone_id                = aws_cloudfront_distribution.enplace_fe.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
 resource "aws_api_gateway_domain_name" "enplace" {
   domain_name     = "api.${var.domain_name}"
-  certificate_arn = aws_acm_certificate.enplace_api.arn
-  depends_on      = [aws_acm_certificate.enplace_api]
+  certificate_arn = aws_acm_certificate.enplace.arn
+  depends_on      = [aws_acm_certificate.enplace]
 }
 
 resource "aws_route53_record" "enplace_api" {
@@ -34,9 +46,9 @@ resource "aws_route53_record" "enplace_api" {
 
 resource "aws_cognito_user_pool_domain" "enplace" {
   domain          = "auth.${var.domain_name}"
-  certificate_arn = aws_acm_certificate.enplace_auth.arn
   user_pool_id    = aws_cognito_user_pool.enplace.id
-  depends_on      = [aws_acm_certificate.enplace_auth]
+  certificate_arn = aws_acm_certificate.enplace.arn
+  depends_on      = [aws_acm_certificate.enplace]
 }
 
 resource "aws_route53_record" "enplace_auth" {
