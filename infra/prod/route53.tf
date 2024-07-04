@@ -48,4 +48,3 @@ resource "aws_route53_record" "enplace_auth" {
     evaluate_target_health = false
   }
 }
-

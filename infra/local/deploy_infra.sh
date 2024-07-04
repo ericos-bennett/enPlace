@@ -18,7 +18,6 @@ echo ">>> Lambda code updated"
 # Copy terraform files that we want to use for the  local deployment
 echo ">>> Copying terraform resource files to local directory"
 cp ../prod/iam.tf .
-cp ../prod/apigateway.tf .
 cp ../prod/secretsmanager.tf .
 cp ../prod/lambda.tf .
 cp ../prod/dynamodb.tf .
@@ -31,7 +30,6 @@ echo ">>> Terraform applied"
 # Remove the copied terraform files once the deployment is complete
 echo ">>> Removing terraform resource files from local directory"
 rm iam.tf
-rm apigateway.tf
 rm secretsmanager.tf
 rm lambda.tf
 rm dynamodb.tf
