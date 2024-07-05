@@ -1,5 +1,14 @@
 resource "aws_cognito_user_pool" "enplace" {
   name = "enplace_user_pool"
+  email_configuration {
+    email_sending_account = "COGNITO_DEFAULT"
+  }
+  account_recovery_setting {
+    recovery_mechanism {
+      name     = "verified_email"
+      priority = 1
+    }
+  }
 }
 
 resource "aws_cognito_user_pool_client" "enplace" {
