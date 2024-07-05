@@ -28,7 +28,6 @@ export const getAuthTokensAndSave = async (authCode: string) => {
 
   if (response.ok) {
     const tokens = await response.json()
-    console.log({ tokens })
     setAccessTokenCookie(tokens.access_token)
   } else {
     console.error('Failed to exchange code for tokens:', response.status)
