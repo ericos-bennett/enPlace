@@ -10,7 +10,7 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
   enabled = true
 
   origin {
-    domain_name = aws_s3_bucket.enplace.website_endpoint
+    domain_name = aws_s3_bucket_website_configuration.enplace.website_domain
     origin_id   = "S3-enplace-frontend"
 
     origin_access_control_id = aws_cloudfront_origin_access_control.enplace_fe.id
@@ -42,9 +42,8 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
-    acm_certificate_arn            = aws_acm_certificate.enplace.arn
-    ssl_support_method             = "sni-only"
+    acm_certificate_arn = aws_acm_certificate.enplace.arn
+    ssl_support_method  = "sni-only"
   }
 
   depends_on = [aws_acm_certificate_validation.enplace]
