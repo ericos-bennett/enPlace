@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 
 export const SignUpButton: React.FC = () => {
   const authDomain = 'auth.enplace.xyz'
-  const clientId = '6r38inae6oc2mgt8m98di5b5m5'
+  const clientId = '47stqonob5ak3gkk6cl3pp3p8s'
   const redirectUri = import.meta.env.PROD
     ? 'https://enplace.xyz/callback'
     : 'http://localhost:5173/callback'
