@@ -13,8 +13,6 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
     domain_name = aws_s3_bucket.enplace.bucket_regional_domain_name
     origin_id   = "S3-enplace-frontend"
 
-    origin_access_control_id = aws_cloudfront_origin_access_control.enplace_fe.id
-
     custom_origin_config {
       origin_protocol_policy = "http-only"
       http_port              = "80"
