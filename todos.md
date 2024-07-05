@@ -29,8 +29,10 @@
 - [x] Add Cognito auth and connect to API gateway
 - [x] Deploy to AWS!
 - [x] Get FE to load
-- [ ] Get auth subdomain to load
+- [x] Get auth subdomain to load
+- [ ] Fix CORS issue on prod API Gateway
 - [ ] Troubleshoot S3 bucket permissions issue
+- [ ] Update lambdas to use userId from auth token
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
 - [ ] Separate lambda build into separate job, using variables exported by Terraform apply job
 - [ ] Create log in button which redirects to auth subdomain and adds token to subsequent API calls
