@@ -28,7 +28,7 @@
 - [x] Add rate limiting to API Gateway
 - [x] Add Cognito auth and connect to API gateway
 - [x] Deploy to AWS!
-- [ ] Get FE to load
+- [x] Get FE to load
 - [ ] Get auth subdomain to load
 - [ ] Create log in button which redirects to auth subdomain and adds token to subsequent API calls
 - [ ] Test on AWS
