@@ -1,6 +1,8 @@
 resource "aws_cloudfront_distribution" "enplace_fe" {
   enabled = true
 
+  aliases = ["${var.domain_name}", "www.${var.domain_name}"]
+
   origin {
     domain_name = aws_s3_bucket_website_configuration.enplace.website_endpoint
     origin_id   = "S3-enplace-frontend"
