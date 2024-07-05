@@ -1,11 +1,3 @@
-resource "aws_cloudfront_origin_access_control" "enplace_fe" {
-  name                              = "enplace-frontend"
-  description                       = "Origin Access Control for the enplace frontend"
-  origin_access_control_origin_type = "s3"
-  signing_behavior                  = "always"
-  signing_protocol                  = "sigv4"
-}
-
 resource "aws_cloudfront_distribution" "enplace_fe" {
   enabled = true
 
@@ -13,7 +5,12 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
     domain_name = aws_s3_bucket_website_configuration.enplace.website_domain
     origin_id   = "S3-enplace-frontend"
 
-    origin_access_control_id = aws_cloudfront_origin_access_control.enplace_fe.id
+    custom_origin_config {
+      http_port              = "80"
+      https_port             = "443"
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
+    }
   }
 
   default_cache_behavior {
