@@ -1,11 +1,3 @@
-resource "aws_cloudfront_origin_access_control" "enplace_fe" {
-  name                              = "enplace-frontend"
-  description                       = "Origin Access Control for the enplace frontend"
-  origin_access_control_origin_type = "s3"
-  signing_behavior                  = "always"
-  signing_protocol                  = "sigv4"
-}
-
 resource "aws_cloudfront_distribution" "enplace_fe" {
   enabled = true
 
