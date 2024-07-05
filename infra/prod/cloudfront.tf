@@ -10,7 +10,7 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
   enabled = true
 
   origin {
-    domain_name = aws_s3_bucket.enplace.bucket_regional_domain_name
+    domain_name = aws_s3_bucket_website_configuration.enplace.website_domain
     origin_id   = "S3-enplace-frontend"
 
     custom_origin_config {
