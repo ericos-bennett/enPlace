@@ -1,6 +1,8 @@
 resource "aws_cognito_user_pool" "enplace" {
   name                     = "enplace_user_pool"
+  username_attributes      = ["email"]
   auto_verified_attributes = ["email"]
+
   email_configuration {
     email_sending_account = "COGNITO_DEFAULT"
   }
