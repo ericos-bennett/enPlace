@@ -2,13 +2,12 @@ import { getIdTokenFromCookie } from './auth'
 import { Recipe, RecipeMeta, CreateRecipeResponse } from '~/types'
 
 const recipesEndpoint = `${import.meta.env.VITE_API_URL}/recipes`
+const headers = {
+  Authorization: `${getIdTokenFromCookie()}`,
+}
 
 export const getRecipe = async (recipeId: string): Promise<Recipe> => {
-  const response = await fetch(`${recipesEndpoint}/${recipeId}`, {
-    headers: {
-      Authorization: `Bearer ${getIdTokenFromCookie()}`,
-    },
-  })
+  const response = await fetch(`${recipesEndpoint}/${recipeId}`, { headers })
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`)
   }
@@ -16,11 +15,7 @@ export const getRecipe = async (recipeId: string): Promise<Recipe> => {
 }
 
 export const getRecipeMetas = async (): Promise<RecipeMeta[]> => {
-  const response = await fetch(recipesEndpoint, {
-    headers: {
-      Authorization: `Bearer ${getIdTokenFromCookie()}`,
-    },
-  })
+  const response = await fetch(recipesEndpoint, { headers })
   return response.json()
 }
 
@@ -28,11 +23,7 @@ export const createRecipe = async (
   recipeUrl: string
 ): Promise<CreateRecipeResponse> => {
   const response = await fetch(recipesEndpoint, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${getIdTokenFromCookie()}`,
-      'Content-Type': 'application/json',
-    },
+    headers: { ...headers, 'Content-Type': 'application/json' },
     body: JSON.stringify({ recipeUrl }),
   })
   if (response.status == 409) {
