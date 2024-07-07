@@ -29,6 +29,18 @@ resource "aws_api_gateway_method_settings" "enplace" {
   }
 }
 
+resource "aws_api_gateway_gateway_response" "enplace" {
+  rest_api_id   = aws_api_gateway_rest_api.enplace.id
+  status_code   = "401"
+  response_type = "UNAUTHORIZED"
+
+  response_parameters = {
+    "gatewayresponse.header.Access-Control-Allow-Origin"  = "'*'",
+    "gatewayresponse.header.Access-Control-Allow-Methods" = "'*'",
+    "gatewayresponse.header.Access-Control-Allow-Headers" = "'*'",
+  }
+}
+
 resource "aws_api_gateway_resource" "recipes" {
   rest_api_id = aws_api_gateway_rest_api.enplace.id
   parent_id   = aws_api_gateway_rest_api.enplace.root_resource_id

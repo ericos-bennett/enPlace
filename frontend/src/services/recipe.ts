@@ -16,6 +16,9 @@ export const getRecipe = async (recipeId: string): Promise<Recipe> => {
 
 export const getRecipeMetas = async (): Promise<RecipeMeta[]> => {
   const response = await fetch(recipesEndpoint, { headers })
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
   return response.json()
 }
 
