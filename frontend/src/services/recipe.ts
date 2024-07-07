@@ -1,7 +1,7 @@
 import { getAccessTokenFromCookie } from './auth'
 import { Recipe, RecipeMeta, CreateRecipeResponse } from '~/types'
 
-const recipesEndpoint = `${import.meta.env.VITE_API_URL}/${import.meta.env.VITE_API_STAGE}/recipes`
+const recipesEndpoint = `${import.meta.env.VITE_API_URL}/recipes`
 
 export const getRecipe = async (recipeId: string): Promise<Recipe> => {
   const response = await fetch(`${recipesEndpoint}/${recipeId}`, {

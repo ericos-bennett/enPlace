@@ -32,6 +32,12 @@ resource "aws_api_gateway_domain_name" "enplace" {
   depends_on      = [aws_acm_certificate_validation.enplace]
 }
 
+resource "aws_api_gateway_base_path_mapping" "example" {
+  api_id      = aws_api_gateway_rest_api.enplace.id
+  stage_name  = aws_api_gateway_stage.enplace.stage_name
+  domain_name = aws_api_gateway_domain_name.enplace.domain_name
+}
+
 resource "aws_route53_record" "enplace_api" {
   zone_id = aws_route53_zone.enplace.zone_id
   name    = "api.${var.domain_name}"
