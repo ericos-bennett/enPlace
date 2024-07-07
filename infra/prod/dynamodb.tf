@@ -1,8 +1,9 @@
 resource "aws_dynamodb_table" "recipes" {
-  name           = "Recipes"
-  billing_mode   = "PROVISIONED"
-  read_capacity  = 15
-  write_capacity = 15
+  name                        = "Recipes"
+  deletion_protection_enabled = true
+  billing_mode                = "PROVISIONED"
+  read_capacity               = 15
+  write_capacity              = 15
 
   hash_key  = "Id"
   range_key = "CreatedAt"
