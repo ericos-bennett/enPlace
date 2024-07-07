@@ -4,15 +4,19 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
   aliases = ["${var.domain_name}", "www.${var.domain_name}"]
 
   origin {
-    origin_id                = "S3-enplace-frontend"
-    domain_name              = aws_s3_bucket_website_configuration.enplace.website_endpoint
-    origin_access_control_id = aws_cloudfront_origin_access_control.enplace_fe.id
+    origin_id   = "S3-enplace-frontend"
+    domain_name = aws_s3_bucket_website_configuration.enplace.website_endpoint
 
     custom_origin_config {
       origin_protocol_policy = "http-only"
       http_port              = "80"
       https_port             = "443"
       origin_ssl_protocols   = ["TLSv1.2"]
+    }
+
+    custom_header {
+      name  = "Referer"
+      value = var.cloudfront_referer_header
     }
   }
 
@@ -54,11 +58,4 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
   }
 
   depends_on = [aws_acm_certificate_validation.enplace]
-}
-
-resource "aws_cloudfront_origin_access_control" "enplace_fe" {
-  name                              = "enplace-fe-oac"
-  origin_access_control_origin_type = "s3"
-  signing_behavior                  = "always"
-  signing_protocol                  = "sigv4"
 }

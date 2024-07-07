@@ -29,18 +29,18 @@ resource "aws_s3_bucket_policy" "enplace" {
   bucket = aws_s3_bucket.enplace.id
 
   policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2012-10-17",
     Statement = [
       {
-        Effect = "Allow"
+        Effect = "Allow",
         Principal = {
           Service = "cloudfront.amazonaws.com"
-        }
-        Action   = "s3:GetObject"
-        Resource = "${aws_s3_bucket.enplace.arn}/*"
+        },
+        Action   = "s3:GetObject",
+        Resource = "${aws_s3_bucket.enplace.arn}/*",
         Condition = {
-          ArnEquals = {
-            "aws:SourceArn" = aws_cloudfront_distribution.enplace_fe.arn
+          StringEquals = {
+            "aws:Referer" = var.cloudfront_referer_header
           }
         }
       }
