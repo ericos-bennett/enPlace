@@ -6,7 +6,11 @@ const clientResponse = (statusCode, body) => {
   return {
     statusCode,
     body,
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,GET",
+    },
   };
 };
 
