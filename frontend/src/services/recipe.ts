@@ -1,4 +1,4 @@
-import { getAccessTokenFromCookie } from './auth'
+import { getIdTokenFromCookie } from './auth'
 import { Recipe, RecipeMeta, CreateRecipeResponse } from '~/types'
 
 const recipesEndpoint = `${import.meta.env.VITE_API_URL}/recipes`
@@ -6,7 +6,7 @@ const recipesEndpoint = `${import.meta.env.VITE_API_URL}/recipes`
 export const getRecipe = async (recipeId: string): Promise<Recipe> => {
   const response = await fetch(`${recipesEndpoint}/${recipeId}`, {
     headers: {
-      Authorization: `Bearer ${getAccessTokenFromCookie()}`,
+      Authorization: `Bearer ${getIdTokenFromCookie()}`,
     },
   })
   if (!response.ok) {
@@ -18,7 +18,7 @@ export const getRecipe = async (recipeId: string): Promise<Recipe> => {
 export const getRecipeMetas = async (): Promise<RecipeMeta[]> => {
   const response = await fetch(recipesEndpoint, {
     headers: {
-      Authorization: `Bearer ${getAccessTokenFromCookie()}`,
+      Authorization: `Bearer ${getIdTokenFromCookie()}`,
     },
   })
   return response.json()
@@ -30,7 +30,7 @@ export const createRecipe = async (
   const response = await fetch(recipesEndpoint, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${getAccessTokenFromCookie()}`,
+      Authorization: `Bearer ${getIdTokenFromCookie()}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ recipeUrl }),
