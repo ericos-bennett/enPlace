@@ -7,6 +7,13 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
     origin_id                = "S3-enplace-frontend"
     domain_name              = aws_s3_bucket_website_configuration.enplace.website_endpoint
     origin_access_control_id = aws_cloudfront_origin_access_control.enplace_fe.id
+
+    custom_origin_config {
+      origin_protocol_policy = "http-only"
+      http_port              = "80"
+      https_port             = "443"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
   }
 
   default_cache_behavior {
