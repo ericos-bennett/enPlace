@@ -4,15 +4,9 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
   aliases = ["${var.domain_name}", "www.${var.domain_name}"]
 
   origin {
-    domain_name = aws_s3_bucket_website_configuration.enplace.website_endpoint
-    origin_id   = "S3-enplace-frontend"
-
-    custom_origin_config {
-      origin_protocol_policy = "http-only"
-      http_port              = "80"
-      https_port             = "443"
-      origin_ssl_protocols   = ["TLSv1.2"]
-    }
+    origin_id                = "S3-enplace-frontend"
+    domain_name              = aws_s3_bucket_website_configuration.enplace.website_endpoint
+    origin_access_control_id = aws_cloudfront_origin_access_control.enplace_fe.id
   }
 
   default_cache_behavior {
@@ -53,4 +47,11 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
   }
 
   depends_on = [aws_acm_certificate_validation.enplace]
+}
+
+resource "aws_cloudfront_origin_access_control" "enplace_fe" {
+  name                              = "enplace-fe-oac"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
 }

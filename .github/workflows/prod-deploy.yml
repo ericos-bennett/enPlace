@@ -34,6 +34,12 @@ jobs:
           role-to-assume: ${{env.AWS_ROLE}}
           role-session-name: GitHub-OIDC-TERRAFORM
 
+      - name: Package Frontend
+        run: ./package_frontend.sh
+
+      - name: Package Lambdas
+        run: ./package_lambdas.sh
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
@@ -41,12 +47,6 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init -backend-config="bucket=${{env.AWS_TFSTATE_BUCKET_NAME}}" -backend-config="key=${{env.AWS_TFSTATE_BUCKET_KEY_NAME}}" -backend-config="region=${{env.AWS_REGION}}"
-
-      - name: Package Frontend
-        run: ./package_frontend.sh
-
-      - name: Package Lambdas
-        run: ./package_lambdas.sh
 
       - name: Validate Terraform
         run: terraform validate
