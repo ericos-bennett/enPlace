@@ -1,6 +1,8 @@
 resource "aws_dynamodb_table" "recipes" {
-  name         = "Recipes"
-  billing_mode = "PAY_PER_REQUEST"
+  name           = "Recipes"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 15
+  write_capacity = 15
 
   hash_key  = "Id"
   range_key = "CreatedAt"
@@ -26,7 +28,10 @@ resource "aws_dynamodb_table" "recipes" {
   }
 
   global_secondary_index {
-    name               = "UserIdIndex"
+    name           = "UserIdIndex"
+    read_capacity  = 10
+    write_capacity = 10
+
     hash_key           = "UserId"
     range_key          = "SourceUrl"
     projection_type    = "INCLUDE"

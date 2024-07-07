@@ -32,7 +32,9 @@
 - [x] Get auth subdomain to load
 - [ ] Fix CORS issue on prod API Gateway
 - [ ] Troubleshoot S3 bucket permissions issue
-- [ ] Update lambdas to use userId from auth token
+- [ ] Update lambdas to use username from access token - [aws-jwt-verify](https://github.com/awslabs/aws-jwt-verify])
+- [ ] Investigate risk/reward of hiding or rate-limiting sign in page
+- [ ] Add deletion protection to dynamobd (and user pool?)
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
 - [ ] Separate lambda build into separate job, using variables exported by Terraform apply job
 - [ ] Create log in button which redirects to auth subdomain and adds token to subsequent API calls
