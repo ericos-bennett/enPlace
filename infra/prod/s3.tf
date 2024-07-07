@@ -32,12 +32,10 @@ resource "aws_s3_bucket_policy" "enplace" {
     Version = "2012-10-17",
     Statement = [
       {
-        Effect = "Allow",
-        Principal = {
-          Service = "cloudfront.amazonaws.com"
-        },
-        Action   = "s3:GetObject",
-        Resource = "${aws_s3_bucket.enplace.arn}/*",
+        Effect    = "Allow",
+        Principal = "*",
+        Action    = "s3:GetObject",
+        Resource  = "${aws_s3_bucket.enplace.arn}/*",
         Condition = {
           StringEquals = {
             "aws:Referer" = var.cloudfront_referer_header

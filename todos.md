@@ -30,8 +30,8 @@
 - [x] Deploy to AWS!
 - [x] Get FE to load
 - [x] Get auth subdomain to load
+- [x] Troubleshoot S3 bucket permissions issue
 - [ ] Fix CORS issue on prod API Gateway
-- [ ] Troubleshoot S3 bucket permissions issue
 - [ ] Update lambdas to use username from access token - [aws-jwt-verify](https://github.com/awslabs/aws-jwt-verify])
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
 - [ ] Add deletion protection to dynamobd (and user pool?)
