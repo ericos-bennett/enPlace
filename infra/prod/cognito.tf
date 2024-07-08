@@ -12,6 +12,9 @@ resource "aws_cognito_user_pool" "enplace" {
       priority = 1
     }
   }
+  admin_create_user_config {
+    allow_admin_create_user_only = true
+  }
 }
 
 resource "aws_cognito_user_pool_client" "enplace" {
