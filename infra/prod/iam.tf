@@ -65,7 +65,10 @@ resource "aws_iam_role_policy" "get_recipes" {
           "dynamodb:GetItem",
           "dynamodb:Query"
         ],
-        Resource = aws_dynamodb_table.recipes.arn
+        Resource = [
+          aws_dynamodb_table.recipes.arn,
+          "${aws_dynamodb_table.recipes.arn}/index/UserIdIndex"
+        ]
       }
     ]
   })
