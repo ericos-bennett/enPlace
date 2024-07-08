@@ -9,7 +9,7 @@ const setIdTokenCookie = (idToken: string) => {
   Cookies.set('id_token', idToken, { secure: true, sameSite: 'strict' })
 }
 
-export const authorizationUrl = `https://${authDomain}/signup?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`
+export const authorizationUrl = `https://${authDomain}/login?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`
 
 export const getAuthTokensAndSave = async (authCode: string) => {
   const tokenUrl = `https://${authDomain}/oauth2/token`

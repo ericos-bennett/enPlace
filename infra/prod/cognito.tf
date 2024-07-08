@@ -26,6 +26,7 @@ resource "aws_cognito_user_pool_client" "enplace" {
   supported_identity_providers         = ["COGNITO"]
   callback_urls                        = ["https://${var.domain_name}/callback", "http://localhost:5173/callback"]
   logout_urls                          = ["https://${var.domain_name}/logout", "http://localhost:5173/logout"]
+  prevent_user_existence_errors        = "ENABLED"
 }
 
 resource "aws_api_gateway_authorizer" "cognito_authorizer" {

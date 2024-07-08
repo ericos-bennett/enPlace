@@ -20,5 +20,5 @@ export const SignUpButton: React.FC = () => {
     handleCallback()
   }, [])
 
-  return <Button onClick={handleSignUp}>Sign Up</Button>
+  return <Button onClick={handleSignUp}>Log In</Button>
 }
