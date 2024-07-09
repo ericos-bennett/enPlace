@@ -6,7 +6,7 @@ const redirectUri = `${import.meta.env.VITE_SPA_URL}/callback`
 const scope = 'openid email'
 
 const setIdTokenCookie = (idToken: string) => {
-  Cookies.set('id_token', idToken, { secure: true, sameSite: 'strict' })
+  Cookies.set('id_token', idToken, { secure: true, sameSite: 'none' })
 }
 
 export const authorizationUrl = `https://${authDomain}/login?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`
