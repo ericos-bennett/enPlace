@@ -1,7 +1,7 @@
 import AWS from "aws-sdk";
 
-// const endpoint =
-//   process.env.NODE_ENV === "production" ? undefined : "http://localstack:4566";
+const endpoint =
+  process.env.NODE_ENV === "production" ? undefined : "http://localstack:4566";
 const clientResponse = (statusCode, body) => {
   return {
     statusCode,
@@ -19,7 +19,7 @@ export const handler = async (event) => {
   console.log({ event });
   try {
     const userId = 123;
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
+    const dynamodb = new AWS.DynamoDB.DocumentClient({ endpoint });
 
     const params = {
       TableName: "Recipes",

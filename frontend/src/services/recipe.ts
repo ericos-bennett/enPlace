@@ -26,8 +26,9 @@ export const createRecipe = async (
   recipeUrl: string
 ): Promise<CreateRecipeResponse> => {
   const response = await fetch(recipesEndpoint, {
-    headers: { ...headers, 'Content-Type': 'application/json' },
+    method: 'POST',
     body: JSON.stringify({ recipeUrl }),
+    headers: { ...headers, 'Content-Type': 'application/json' },
   })
   if (response.status == 409) {
     return response.json()
