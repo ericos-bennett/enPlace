@@ -4,11 +4,11 @@ variable "environment" {
 }
 variable "dynamodb_endpoint" {
   type     = string
-  nullable = true
+  nullable = false
 }
 variable "secretsmanager_endpoint" {
   type     = string
-  nullable = true
+  nullable = false
 }
 variable "openai_api_key" {
   type      = string
