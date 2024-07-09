@@ -37,7 +37,6 @@
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
 - [ ] Separate lambda build into separate job, using variables exported by Terraform apply job
-- [ ] Create log in button which redirects to auth subdomain and adds token to subsequent API calls
 - [ ] Test on AWS
 - [ ] Improve FE design
 - [ ] Use MUI components wherever possible

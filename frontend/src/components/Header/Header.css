@@ -12,9 +12,14 @@ header {
   a:active {
     color: var(--font-color);
   }
+}
 
-  nav {
-    display: flex;
-    gap: 2rem;
-  }
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
 }
