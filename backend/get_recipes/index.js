@@ -5,7 +5,7 @@ const clientResponse = (statusCode, body) => {
     statusCode,
     body,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "www.enplace.xyz",
       "Access-Control-Allow-Methods": "GET,OPTIONS",
       "Access-Control-Allow-Headers":
         "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
