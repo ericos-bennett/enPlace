@@ -2,14 +2,22 @@ variable "environment" {
   type     = string
   nullable = false
 }
-variable "domain_name" {
+variable "dynamodb_endpoint" {
   type     = string
-  nullable = false
+  nullable = true
+}
+variable "secretsmanager_endpoint" {
+  type     = string
+  nullable = true
 }
 variable "openai_api_key" {
   type      = string
   nullable  = false
   sensitive = true
+}
+variable "domain_name" {
+  type     = string
+  nullable = false
 }
 variable "cloudfront_referer_header" {
   type      = string

@@ -6,6 +6,11 @@ resource "aws_lambda_function" "get_recipe" {
   source_code_hash = filebase64sha256("${path.module}/get_recipe.zip")
   runtime          = "nodejs20.x"
   timeout          = 30
+  environment {
+    variables = {
+      DYNAMODB_ENDPOINT = var.dynamodb_endpoint,
+    }
+  }
 }
 
 resource "aws_lambda_permission" "get_recipe" {
@@ -23,6 +28,11 @@ resource "aws_lambda_function" "get_recipes" {
   source_code_hash = filebase64sha256("${path.module}/get_recipes.zip")
   runtime          = "nodejs20.x"
   timeout          = 30
+  environment {
+    variables = {
+      DYNAMODB_ENDPOINT = var.dynamodb_endpoint,
+    }
+  }
 }
 
 resource "aws_lambda_permission" "get_recipes" {
@@ -42,7 +52,9 @@ resource "aws_lambda_function" "create_recipe" {
   timeout          = 30
   environment {
     variables = {
-      OPENAI_API_KEY_ID = aws_secretsmanager_secret.openai_api_key.id,
+      DYNAMODB_ENDPOINT       = var.dynamodb_endpoint,
+      SECRETSMANAGER_ENDPOINT = var.secretsmanager_endpoint
+      OPENAI_API_KEY_ID       = aws_secretsmanager_secret.openai_api_key.id
     }
   }
 }
