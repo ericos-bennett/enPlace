@@ -24,8 +24,8 @@ resource "aws_cognito_user_pool_client" "enplace" {
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["openid", "email"]
   supported_identity_providers         = ["COGNITO"]
-  callback_urls                        = ["https://${var.domain_name}/callback", "http://localhost:5173/callback"]
-  logout_urls                          = ["https://${var.domain_name}/logout", "http://localhost:5173/logout"]
+  callback_urls                        = ["https://www.${var.domain_name}/callback", "http://localhost:5173/callback"]
+  logout_urls                          = ["https://www.${var.domain_name}/logout", "http://localhost:5173/logout"]
   prevent_user_existence_errors        = "ENABLED"
 }
 
