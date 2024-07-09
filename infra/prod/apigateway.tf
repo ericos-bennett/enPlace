@@ -31,11 +31,10 @@ resource "aws_api_gateway_method_settings" "enplace" {
 
 resource "aws_api_gateway_gateway_response" "enplace" {
   rest_api_id   = aws_api_gateway_rest_api.enplace.id
-  status_code   = "401"
-  response_type = "UNAUTHORIZED"
+  response_type = "DEFAULT_4XX"
 
   response_parameters = {
-    "gatewayresponse.header.Access-Control-Allow-Origin"      = "'https://www.enplace.xyz'",
+    "gatewayresponse.header.Access-Control-Allow-Origin"      = "'*'",
     "gatewayresponse.header.Access-Control-Allow-Methods"     = "'*'",
     "gatewayresponse.header.Access-Control-Allow-Headers"     = "'*'",
     "gatewayresponse.header.Access-Control-Allow-Credentials" = "'true'"
@@ -100,7 +99,7 @@ resource "aws_api_gateway_integration_response" "options_recipes" {
   status_code = "200"
 
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin"      = "'https://www.enplace.xyz'",
+    "method.response.header.Access-Control-Allow-Origin"      = "'*'",
     "method.response.header.Access-Control-Allow-Methods"     = "'GET,POST,OPTIONS'",
     "method.response.header.Access-Control-Allow-Headers"     = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
     "method.response.header.Access-Control-Allow-Credentials" = "'true'"
