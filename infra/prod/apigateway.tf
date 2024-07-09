@@ -34,7 +34,7 @@ resource "aws_api_gateway_gateway_response" "enplace" {
   response_type = "DEFAULT_4XX"
 
   response_parameters = {
-    "gatewayresponse.header.Access-Control-Allow-Origin"      = "'https://www.enplace.xyz'",
+    "gatewayresponse.header.Access-Control-Allow-Origin"      = "'*'",
     "gatewayresponse.header.Access-Control-Allow-Methods"     = "'GET,POST,OPTIONS'",
     "gatewayresponse.header.Access-Control-Allow-Headers"     = "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
     "gatewayresponse.header.Access-Control-Allow-Credentials" = "'true'"
@@ -99,7 +99,7 @@ resource "aws_api_gateway_integration_response" "options_recipes" {
   status_code = "200"
 
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin"      = "'https://www.enplace.xyz'",
+    "method.response.header.Access-Control-Allow-Origin"      = "'*'",
     "method.response.header.Access-Control-Allow-Methods"     = "'GET,POST,OPTIONS'",
     "method.response.header.Access-Control-Allow-Headers"     = "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
     "method.response.header.Access-Control-Allow-Credentials" = "'true'"
