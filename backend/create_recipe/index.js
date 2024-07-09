@@ -10,7 +10,7 @@ const clientResponse = (statusCode, body) => {
     body,
     headers: {
       "Access-Control-Allow-Origin": "https://www.enplace.xyz",
-      "Access-Control-Allow-Methods": "POST,OPTIONS",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
       "Access-Control-Allow-Headers":
         "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
       "Access-Control-Allow-Credentials": true,
