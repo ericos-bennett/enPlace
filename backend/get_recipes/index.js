@@ -1,4 +1,5 @@
 import AWS from "aws-sdk";
+import { jwtDecode } from "jwt-decode";
 
 const clientResponse = (statusCode, bodyJson) => {
   return {
@@ -17,7 +18,10 @@ const clientResponse = (statusCode, bodyJson) => {
 export const handler = async (event) => {
   try {
     console.log({ event });
-    const userId = 123;
+    console.log(event.headers.Authorization);
+    const authToken = event.headers.Authorization;
+    const { sub } = jwtDecode(authToken);
+    console.log({ sub });
     const dynamodb = new AWS.DynamoDB.DocumentClient({
       endpoint: process.env.DYNAMODB_ENDPOINT,
     });
@@ -27,7 +31,7 @@ export const handler = async (event) => {
       IndexName: "UserIdIndex",
       KeyConditionExpression: "UserId = :userId",
       ExpressionAttributeValues: {
-        ":userId": userId,
+        ":userId": sub,
       },
     };
 

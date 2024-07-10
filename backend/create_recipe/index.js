@@ -1,4 +1,5 @@
 import AWS from "aws-sdk";
+import { jwtDecode } from "jwt-decode";
 import OpenAI from "openai";
 import { v4 as uuidv4 } from "uuid";
 import fetch from "node-fetch";
@@ -19,13 +20,18 @@ const clientResponse = (statusCode, bodyJson) => {
 };
 
 export const handler = async (event) => {
-  console.log({ event });
   try {
-    const userId = 123;
+    // Get userId
+    console.log({ event });
+    console.log(event.headers.Authorization);
+    const authToken = event.headers.Authorization;
+    const { sub } = jwtDecode(authToken);
+    console.log({ sub });
+
+    const { recipeUrl } = JSON.parse(event.body);
     const dynamodb = new AWS.DynamoDB.DocumentClient({
       endpoint: process.env.DYNAMODB_ENDPOINT,
     });
-    const { recipeUrl } = JSON.parse(event.body);
 
     // Validate URL input
     try {
@@ -44,7 +50,7 @@ export const handler = async (event) => {
       IndexName: "UserIdIndex",
       KeyConditionExpression: "UserId = :userId AND SourceUrl = :sourceUrl",
       ExpressionAttributeValues: {
-        ":userId": userId,
+        ":userId": sub,
         ":sourceUrl": recipeUrl,
       },
     };
@@ -90,7 +96,7 @@ export const handler = async (event) => {
 
     // Add extra properties to the recipe
     recipeItem.Id = uuidv4();
-    recipeItem.UserId = userId;
+    recipeItem.UserId = sub;
     recipeItem.SourceUrl = recipeUrl;
     recipeItem.CreatedAt = new Date().toISOString();
 

@@ -12,6 +12,7 @@
   "type": "module",
   "dependencies": {
     "aws-sdk": "^2.1642.0",
+    "jwt-decode": "^4.0.0",
     "node-fetch": "^3.3.2",
     "openai": "^4.51.0"
   }
