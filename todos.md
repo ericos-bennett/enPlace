@@ -33,12 +33,11 @@
 - [x] Troubleshoot S3 bucket permissions issue
 - [x] Add deletion protection to dynamobd
 - [x] Update lambdas to use userId from auth token
-- [ ] Fix 401 issue on prod API Gateway - This is due to Terraform's aws_api_gateway_stage.deployment_id being updated after each 'terraform apply', but the API Gateway itself is not re-deployed. Fixed temporarily by deploying the gateway manually in the console. Ideally we want to trigger a new deployment whenever there are changes to any API Gateway resources.
+- [x] Fix 401 issue on prod API Gateway
 - [ ] Fix bug where idToken is not attached to Authorization header immediately after sign in. Page refresh is a temporary fix.
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
 - [ ] Separate lambda build into separate job, using variables exported by Terraform apply job
-- [ ] Test on AWS
 - [ ] Improve FE design
 - [ ] Use MUI components wherever possible
 - [ ] Format /backend automatically
