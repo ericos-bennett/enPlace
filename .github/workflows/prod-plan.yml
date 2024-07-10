@@ -1,4 +1,4 @@
-name: Prod Deploy
+name: Prod Plan
 
 on:
   workflow_dispatch:
@@ -52,8 +52,8 @@ jobs:
       - name: Validate Terraform
         run: terraform validate
 
+      - name: Refresh Terraform
+        run: terraform refresh
+
       - name: Plan Terraform
         run: terraform plan -var-file="prod.tfvars"
-
-      - name: Deploy Terraform
-        run: terraform apply -var-file="prod.tfvars" -auto-approve
