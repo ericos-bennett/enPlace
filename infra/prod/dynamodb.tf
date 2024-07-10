@@ -20,7 +20,7 @@ resource "aws_dynamodb_table" "recipes" {
 
   attribute {
     name = "UserId"
-    type = "N"
+    type = "S"
   }
 
   attribute {
