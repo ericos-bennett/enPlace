@@ -1,9 +1,9 @@
 import AWS from "aws-sdk";
 
-const clientResponse = (statusCode, body) => {
+const clientResponse = (statusCode, bodyJson) => {
   return {
     statusCode,
-    body,
+    body: JSON.stringify(bodyJson),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
@@ -18,7 +18,6 @@ export const handler = async (event) => {
   try {
     console.log({ event });
     const { recipeId } = event.pathParameters;
-    console.log({ recipeId });
     const dynamodb = new AWS.DynamoDB.DocumentClient({
       endpoint: process.env.DYNAMODB_ENDPOINT,
     });
@@ -32,13 +31,12 @@ export const handler = async (event) => {
     };
 
     const { Items } = await dynamodb.query(params).promise();
-    console.log({ Items });
     if (Items.length == 0) {
       return clientResponse(404, {
         errorMessage: "No recipe with the specified ID",
       });
     }
-    return clientResponse(200, JSON.stringify(Items[0]));
+    return clientResponse(200, Items[0]);
   } catch (error) {
     console.log(error);
     return clientResponse(500, { errorMessage: error.message });

@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 import fetch from "node-fetch";
 import exampleRecipe from "./exampleRecipe.json" assert { type: "json" };
 
-const clientResponse = (statusCode, body) => {
+const clientResponse = (statusCode, bodyJson) => {
   return {
     statusCode,
-    body,
+    body: JSON.stringify(bodyJson),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
