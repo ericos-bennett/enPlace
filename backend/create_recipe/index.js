@@ -105,6 +105,6 @@ export const handler = async (event) => {
     return clientResponse(201, { recipeId: recipeItem.Id });
   } catch (error) {
     console.log(error);
-    return clientResponse(500, { errorMessage: error.message });
+    return clientResponse(500, { errorMessage: "Internal server error" });
   }
 };

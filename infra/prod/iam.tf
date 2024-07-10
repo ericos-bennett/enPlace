@@ -107,7 +107,9 @@ resource "aws_iam_role_policy" "create_recipe" {
           "dynamodb:PutItem",
           "dynamodb:UpdateItem"
         ],
-        Resource = aws_dynamodb_table.recipes.arn
+        Resource = [
+          aws_dynamodb_table.recipes.arn, "${aws_dynamodb_table.recipes.arn}/index/UserIdIndex"
+        ]
       },
       {
         Effect = "Allow",

@@ -35,6 +35,6 @@ export const handler = async (event) => {
     return clientResponse(200, Items);
   } catch (error) {
     console.log(error);
-    return clientResponse(500, { errorMessage: error.message });
+    return clientResponse(500, { errorMessage: "Internal server error" });
   }
 };
