@@ -39,6 +39,10 @@ resource "aws_api_gateway_gateway_response" "enplace" {
     "gatewayresponse.header.Access-Control-Allow-Headers"     = "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
     "gatewayresponse.header.Access-Control-Allow-Credentials" = "'true'"
   }
+
+  response_templates = {
+    "application/json" = "{\"message\":$context.error.messageString}"
+  }
 }
 
 resource "aws_api_gateway_resource" "recipes" {
