@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Typography } from '@mui/material'
-import { SignUpButton } from '../SignUpButton/SignUpButton'
+import { LoginButton } from '../LoginButton/LoginButton'
 import './Header.css'
 
 export const Header: React.FC = () => {
@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
         <Typography variant="body1" className="nav-link">
           <Link to="/recipes">My Recipes</Link>
         </Typography>
-        <SignUpButton />
+        <LoginButton />
       </nav>
     </header>
   )
