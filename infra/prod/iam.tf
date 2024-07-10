@@ -104,6 +104,8 @@ resource "aws_iam_role_policy" "create_recipe" {
       {
         Effect = "Allow",
         Action = [
+          "dynamodb:GetItem",
+          "dynamodb:Query",
           "dynamodb:PutItem",
           "dynamodb:UpdateItem"
         ],
