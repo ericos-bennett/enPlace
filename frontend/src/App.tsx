@@ -21,6 +21,7 @@ export const App: React.FC = () => {
           <Route path="/recipes/404" element={<NotFoundPage />} />
           <Route path="/recipes/:recipeId" element={<RecipePage />} />
           <Route path="/callback" element={<HomePage />} />
+          <Route path="/logout" element={<HomePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Container>
