@@ -18,10 +18,9 @@ const clientResponse = (statusCode, bodyJson) => {
 export const handler = async (event) => {
   try {
     console.log({ event });
-    console.log(event.headers.Authorization);
     const authToken = event.headers.Authorization;
     const { sub } = jwtDecode(authToken);
-    console.log({ sub });
+
     const dynamodb = new AWS.DynamoDB.DocumentClient({
       endpoint: process.env.DYNAMODB_ENDPOINT,
     });

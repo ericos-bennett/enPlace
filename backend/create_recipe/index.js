@@ -23,10 +23,8 @@ export const handler = async (event) => {
   try {
     // Get userId
     console.log({ event });
-    console.log(event.headers.Authorization);
     const authToken = event.headers.Authorization;
     const { sub } = jwtDecode(authToken);
-    console.log({ sub });
 
     const { recipeUrl } = JSON.parse(event.body);
     const dynamodb = new AWS.DynamoDB.DocumentClient({
