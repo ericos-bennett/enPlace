@@ -7,7 +7,7 @@ const logoutUri = `${import.meta.env.VITE_SPA_URL}/logout`
 const scope = 'openid email'
 
 const setIdTokenCookie = (idToken: string) => {
-  Cookies.set('id_token', idToken, { secure: true, sameSite: 'none' })
+  Cookies.set('id_token', idToken, { secure: true, sameSite: 'strict' })
 }
 export const removeIdTokenCookie = (): void => {
   Cookies.remove('id_token')

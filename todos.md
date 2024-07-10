@@ -35,7 +35,7 @@
 - [x] Update lambdas to use userId from auth token
 - [x] Fix 401 issue on prod API Gateway
 - [x] Fix bug where idToken is not attached to Authorization header immediately after sign in
-- [ ] Add logout button
+- [x] Add logout button
 - [ ] Display error message if client receives 401
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
