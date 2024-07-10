@@ -19,6 +19,7 @@ const clientResponse = (statusCode, body) => {
 };
 
 export const handler = async (event) => {
+  console.log({ event });
   try {
     const userId = 123;
     const dynamodb = new AWS.DynamoDB.DocumentClient({

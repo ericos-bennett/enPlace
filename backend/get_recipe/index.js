@@ -16,6 +16,7 @@ const clientResponse = (statusCode, body) => {
 
 export const handler = async (event) => {
   try {
+    console.log({ event });
     const { recipeId } = event.pathParameters;
     const dynamodb = new AWS.DynamoDB.DocumentClient({
       endpoint: process.env.DYNAMODB_ENDPOINT,
