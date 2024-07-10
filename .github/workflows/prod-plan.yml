@@ -52,8 +52,5 @@ jobs:
       - name: Validate Terraform
         run: terraform validate
 
-      - name: Refresh Terraform
-        run: terraform refresh
-
       - name: Plan Terraform
         run: terraform plan -var-file="prod.tfvars"
