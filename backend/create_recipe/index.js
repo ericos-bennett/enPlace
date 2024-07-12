@@ -70,17 +70,19 @@ export const handler = async (event) => {
     // Get the recipe object from the OpenAI API
     const noRecipeReturnValue = "NO_RECIPE";
     const promptInstructions = [
-      `Return the recipe from: ${recipeUrl} as a VALID JSON following this format: ${JSON.stringify(
+      `Return the exact recipe from: ${recipeUrl} as a VALID JSON following this format: ${JSON.stringify(
         exampleRecipe
       )}`,
-      `Don't add newlines.`,
-      `Save all amounts as decimals.`,
       `Create a separate step for each instruction in the recipe and do not duplicate ingredients.`,
       `If there is no recipe on the page, return the string "${noRecipeReturnValue}"`,
     ];
     const completion = await openai.chat.completions.create({
       messages: [{ role: "system", content: promptInstructions.join(" ") }],
       model: "gpt-3.5-turbo",
+      response_format: {
+        type: "json_object",
+      },
+      temperature: 0,
     });
     console.log(`OpenAI API Usage: ${JSON.stringify(completion.usage)}`);
     const openAiResponse = completion.choices[0].message.content;
