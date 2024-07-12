@@ -2,7 +2,7 @@
 set -e
 
 # Create the localstack docker network if it doesn't exist
-NETWORK_NAME="localstack-network"
+NETWORK_NAME="enplace-localstack-network"
 if ! docker network ls | grep -q "$NETWORK_NAME"; then
   echo ">>> Network $NETWORK_NAME does not exist, creating it"
   docker network create $NETWORK_NAME
@@ -12,7 +12,7 @@ else
 fi
 
 # Delete the localstack container if it exists
-CONTAINER_NAME="localstack"
+CONTAINER_NAME="enplace-localstack"
 if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
     echo ">>> Stopping and removing the container: $CONTAINER_NAME"
     docker stop $CONTAINER_NAME 2>/dev/null

@@ -1,3 +1,3 @@
 environment             = "local"
-dynamodb_endpoint       = "http://localstack:4566"
-secretsmanager_endpoint = "http://localstack:4566"
+dynamodb_endpoint       = "http://enplace-localstack:4566"
+secretsmanager_endpoint = "http://enplace-localstack:4566"
