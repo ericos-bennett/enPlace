@@ -36,6 +36,8 @@
 - [x] Fix 401 issue on prod API Gateway
 - [x] Fix bug where idToken is not attached to Authorization header immediately after sign in
 - [x] Add logout button
+- [ ] Parse URL in create_recipe lambda and pass context OpenAI API
+- [ ] Provide strict JSON context in OpenAI API request
 - [ ] Display error message if client receives 401
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
