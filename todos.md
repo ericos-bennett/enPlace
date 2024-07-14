@@ -36,12 +36,20 @@
 - [x] Fix 401 issue on prod API Gateway
 - [x] Fix bug where idToken is not attached to Authorization header immediately after sign in
 - [x] Add logout button
-- [ ] Parse URL in create_recipe lambda and pass context OpenAI API
-- [ ] Provide strict JSON context in OpenAI API request
-- [ ] Display error message if client receives 401
+- [ ] Allow users to input a recipe prompt instead of a URL
+- [ ] Parse URL in create_recipe lambda and pass contents to OpenAI API
+- [ ] Specify strict JSON output in OpenAI API request
+- [ ] Redirect to signin page if 401 returned
+- [ ] Improve FE design and make it mobile-friendly
+- [ ] Meal plan feature - users can group recipes together
+- [ ] Save ingredients feature - copy ingredeint list to clipboard (for a single recipe, or all in a meal plan)
+- [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
+- [ ] Remove auth from create_recipe and get_recipe endpoints BUT restrict origin to SPA
+- [ ] Enable signups
+- [ ] Allow fine tuning of output recipe with a subsequent prompt - use existing JSON as input
+- [ ] Format /backend automatically
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
 - [ ] Separate lambda build into separate job, using variables exported by Terraform apply job
-- [ ] Improve FE design
-- [ ] Use MUI components wherever possible
-- [ ] Format /backend automatically
+- [ ] Add feedback form feature (+ connect to SNS)
+- [ ] Add 'Buy me a coffee' button
