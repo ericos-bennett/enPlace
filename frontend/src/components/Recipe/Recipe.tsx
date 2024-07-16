@@ -35,12 +35,8 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
           <strong>Servings:</strong> {recipe.servings}
         </div>
         <div>
-          <img src={clock} height="20" alt="Prep Time" />
-          <strong>Prep Time:</strong> {recipe.prepTime}min
-        </div>
-        <div>
-          <img src={clock} height="20" alt="Cooking Time" />
-          <strong>Cooking Time:</strong> {recipe.cookingTime}min
+          <img src={clock} height="20" alt="Total Time" />
+          <strong>Total Time:</strong> {recipe.totalTime}min
         </div>
       </div>
       <TableContainer className="recipe-steps">

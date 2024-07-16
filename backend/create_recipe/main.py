@@ -1,10 +1,12 @@
 import os
 import json
-import boto3
 import uuid
+import boto3
 import jwt
 from openai import OpenAI
+from recipe_scrapers import scrape_me
 from datetime import datetime
+from decimal import Decimal
 from urllib.parse import urlparse
 
 def client_response(status_code, body_json):
@@ -32,6 +34,16 @@ def handler(event, context):
     result = urlparse(recipe_url)
     if not all([result.scheme, result.netloc]):
         return client_response(400, {'errorMessage': "Not a valid URL"})
+    
+    # Get date from website
+    scraper = scrape_me(recipe_url, wild_mode=True)
+    recipe_name = scraper.title()
+    recipe_description = scraper.description()
+    recipe_servings = scraper.yields()
+    recipe_total_time = scraper.total_time()
+    recipe_image_url = scraper.image()
+    ingredients = scraper.ingredients()
+    instructions = scraper.instructions_list()
 
     # Check if URL already exists in DB
     dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))
@@ -56,14 +68,15 @@ def handler(event, context):
     # Load example recipe JSON
     with open('exampleRecipe.json', 'r') as f:
         example_recipe = json.load(f)
-    prompt_instructions = [
-        f"Return the exact recipe from: {recipe_url} as a VALID JSON following this format: {json.dumps(example_recipe)}",
-        "Create a separate step for each instruction in the recipe and do not duplicate ingredients.",
-    ]
 
+    # Use OpenAI to format recipe steps
     completion = openai_client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "system", "content": " ".join(prompt_instructions)}],
+        messages=[
+            {"role": "system", "content":  f"You are a recipe formatter which returns only a valid JSON matching exactly this format: {json.dumps(example_recipe)}"},
+            {"role": "user", "content": f"Here are the ingredients: {ingredients}"},
+            {"role": "user", "content": f"Here are the instructions: {instructions}"}
+        ],
         response_format={ "type": "json_object" },
         temperature=0
     )
@@ -71,15 +84,20 @@ def handler(event, context):
     openai_response = completion.choices[0].message.content
     print(openai_response)
 
-    # Add extra properties to the recipe
-    recipe_item = json.loads(openai_response)
-    recipe_item['Id'] = str(uuid.uuid4())
-    recipe_item['UserId'] = sub
-    recipe_item['SourceUrl'] = recipe_url
-    recipe_item['CreatedAt'] = datetime.utcnow().isoformat()
+    # Build the recipe object
+    recipe = json.loads(openai_response, parse_float=Decimal)
+    recipe['Id'] = str(uuid.uuid4())
+    recipe['UserId'] = sub
+    recipe['CreatedAt'] = datetime.utcnow().isoformat()
+    recipe['SourceUrl'] = recipe_url
+    recipe['name'] = recipe_name
+    recipe['description'] = recipe_description
+    recipe['servings'] = recipe_servings
+    recipe['totalTime'] = recipe_total_time
+    recipe['imageUrl'] = recipe_image_url
 
     # Save to DynamoDB
-    print(f"Saving recipe with ID: {recipe_item['Id']}")
-    table.put_item(Item=recipe_item)
+    print(f"Saving recipe with ID: {recipe['Id']}")
+    table.put_item(Item=recipe)
 
-    return client_response(201, {'recipeId': recipe_item['Id']})
+    return client_response(201, {'recipeId': recipe['Id']})

@@ -9,8 +9,7 @@ export type RecipeMeta = {
 export type Recipe = RecipeMeta & {
   description: string
   servings: number
-  prepTime: number
-  cookingTime: number
+  totalTime: number
   steps: Step[]
 }
 

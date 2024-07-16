@@ -1,9 +1,4 @@
 {
-  "name": "Pasta",
-  "description": "Tasty",
-  "servings": 4,
-  "prepTime": 15,
-  "cookingTime": 45,
   "steps": [
     {
       "ingredients": [
