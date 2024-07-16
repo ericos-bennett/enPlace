@@ -24,10 +24,10 @@ pip install \
 # We have to install these manually, because there are no wheels with the correct version on PyPI
 pip install \
   --upgrade \
+  --quiet \
   --target package \
   -r requirements_source.txt
-
-cd package && zip -r ../create_recipe.zip .
+cd package && zip -q -r ../create_recipe.zip .
 cd .. && zip create_recipe.zip main.py && zip create_recipe.zip exampleRecipe.json
 mv create_recipe.zip ../../infra/local
 
