@@ -37,7 +37,8 @@
 - [x] Fix bug where idToken is not attached to Authorization header immediately after sign in
 - [x] Add logout button
 - [x] Parse URL in create_recipe lambda and pass contents to OpenAI API
-- [ ] Use new python lambda for cloud deployment with deterministic-zip, remove old lambda
+- [x] Use new python lambda for cloud deployment, remove old lambda
+- [ ] Use deterministic-zip for python lambda
 - [ ] Specify strict JSON output in OpenAI API request
 - [ ] Allow users to input a recipe prompt instead of a URL
 - [ ] Use imageUrl

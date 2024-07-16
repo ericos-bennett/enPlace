@@ -33,6 +33,6 @@ pip install \
   -r requirements_source.txt
 cd package && zip -q -r ../create_recipe.zip .
 cd .. && zip create_recipe.zip main.py && zip create_recipe.zip exampleRecipe.json
-mv create_recipe.zip ../../infra/local
+mv create_recipe.zip ../../infra/prod
 
 echo ">>> Lambda code updated"
