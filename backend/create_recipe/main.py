@@ -1,6 +1,7 @@
 import os
 import json
 import uuid
+import re
 import boto3
 import jwt
 from openai import OpenAI
@@ -39,7 +40,7 @@ def handler(event, context):
     scraper = scrape_me(recipe_url, wild_mode=True)
     recipe_name = scraper.title()
     recipe_description = scraper.description()
-    recipe_servings = scraper.yields()
+    recipe_servings = re.sub(r'\D', '', scraper.yields())
     recipe_total_time = scraper.total_time()
     recipe_image_url = scraper.image()
     ingredients = scraper.ingredients()
@@ -73,7 +74,7 @@ def handler(event, context):
     completion = openai_client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content":  f"You are a recipe formatter which returns only a valid JSON matching exactly this format: {json.dumps(example_recipe)}"},
+            {"role": "system", "content":  f"You are a recipe formatter which matches a recipe's ingredients with their relevant steps and returns only a valid JSON matching exactly this format: {json.dumps(example_recipe)}"},
             {"role": "user", "content": f"Here are the ingredients: {ingredients}"},
             {"role": "user", "content": f"Here are the instructions: {instructions}"}
         ],

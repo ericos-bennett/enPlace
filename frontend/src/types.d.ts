@@ -1,7 +1,7 @@
 export type RecipeMeta = {
   Id: string
   CreatedAt: string
-  UserId: number
+  UserId: string
   SourceUrl: string
   name: string
 }
@@ -21,7 +21,7 @@ export type Step = {
 export type Ingredient = {
   ingredient: string
   preparation?: string
-  amount: number
+  amount: string
   units?: string
 }
 

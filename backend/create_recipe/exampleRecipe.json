@@ -5,7 +5,7 @@
         {
           "ingredient": "Olive Oil",
           "preparation": null,
-          "amount": 2,
+          "amount": "1/2",
           "units": "Tbsp"
         }
       ],
@@ -16,13 +16,13 @@
         {
           "ingredient": "Tomatoes",
           "preparation": "Diced",
-          "amount": 4,
+          "amount": "4",
           "units": null
         },
         {
           "ingredient": "Basil",
           "preparation": "Sliced",
-          "amount": 10,
+          "amount": "10",
           "units": "Leaves"
         }
       ],
