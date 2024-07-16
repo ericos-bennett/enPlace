@@ -18,8 +18,15 @@ pip install \
   --platform manylinux2014_aarch64 \
   --implementation cp \
   --only-binary=:all: \
+  --no-deps \
   --target package \
-  -r requirements.txt
+  -r requirements_binary.txt
+# We have to install these manually, because there are no wheels with the correct version on PyPI
+pip install \
+  --upgrade \
+  --target package \
+  -r requirements_source.txt
+
 cd package && zip -r ../create_recipe.zip .
 cd .. && zip create_recipe.zip main.py && zip create_recipe.zip exampleRecipe.json
 mv create_recipe.zip ../../infra/local
