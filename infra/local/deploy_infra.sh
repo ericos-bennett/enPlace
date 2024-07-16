@@ -9,9 +9,21 @@ deterministic-zip -q -r ../../infra/local/get_recipe.zip .
 cd ../get_recipes
 npm install
 deterministic-zip -q -r ../../infra/local/get_recipes.zip .
+
 cd ../create_recipe
-npm install
-deterministic-zip -q -r ../../infra/local/create_recipe.zip .
+pip install \
+  --upgrade \
+  --quiet \
+  --python-version 3.12 \
+  --platform manylinux2014_aarch64 \
+  --implementation cp \
+  --only-binary=:all: \
+  --target package \
+  -r requirements.txt
+cd package && zip -r ../create_recipe.zip .
+cd .. && zip create_recipe.zip main.py && zip create_recipe.zip exampleRecipe.json
+mv create_recipe.zip ../../infra/local
+
 cd ../../infra/local
 echo ">>> Lambda code updated"
 

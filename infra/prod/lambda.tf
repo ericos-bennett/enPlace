@@ -46,10 +46,11 @@ resource "aws_lambda_function" "create_recipe" {
   filename         = "${path.module}/create_recipe.zip"
   function_name    = "CreateRecipe"
   role             = aws_iam_role.create_recipe.arn
-  handler          = "index.handler"
+  handler          = "main.handler"
   source_code_hash = filebase64sha256("${path.module}/create_recipe.zip")
-  runtime          = "nodejs20.x"
+  runtime          = "python3.12"
   timeout          = 30
+  architectures    = ["arm64"]
   environment {
     variables = {
       DYNAMODB_ENDPOINT       = var.dynamodb_endpoint,

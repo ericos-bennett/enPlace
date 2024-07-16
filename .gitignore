@@ -11,6 +11,9 @@ dist-ssr
 .env*
 !.env.example
 
+# BACKEND
+backend/*/package
+
 # INFRA
 .terraform/
 *.tfstate*

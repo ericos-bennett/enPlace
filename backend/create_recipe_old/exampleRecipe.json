@@ -1,0 +1,37 @@
+{
+  "name": "Pasta",
+  "description": "Tasty",
+  "servings": 4,
+  "prepTime": 15,
+  "cookingTime": 45,
+  "steps": [
+    {
+      "ingredients": [
+        {
+          "ingredient": "Olive Oil",
+          "preparation": null,
+          "amount": 2,
+          "units": "Tbsp"
+        }
+      ],
+      "instructions": "Heat oil in pan"
+    },
+    {
+      "ingredients": [
+        {
+          "ingredient": "Tomatoes",
+          "preparation": "Diced",
+          "amount": 4,
+          "units": null
+        },
+        {
+          "ingredient": "Basil",
+          "preparation": "Sliced",
+          "amount": 10,
+          "units": "Leaves"
+        }
+      ],
+      "instructions": "Combine tomatoes and basil"
+    }
+  ]
+}

@@ -36,9 +36,10 @@
 - [x] Fix 401 issue on prod API Gateway
 - [x] Fix bug where idToken is not attached to Authorization header immediately after sign in
 - [x] Add logout button
-- [ ] Allow users to input a recipe prompt instead of a URL
+- [ ] Use new python lambda for cloud deployment with deterministic-zip, remove old lambda
 - [ ] Parse URL in create_recipe lambda and pass contents to OpenAI API
 - [ ] Specify strict JSON output in OpenAI API request
+- [ ] Allow users to input a recipe prompt instead of a URL
 - [ ] Redirect to signin page if 401 returned
 - [ ] Improve FE design and make it mobile-friendly
 - [ ] Meal plan feature - users can group recipes together
