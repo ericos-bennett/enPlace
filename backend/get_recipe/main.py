@@ -9,7 +9,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def client_response(status_code, body_json):
-    return {
+    response = {
         'statusCode': status_code,
         'body': json.dumps(body_json, default=str),
         'headers': {
@@ -19,6 +19,8 @@ def client_response(status_code, body_json):
             'Access-Control-Allow-Credentials': True,
         },
     }
+    logger.info(f'Response: {response}')
+    return response
 
 def log_exception():
     exception_type, exception_value, exception_traceback = sys.exc_info()
