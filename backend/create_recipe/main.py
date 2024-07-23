@@ -75,6 +75,7 @@ def handler(event, context):
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content":  f"You are a recipe formatter which matches a recipe's ingredients with their relevant steps and returns only a valid JSON matching exactly this format: {json.dumps(example_recipe)}"},
+            {"role": "user", "content": f"Only mention each ingredient once, when it is first used in the recipe"},
             {"role": "user", "content": f"Here are the ingredients: {ingredients}"},
             {"role": "user", "content": f"Here are the instructions: {instructions}"}
         ],

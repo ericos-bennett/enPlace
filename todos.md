@@ -38,11 +38,14 @@
 - [x] Add logout button
 - [x] Parse URL in create_recipe lambda and pass contents to OpenAI API
 - [x] Use new python lambda for cloud deployment, remove old lambda
+- [ ] Remove 'My Recipes' link if not signed in
+- [ ] Improve FE design and make it mobile-friendly
+- [ ] Add animation when creating recipe
+- [ ] Use imageUrl
+- [ ] Get auth state from cookie on page load
 - [ ] Specify strict JSON output in OpenAI API request
 - [ ] Allow users to input a recipe prompt instead of a URL
-- [ ] Use imageUrl
 - [ ] Redirect to signin page if 401 returned
-- [ ] Improve FE design and make it mobile-friendly
 - [ ] Meal plan feature - users can group recipes together
 - [ ] Save ingredients feature - copy ingredeint list to clipboard (for a single recipe, or all in a meal plan)
 - [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
