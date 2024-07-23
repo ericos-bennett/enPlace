@@ -39,11 +39,11 @@
 - [x] Parse URL in create_recipe lambda and pass contents to OpenAI API
 - [x] Use new python lambda for cloud deployment, remove old lambda
 - [x] Add explicit 'logging' exception handling to lambdas
+- [x] Get auth state from cookie on page load
 - [ ] Remove 'My Recipes' link if not signed in
 - [ ] Improve FE design and make it mobile-friendly
 - [ ] Add animation when creating recipe
 - [ ] Use imageUrl
-- [ ] Get auth state from cookie on page load
 - [ ] Specify strict JSON output in OpenAI API request
 - [ ] Allow users to input a recipe prompt instead of a URL
 - [ ] Redirect to signin page if 401 returned

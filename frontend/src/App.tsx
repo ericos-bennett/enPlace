@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
-import { getAuthTokensAndSave } from '~/services/auth'
+import { getAuthTokensAndSave, getIdTokenFromCookie } from '~/services/auth'
+import { useAuthStore } from '~/store/auth'
 import { HomePage } from '~/pages/HomePage/HomePage'
 import { RecipePage } from '~/pages/RecipePage/RecipePage'
 import { MyRecipesPage } from '~/pages/MyRecipesPage/MyRecipesPage'
@@ -11,6 +12,14 @@ import { Footer } from '~/components/Footer/Footer'
 import '~/App.css'
 
 export const App: React.FC = () => {
+  const { setIsLoggedIn } = useAuthStore()
+
+  useEffect(() => {
+    if (getIdTokenFromCookie()) {
+      setIsLoggedIn(true)
+    }
+  }, [])
+
   useEffect(() => {
     const handleCallback = async () => {
       const searchParams = new URLSearchParams(window.location.search)
