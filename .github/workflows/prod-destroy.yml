@@ -13,6 +13,7 @@ env:
   AWS_TFSTATE_BUCKET_NAME: ${{ secrets.AWS_TFSTATE_BUCKET_NAME }}
   AWS_TFSTATE_BUCKET_KEY_NAME: ${{ secrets.AWS_TFSTATE_BUCKET_KEY_NAME }}
   TF_VAR_openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+  TF_VAR_cloudfront_referer_header: ${{ secrets.CLOUDFRONT_REFERER_HEADER }}
   TF_LOG: INFO
 
 jobs:
