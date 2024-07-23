@@ -38,7 +38,6 @@
 - [x] Add logout button
 - [x] Parse URL in create_recipe lambda and pass contents to OpenAI API
 - [x] Use new python lambda for cloud deployment, remove old lambda
-- [ ] Use deterministic-zip for python lambda
 - [ ] Specify strict JSON output in OpenAI API request
 - [ ] Allow users to input a recipe prompt instead of a URL
 - [ ] Use imageUrl
@@ -51,6 +50,7 @@
 - [ ] Remove auth from create_recipe and get_recipe endpoints BUT restrict origin to SPA
 - [ ] Enable signups
 - [ ] Allow fine tuning of output recipe with a subsequent prompt - use existing JSON as input
+- [ ] Use deterministic-zip for python lambdas
 - [ ] Format /backend automatically
 - [ ] Separate FE build into separate job, using variables - e.g. authDomain, clientId - exported by Terraform apply job
 - [ ] Separate lambda build into separate job, using variables exported by Terraform apply job

@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-# Install deterministic-zip
-echo ">>> Installing deterministic-zip..."
-bash <(curl -sS https://raw.githubusercontent.com/timo-reymann/deterministic-zip/main/installer)
-
 # Package lambda code
 echo ">>> Updating get_recipe lambda"
 cd ../../backend/get_recipe
