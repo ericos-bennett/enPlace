@@ -38,6 +38,7 @@
 - [x] Add logout button
 - [x] Parse URL in create_recipe lambda and pass contents to OpenAI API
 - [x] Use new python lambda for cloud deployment, remove old lambda
+- [x] Add explicit 'logging' exception handling to lambdas
 - [ ] Remove 'My Recipes' link if not signed in
 - [ ] Improve FE design and make it mobile-friendly
 - [ ] Add animation when creating recipe

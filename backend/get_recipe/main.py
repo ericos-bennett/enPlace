@@ -1,4 +1,6 @@
 import os
+import sys
+import traceback
 import logging
 import json
 import boto3
@@ -18,20 +20,33 @@ def client_response(status_code, body_json):
         },
     }
 
+def log_exception():
+    exception_type, exception_value, exception_traceback = sys.exc_info()
+    error_message = json.dumps({
+        "errorType": exception_type.__name__,
+        "errorMessage": str(exception_value),
+        "stackTrace": traceback.format_exception(exception_type, exception_value, exception_traceback)
+    })
+    logger.error(error_message)
+
 def handler(event, context):
-    logger.info(f"Event: {event}")
-    recipe_id = event['pathParameters']['recipeId']
+    try:
+        logger.info(f"Event: {event}")
+        recipe_id = event['pathParameters']['recipeId']
 
-    dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))
-    table = dynamodb.Table('Recipes')
-    response = table.query(
-        KeyConditionExpression="Id = :id",
-        ExpressionAttributeValues={
-          ":id": recipe_id,
-        },
-    )
-    items = response.get('Items', [])
-    if not items:
-        return client_response(404, {'errorMessage': "No recipe with the specified ID" })
+        dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))
+        table = dynamodb.Table('Recipes')
+        response = table.query(
+            KeyConditionExpression="Id = :id",
+            ExpressionAttributeValues={
+            ":id": recipe_id,
+            },
+        )
+        items = response.get('Items', [])
+        if not items:
+            return client_response(404, {'errorMessage': "No recipe with the specified ID" })
 
-    return client_response(200, items[0])
+        return client_response(200, items[0])
+    except:
+        log_exception()
+        return client_response(500, {'errorMessage':"Internal Server Error"})
