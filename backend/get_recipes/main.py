@@ -1,7 +1,11 @@
 import os
+import logging
 import json
 import boto3
 import jwt
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def client_response(status_code, body_json):
     return {
@@ -16,7 +20,7 @@ def client_response(status_code, body_json):
     }
 
 def handler(event, context):
-    print(event)
+    logger.info(f"Event: {event}")
     auth_token = event['headers']['Authorization']
     decoded_token = jwt.decode(auth_token, options={"verify_signature": False})
     sub = decoded_token['sub']

@@ -1,6 +1,10 @@
 import os
+import logging
 import json
 import boto3
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def client_response(status_code, body_json):
     return {
@@ -15,7 +19,7 @@ def client_response(status_code, body_json):
     }
 
 def handler(event, context):
-    print(event)
+    logger.info(f"Event: {event}")
     recipe_id = event['pathParameters']['recipeId']
 
     dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))

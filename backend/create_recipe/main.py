@@ -1,4 +1,5 @@
 import os
+import logging
 import json
 import uuid
 import re
@@ -9,6 +10,9 @@ from recipe_scrapers import scrape_me
 from datetime import datetime
 from decimal import Decimal
 from urllib.parse import urlparse
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def client_response(status_code, body_json):
     return {
@@ -23,7 +27,7 @@ def client_response(status_code, body_json):
     }
 
 def handler(event, context):
-    print(event)
+    logger.info(f"Event: {event}")
     auth_token = event['headers']['Authorization']
     decoded_token = jwt.decode(auth_token, options={"verify_signature": False})
     sub = decoded_token['sub']
@@ -82,9 +86,9 @@ def handler(event, context):
         response_format={ "type": "json_object" },
         temperature=0
     )
-    print(f"OpenAI API Usage: {completion.usage}")
+    logger.info(f"OpenAI API Usage: {completion.usage}")
     openai_response = completion.choices[0].message.content
-    print(openai_response)
+    logger.info(f"OpenAI Response: {json.dumps(openai_response, default=str)}")
 
     # Build the recipe object
     recipe = json.loads(openai_response, parse_float=Decimal)
@@ -99,7 +103,7 @@ def handler(event, context):
     recipe['imageUrl'] = recipe_image_url
 
     # Save to DynamoDB
-    print(f"Saving recipe with ID: {recipe['Id']}")
+    logger.info(f"Saving recipe with ID: {recipe['Id']}")
     table.put_item(Item=recipe)
 
     return client_response(201, {'recipeId': recipe['Id']})
