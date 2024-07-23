@@ -72,7 +72,7 @@ def handler(event, context):
 
     # Use OpenAI to format recipe steps
     completion = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content":  f"You are a recipe formatter which matches a recipe's ingredients with their relevant steps and returns only a valid JSON matching exactly this format: {json.dumps(example_recipe)}"},
             {"role": "user", "content": f"Here are the ingredients: {ingredients}"},
