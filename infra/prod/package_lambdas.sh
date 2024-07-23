@@ -24,8 +24,19 @@ mv get_recipe.zip ../../infra/prod
 
 echo ">>> Updating get_recipes lambda"
 cd ../get_recipes
-npm install
-deterministic-zip -q -r ../../infra/prod/get_recipes.zip .
+pip install \
+  --upgrade \
+  --quiet \
+  --python-version 3.12 \
+  --platform manylinux2014_aarch64 \
+  --implementation cp \
+  --only-binary=:all: \
+  --no-deps \
+  --target package \
+  -r requirements.txt
+cd package && zip -q -r ../get_recipes.zip .
+cd .. && zip get_recipes.zip main.py
+mv get_recipes.zip ../../infra/prod
 
 echo ">>> Updating create_recipe lambda"
 cd ../create_recipe
