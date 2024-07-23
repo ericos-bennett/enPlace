@@ -5,15 +5,29 @@ set -e
 echo ">>> Installing deterministic-zip..."
 bash <(curl -sS https://raw.githubusercontent.com/timo-reymann/deterministic-zip/main/installer)
 
-echo ">>> Updating lambda code..."
+# Package lambda code
+echo ">>> Updating get_recipe lambda"
 cd ../../backend/get_recipe
-npm install
-deterministic-zip -q -r ../../infra/prod/get_recipe.zip .
+pip install \
+  --upgrade \
+  --quiet \
+  --python-version 3.12 \
+  --platform manylinux2014_aarch64 \
+  --implementation cp \
+  --only-binary=:all: \
+  --no-deps \
+  --target package \
+  -r requirements.txt
+cd package && zip -q -r ../get_recipe.zip .
+cd .. && zip get_recipe.zip main.py
+mv get_recipe.zip ../../infra/prod
 
+echo ">>> Updating get_recipes lambda"
 cd ../get_recipes
 npm install
 deterministic-zip -q -r ../../infra/prod/get_recipes.zip .
 
+echo ">>> Updating create_recipe lambda"
 cd ../create_recipe
 pip install \
   --upgrade \

@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 def client_response(status_code, body_json):
     return {
         'statusCode': status_code,
-        'body': json.dumps(body_json),
+        'body': json.dumps(body_json, default=str),
         'headers': {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',

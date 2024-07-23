@@ -2,10 +2,11 @@ resource "aws_lambda_function" "get_recipe" {
   filename         = "${path.module}/get_recipe.zip"
   function_name    = "GetRecipe"
   role             = aws_iam_role.get_recipe.arn
-  handler          = "index.handler"
+  handler          = "main.handler"
   source_code_hash = filebase64sha256("${path.module}/get_recipe.zip")
-  runtime          = "nodejs20.x"
+  runtime          = "python3.12"
   timeout          = 30
+  architectures    = ["arm64"]
   environment {
     variables = {
       DYNAMODB_ENDPOINT = var.dynamodb_endpoint,
