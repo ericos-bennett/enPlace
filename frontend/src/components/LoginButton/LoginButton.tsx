@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Button } from '@mui/material'
 import {
   loginUrl,
@@ -6,9 +6,10 @@ import {
   getAuthTokensAndSave,
   removeIdTokenCookie,
 } from '~/services/auth'
+import { useAuthStore } from '~/store/auth'
 
 export const LoginButton: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const { isLoggedIn, setIsLoggedIn } = useAuthStore()
 
   const handleLogin = () => {
     window.location.href = loginUrl
