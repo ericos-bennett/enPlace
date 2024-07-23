@@ -39,7 +39,7 @@ jobs:
         run: ./package_frontend.sh
 
       - name: Package Lambdas
-        run: ./package_lambdas.sh
+        run: cd .. && ./package_lambdas.sh prod && cd prod
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
