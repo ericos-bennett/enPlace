@@ -8,7 +8,6 @@ import { RecipePage } from '~/pages/RecipePage/RecipePage'
 import { MyRecipesPage } from '~/pages/MyRecipesPage/MyRecipesPage'
 import { NotFoundPage } from '~/pages/NotFoundPage/NotFoundPage'
 import { Header } from '~/components/Header/Header'
-import { Footer } from '~/components/Footer/Footer'
 import '~/App.css'
 
 export const App: React.FC = () => {
@@ -49,9 +48,6 @@ export const App: React.FC = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Container>
-      <Box id="page-footer">
-        <Footer />
-      </Box>
     </BrowserRouter>
   )
 }

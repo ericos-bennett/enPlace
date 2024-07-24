@@ -41,6 +41,7 @@
 - [x] Add explicit 'logging' exception handling to lambdas
 - [x] Get auth state from cookie on page load
 - [x] Remove 'My Recipes' link if not signed in
+- [ ] Show list of all ingredients at bottom
 - [ ] Improve FE design and make it mobile-friendly
 - [ ] Add animation when creating recipe
 - [ ] Use imageUrl

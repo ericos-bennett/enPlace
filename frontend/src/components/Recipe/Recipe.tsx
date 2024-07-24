@@ -43,7 +43,7 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
         <Table size="small" stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell>Ingredients:</TableCell>
+              <TableCell className="ingredients-column">Ingredients:</TableCell>
               <TableCell>Steps:</TableCell>
             </TableRow>
           </TableHead>

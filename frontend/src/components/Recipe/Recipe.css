@@ -25,3 +25,7 @@
     padding: inherit;
   }
 }
+
+.ingredients-column {
+  width: 300px;
+}
