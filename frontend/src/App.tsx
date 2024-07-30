@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
-import { getAuthTokensAndSave, getIdTokenFromCookie } from '~/services/auth'
+import { getAuthTokensAndSave, getIdToken } from '~/services/auth'
 import { useAuthStore } from '~/store/auth'
 import { HomePage } from '~/pages/HomePage/HomePage'
 import { RecipePage } from '~/pages/RecipePage/RecipePage'
@@ -14,7 +14,7 @@ export const App: React.FC = () => {
   const { setIsLoggedIn } = useAuthStore()
 
   useEffect(() => {
-    if (getIdTokenFromCookie()) {
+    if (getIdToken()) {
       setIsLoggedIn(true)
     }
   }, [])

@@ -41,19 +41,22 @@
 - [x] Add explicit 'logging' exception handling to lambdas
 - [x] Get auth state from cookie on page load
 - [x] Remove 'My Recipes' link if not signed in
+- [ ] Token auto-refresh
+- [ ] Landing page design, including signup CTA
+- [ ] Redirect to signin page if 401 returned (or just redirect without 401?)
+- [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
+- [ ] Enable signups
+- [ ] Allow signups with Google, FB, etc.
+- [ ] Remove auth check from GET /recipe endpoint (but restrict origin to SPA?)
 - [ ] Show list of all ingredients at bottom
 - [ ] Improve FE design and make it mobile-friendly
 - [ ] Add animation when creating recipe
 - [ ] Use imageUrl
 - [ ] Specify strict JSON output in OpenAI API request
 - [ ] Allow users to input a recipe prompt instead of a URL
-- [ ] Redirect to signin page if 401 returned
 - [ ] Meal plan feature - users can group recipes together
-- [ ] Save ingredients feature - copy ingredeint list to clipboard (for a single recipe, or all in a meal plan)
-- [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
+- [ ] Save ingredients feature - copy ingredient list to clipboard (for a single recipe, or all in a meal plan)
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
-- [ ] Remove auth from create_recipe and get_recipe endpoints BUT restrict origin to SPA
-- [ ] Enable signups
 - [ ] Allow fine tuning of output recipe with a subsequent prompt - use existing JSON as input
 - [ ] Use deterministic-zip for python lambdas
 - [ ] Format /backend automatically
@@ -61,3 +64,4 @@
 - [ ] Separate lambda build into separate job, using variables exported by Terraform apply job
 - [ ] Add feedback form feature (+ connect to SNS)
 - [ ] Add 'Buy me a coffee' button
+- [ ] Chrome extension
