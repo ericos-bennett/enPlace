@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   TableContainer,
   Table,
@@ -6,10 +7,12 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Icon,
 } from '@mui/material'
 import type { Recipe as RecipeType, Ingredient } from '~/types'
-import cutlery from '~/assets/icons/cutlery.jpeg'
-import clock from '~/assets/icons/clock.jpeg'
+import cutlery from '~/assets/icons/cutlery.svg'
+import clock from '~/assets/icons/clock.svg'
+import copy from '~/assets/icons/copy.svg'
 import './Recipe.css'
 
 interface RecipeProps {
@@ -19,6 +22,22 @@ interface RecipeProps {
 export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
   const formatIngredient = (ingredient: Ingredient): string => {
     return `${ingredient.ingredient} - ${ingredient.amount}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`
+  }
+
+  const handleCopy = async () => {
+    const formattedIngredients = recipe.steps
+      .flatMap((step) => step.ingredients || [])
+      .map(
+        ({ ingredient, amount, units }) =>
+          `${ingredient} - ${amount} ${units || ''}`
+      )
+      .join('\n')
+
+    try {
+      await navigator.clipboard.writeText(formattedIngredients)
+    } catch (error) {
+      console.error('Failed to copy text: ', error)
+    }
   }
 
   return (
@@ -38,6 +57,14 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
           <img src={clock} height="20" alt="Total Time" />
           <strong>Total Time:</strong> {recipe.totalTime}min
         </div>
+        <Button
+          className="copy-ingredients-button"
+          variant="outlined"
+          startIcon={<img alt="copy" src={copy} height={20} width={20} />}
+          onClick={handleCopy}
+        >
+          Copy Ingredients to Clipboard
+        </Button>
       </div>
       <TableContainer className="recipe-steps">
         <Table size="small" stickyHeader>

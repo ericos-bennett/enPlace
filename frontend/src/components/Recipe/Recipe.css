@@ -16,6 +16,11 @@
     align-items: center;
     gap: 5px;
   }
+
+  .copy-ingredients-button {
+    margin-left: auto;
+    text-transform: none;
+  }
 }
 
 .recipe-steps {
