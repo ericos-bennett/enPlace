@@ -39,7 +39,7 @@ resource "aws_api_gateway_gateway_response" "enplace" {
 
   response_parameters = {
     "gatewayresponse.header.Access-Control-Allow-Origin"      = "'*'",
-    "method.response.header.Access-Control-Allow-Methods"     = "'GET,POST,DELETE,OPTIONS'",
+    "gatewayresponse.header.Access-Control-Allow-Methods"     = "'GET,POST,DELETE,OPTIONS'",
     "gatewayresponse.header.Access-Control-Allow-Headers"     = "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
     "gatewayresponse.header.Access-Control-Allow-Credentials" = "'true'"
   }
