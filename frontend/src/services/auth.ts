@@ -62,7 +62,7 @@ export const getAuthTokensAndSave = async (authCode: string): Promise<void> => {
   }
 }
 
-export const refreshIdToken = async (): Promise<boolean> => {
+export const refreshIdToken = async (): Promise<string | undefined> => {
   const response = await fetch(tokenUrl, {
     method: 'POST',
     headers: {
@@ -78,10 +78,9 @@ export const refreshIdToken = async (): Promise<boolean> => {
   if (response.ok) {
     const { id_token } = await response.json()
     Cookies.set('id_token', id_token, { secure: true, sameSite: 'strict' })
-    return true
+    return id_token
   } else {
     console.error('Failed to exchange refresh token:', response.status)
-    logIn()
-    return false
+    return undefined
   }
 }
