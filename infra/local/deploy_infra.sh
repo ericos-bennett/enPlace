@@ -12,6 +12,11 @@ cp ../prod/iam.tf .
 cp ../prod/secretsmanager.tf .
 cp ../prod/lambda.tf .
 cp ../prod/dynamodb.tf .
+cp ../prod/apigateway.tf .
+
+# Remove auth from API gateway
+sed -i '' 's/COGNITO_USER_POOLS/NONE/g' apigateway.tf
+sed -i '' '/authorizer_id/d' apigateway.tf
 
 # Apply terraform
 echo ">>> Applying terraform locally"
@@ -24,3 +29,4 @@ rm iam.tf
 rm secretsmanager.tf
 rm lambda.tf
 rm dynamodb.tf
+rm apigateway.tf
