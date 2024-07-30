@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Button,
   Container,
@@ -7,7 +8,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Icon,
+  Tooltip,
 } from '@mui/material'
 import type { Recipe as RecipeType, Ingredient } from '~/types'
 import cutlery from '~/assets/icons/cutlery.svg'
@@ -20,6 +21,8 @@ interface RecipeProps {
 }
 
 export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
+  const [copiedTooltipOpen, setCopiedTooltipOpen] = useState(false)
+
   const formatIngredient = (ingredient: Ingredient): string => {
     return `${ingredient.ingredient} - ${ingredient.amount}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`
   }
@@ -35,6 +38,8 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
 
     try {
       await navigator.clipboard.writeText(formattedIngredients)
+      setCopiedTooltipOpen(true)
+      setTimeout(() => setCopiedTooltipOpen(false), 2000)
     } catch (error) {
       console.error('Failed to copy text: ', error)
     }
@@ -57,14 +62,16 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
           <img src={clock} height="20" alt="Total Time" />
           <strong>Total Time:</strong> {recipe.totalTime}min
         </div>
-        <Button
-          className="copy-ingredients-button"
-          variant="outlined"
-          startIcon={<img alt="copy" src={copy} height={20} width={20} />}
-          onClick={handleCopy}
-        >
-          Copy Ingredients to Clipboard
-        </Button>
+        <Tooltip title="Copied!" placement="left" open={copiedTooltipOpen}>
+          <Button
+            className="copy-ingredients-button"
+            variant="outlined"
+            startIcon={<img alt="copy" src={copy} height={20} width={20} />}
+            onClick={handleCopy}
+          >
+            Copy Ingredients to Clipboard
+          </Button>
+        </Tooltip>
       </div>
       <TableContainer className="recipe-steps">
         <Table size="small" stickyHeader>
