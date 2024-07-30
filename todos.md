@@ -41,9 +41,9 @@
 - [x] Add explicit 'logging' exception handling to lambdas
 - [x] Get auth state from cookie on page load
 - [x] Remove 'My Recipes' link if not signed in
-- [ ] Token auto-refresh
+- [x] Token auto-refresh
+- [x] Redirect to signin page if 401 returned
 - [ ] Landing page design, including signup CTA
-- [ ] Redirect to signin page if 401 returned (or just redirect without 401?)
 - [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
 - [ ] Enable signups
 - [ ] Allow signups with Google, FB, etc.

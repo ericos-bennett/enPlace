@@ -1,10 +1,13 @@
 import { logIn, getIdToken, refreshIdToken } from './auth'
 
+const apiEndpoint = import.meta.env.VITE_API_URL
+
 export const callApi = async (
-  path: string,
+  resource: string,
   method: string,
   dataToSend?: any
 ): Promise<any> => {
+  const path = `${apiEndpoint}/${resource}`
   let authToken = getIdToken()
   if (!authToken) {
     logIn()
@@ -17,15 +20,16 @@ export const callApi = async (
     )
     if (response.status == 401) {
       authToken = await refreshIdToken()
-      if (authToken) {
+      if (!authToken) {
+        logIn()
+      } else {
         response = await callApiWithAuthToken(
           path,
           method,
           authToken,
           dataToSend
         )
-      } else {
-        logIn()
+        return response.json()
       }
     } else if (!response.ok) {
       const { errorMessage } = await response.json()
