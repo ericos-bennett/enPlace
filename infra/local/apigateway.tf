@@ -134,6 +134,31 @@ resource "aws_api_gateway_integration" "get_recipes" {
   uri                     = aws_lambda_function.get_recipes.invoke_arn
 }
 
+resource "aws_api_gateway_method" "delete_recipe" {
+  rest_api_id   = aws_api_gateway_rest_api.enplace.id
+  resource_id   = aws_api_gateway_resource.recipe.id
+  http_method   = "DELETE"
+  authorization = "NONE"
+
+  request_parameters = {
+    "method.request.path.recipeId" = true
+  }
+}
+
+resource "aws_api_gateway_integration" "delete_recipe" {
+  rest_api_id = aws_api_gateway_rest_api.enplace.id
+  resource_id = aws_api_gateway_resource.recipe.id
+  http_method = aws_api_gateway_method.delete_recipe.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.delete_recipe.invoke_arn
+
+  request_parameters = {
+    "integration.request.path.recipeId" = "method.request.path.recipeId"
+  }
+}
+
 resource "aws_api_gateway_method" "create_recipe" {
   rest_api_id   = aws_api_gateway_rest_api.enplace.id
   resource_id   = aws_api_gateway_resource.recipes.id

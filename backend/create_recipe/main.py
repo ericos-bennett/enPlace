@@ -44,7 +44,7 @@ def handler(event, context):
         logger.info(f"Event: {event}")
         auth_token = event['headers']['Authorization']
         decoded_token = jwt.decode(auth_token, options={"verify_signature": False})
-        sub = decoded_token['sub']
+        user_id = decoded_token['sub']
 
         body = json.loads(event['body'])
         recipe_url = body['recipeUrl']
@@ -72,7 +72,7 @@ def handler(event, context):
             IndexName='UserIdIndex',
             KeyConditionExpression='UserId = :userId AND SourceUrl = :sourceUrl',
             ExpressionAttributeValues={
-                ':userId': sub,
+                ':userId': user_id,
                 ':sourceUrl': recipe_url,
             }
         )
@@ -108,7 +108,7 @@ def handler(event, context):
         # Build the recipe object
         recipe = json.loads(openai_response, parse_float=Decimal)
         recipe['Id'] = str(uuid.uuid4())
-        recipe['UserId'] = sub
+        recipe['UserId'] = user_id
         recipe['CreatedAt'] = datetime.utcnow().isoformat()
         recipe['SourceUrl'] = recipe_url
         recipe['name'] = recipe_name

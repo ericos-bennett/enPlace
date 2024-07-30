@@ -25,6 +25,10 @@ export type Ingredient = {
   units?: string
 }
 
+export type DeleteRecipeResponse = {
+  message: string
+}
+
 export type CreateRecipeResponse = {
   recipeId: string
 }

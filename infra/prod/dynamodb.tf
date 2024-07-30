@@ -5,16 +5,10 @@ resource "aws_dynamodb_table" "recipes" {
   read_capacity               = 15
   write_capacity              = 15
 
-  hash_key  = "Id"
-  range_key = "CreatedAt"
+  hash_key = "Id"
 
   attribute {
     name = "Id"
-    type = "S"
-  }
-
-  attribute {
-    name = "CreatedAt"
     type = "S"
   }
 
@@ -36,6 +30,6 @@ resource "aws_dynamodb_table" "recipes" {
     hash_key           = "UserId"
     range_key          = "SourceUrl"
     projection_type    = "INCLUDE"
-    non_key_attributes = ["name"]
+    non_key_attributes = ["name", "CreatedAt", "DeletedAt"]
   }
 }

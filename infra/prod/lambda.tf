@@ -44,6 +44,29 @@ resource "aws_lambda_permission" "get_recipes" {
   principal     = "apigateway.amazonaws.com"
 }
 
+resource "aws_lambda_function" "delete_recipe" {
+  filename         = "${path.module}/delete_recipe.zip"
+  function_name    = "DeleteRecipe"
+  role             = aws_iam_role.delete_recipe.arn
+  handler          = "main.handler"
+  source_code_hash = filebase64sha256("${path.module}/delete_recipe.zip")
+  runtime          = "python3.12"
+  timeout          = 30
+  architectures    = ["arm64"]
+  environment {
+    variables = {
+      DYNAMODB_ENDPOINT = var.dynamodb_endpoint,
+    }
+  }
+}
+
+resource "aws_lambda_permission" "delete_recipe" {
+  statement_id  = "AllowAPIGatewayInvokeGetRecipes"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.delete_recipe.arn
+  principal     = "apigateway.amazonaws.com"
+}
+
 resource "aws_lambda_function" "create_recipe" {
   filename         = "${path.module}/create_recipe.zip"
   function_name    = "CreateRecipe"

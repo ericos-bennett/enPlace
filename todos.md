@@ -44,6 +44,7 @@
 - [x] Token auto-refresh
 - [x] Redirect to signin page if 401 returned
 - [x] Save ingredients feature - copy ingredient list to clipboard
+- [ ] Handle NoSchemaFoundInWildMode error when creating recipe
 - [ ] Landing page design, including signup CTA
 - [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
 - [ ] Enable signups
@@ -52,6 +53,8 @@
 - [ ] Improve FE design and make it mobile-friendly
 - [ ] Add animation when creating recipe
 - [ ] Use imageUrl
+- [ ] Add 'softDelete' function to list and detail page
+- [ ] When listing ingredients, combine multiple occurences of the same
 - [ ] Specify strict JSON output in OpenAI API request
 - [ ] Allow users to input a recipe prompt instead of a URL
 - [ ] Meal plan feature - users can group recipes together

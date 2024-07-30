@@ -46,6 +46,23 @@ cd .. && zip get_recipes.zip main.py
 mv get_recipes.zip ../../infra/$ENV
 cd ..
 
+echo ">>> Updating delete_recipe lambda"
+cd delete_recipe
+pip install \
+  --upgrade \
+  --quiet \
+  --python-version 3.12 \
+  --platform manylinux2014_aarch64 \
+  --implementation cp \
+  --only-binary=:all: \
+  --no-deps \
+  --target package \
+  -r requirements.txt
+cd package && zip -q -r ../delete_recipe.zip .
+cd .. && zip delete_recipe.zip main.py
+mv delete_recipe.zip ../../infra/$ENV
+cd ..
+
 echo ">>> Updating create_recipe lambda"
 cd create_recipe
 pip install \

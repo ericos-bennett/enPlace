@@ -1,5 +1,10 @@
 import { callApi } from '~/services/api'
-import { Recipe, RecipeMeta, CreateRecipeResponse } from '~/types'
+import {
+  Recipe,
+  RecipeMeta,
+  CreateRecipeResponse,
+  DeleteRecipeResponse,
+} from '~/types'
 
 const resource = 'recipes'
 
@@ -9,6 +14,12 @@ export const getRecipe = async (recipeId: string): Promise<Recipe> => {
 
 export const getRecipeMetas = async (): Promise<RecipeMeta[]> => {
   return await callApi(resource, 'GET')
+}
+
+export const deleteRecipe = async (
+  recipeId: string
+): Promise<DeleteRecipeResponse> => {
+  return await callApi(`${resource}/${recipeId}`, 'DELETE')
 }
 
 export const createRecipe = async (
