@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { TextField } from '@mui/material'
 import { RecipeMeta } from '~/components/RecipeMeta/RecipeMeta'
-import { getRecipeMetas } from '~/services/recipe'
+import { getRecipeMetas, deleteRecipe } from '~/services/recipe'
 import type { RecipeMeta as RecipeMetaType } from '~/types'
 import './MyRecipesPage.css'
 
@@ -14,6 +14,14 @@ export const MyRecipesPage: React.FC = () => {
       .then((recipeMetas) => setRecipeMetas(recipeMetas))
       .catch((error) => console.error('Error fetching recipes:', error))
   }, [])
+
+  const onDelete = async (recipeId: string): Promise<void> => {
+    await deleteRecipe(recipeId)
+    setRecipeMetas(
+      (prevRecipes) =>
+        prevRecipes?.filter((recipe) => recipe.Id !== recipeId) || null
+    )
+  }
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -52,7 +60,11 @@ export const MyRecipesPage: React.FC = () => {
         {recipeMetas && (
           <div className="recipe-metas">
             {filteredRecipeMetas(recipeMetas).map((recipeMeta, index) => (
-              <RecipeMeta recipeMeta={recipeMeta} key={index}></RecipeMeta>
+              <RecipeMeta
+                recipeMeta={recipeMeta}
+                onDelete={onDelete}
+                key={index}
+              />
             ))}
           </div>
         )}
