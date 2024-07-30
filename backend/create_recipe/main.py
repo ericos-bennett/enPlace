@@ -78,7 +78,15 @@ def handler(event, context):
         )
         items = response.get('Items', [])
         if items:
-            return client_response(409, {'recipeId': items[0]['Id']})
+            existing_recipe = items[0]
+            existing_recipe_id = existing_recipe['Id']
+            # If the recipe has been soft deleted, remove the deletion flag
+            if 'DeletedAt' in existing_recipe:
+                table.update_item(
+                    Key={'Id': existing_recipe_id},
+                    UpdateExpression='REMOVE DeletedAt'
+                )
+            return client_response(409, {'recipeId': existing_recipe_id})
 
         # Get OpenAI secret and start client
         secrets_manager = boto3.client('secretsmanager', endpoint_url=os.getenv('SECRETSMANAGER_ENDPOINT'))

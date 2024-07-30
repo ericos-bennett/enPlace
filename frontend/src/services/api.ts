@@ -31,11 +31,11 @@ export const callApi = async (
         )
         return response.json()
       }
-    } else if (!response.ok) {
+    } else if (response.ok || response.status == 409) {
+      return response.json()
+    } else {
       const { errorMessage } = await response.json()
       throw new Error(errorMessage)
-    } else {
-      return response.json()
     }
   }
 }
