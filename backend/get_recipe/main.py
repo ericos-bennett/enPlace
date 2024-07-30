@@ -38,17 +38,14 @@ def handler(event, context):
 
         dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))
         table = dynamodb.Table('Recipes')
-        response = table.query(
-            KeyConditionExpression="Id = :id",
-            ExpressionAttributeValues={
-            ":id": recipe_id,
-            },
+        response = table.get_item(
+            Key={'Id': recipe_id}
         )
-        items = response.get('Items', [])
-        if not items:
-            return client_response(404, {'errorMessage': "No recipe with the specified ID" })
 
-        return client_response(200, items[0])
+        if 'Item' not in response:
+            return client_response(404, {'errorMessage': 'Recipe not found'})
+
+        return client_response(200, response['Item'])
     except:
         log_exception()
         return client_response(500, {'errorMessage':"Internal Server Error"})
