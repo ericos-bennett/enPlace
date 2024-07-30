@@ -88,7 +88,7 @@ resource "aws_api_gateway_integration_response" "options_recipes" {
 
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin"  = "'*'",
-    "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'",
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,DELETE,OPTIONS'",
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
   }
 }
