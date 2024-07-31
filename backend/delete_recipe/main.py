@@ -3,9 +3,9 @@ import sys
 import traceback
 import logging
 import json
+import datetime
 import boto3
 import jwt
-from datetime import datetime
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -62,7 +62,7 @@ def handler(event, context):
             Key={'Id': recipe_id},
             UpdateExpression='SET DeletedAt = :deletedAt',
             ExpressionAttributeValues={
-                ':deletedAt': datetime.utcnow().isoformat()
+                ':deletedAt': datetime.datetime.utcnow().isoformat()
             }
         )
 

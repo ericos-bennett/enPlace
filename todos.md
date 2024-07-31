@@ -45,11 +45,12 @@
 - [x] Redirect to signin page if 401 returned
 - [x] Save ingredients feature - copy ingredient list to clipboard
 - [x] Add 'softDelete' function to list page
-- [ ] Handle NoSchemaFoundInWildMode error when creating recipe
-- [ ] Landing page design, including signup CTA
 - [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
-- [ ] Enable signups
 - [ ] Allow signups with Google, FB, etc.
+- [ ] Enable signups
+- [ ] Handle NoSchemaFoundInWildMode error when creating recipe
+- [ ] Use HttpOnly cookies for tokens
+- [ ] Landing page design, including signup CTA
 - [ ] Remove auth check from GET /recipe endpoint (but restrict origin to SPA?)
 - [ ] Improve FE design and make it mobile-friendly
 - [ ] Add animation when creating recipe

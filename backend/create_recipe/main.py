@@ -5,11 +5,11 @@ import logging
 import json
 import uuid
 import re
+import datetime
 import boto3
 import jwt
 from openai import OpenAI
 from recipe_scrapers import scrape_me
-from datetime import datetime
 from decimal import Decimal
 from urllib.parse import urlparse
 
@@ -117,7 +117,7 @@ def handler(event, context):
         recipe = json.loads(openai_response, parse_float=Decimal)
         recipe['Id'] = str(uuid.uuid4())
         recipe['UserId'] = user_id
-        recipe['CreatedAt'] = datetime.utcnow().isoformat()
+        recipe['CreatedAt'] = datetime.datetime.utcnow().isoformat()
         recipe['SourceUrl'] = recipe_url
         recipe['name'] = recipe_name
         recipe['description'] = recipe_description

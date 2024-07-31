@@ -61,7 +61,7 @@ resource "aws_lambda_function" "delete_recipe" {
 }
 
 resource "aws_lambda_permission" "delete_recipe" {
-  statement_id  = "AllowAPIGatewayInvokeGetRecipes"
+  statement_id  = "AllowAPIGatewayInvokeDeleteRecipes"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.delete_recipe.arn
   principal     = "apigateway.amazonaws.com"
