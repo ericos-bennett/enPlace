@@ -46,6 +46,7 @@
 - [x] Save ingredients feature - copy ingredient list to clipboard
 - [x] Add 'softDelete' function to list page
 - [x] Specify strict JSON output in OpenAI API request
+- [x] Make ingredient amount nullable in types and UI
 - [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
 - [ ] Allow signups with Google, FB, etc.
 - [ ] Enable signups

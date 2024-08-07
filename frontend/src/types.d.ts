@@ -20,7 +20,7 @@ export type Step = {
 
 export type Ingredient = {
   ingredient: string
-  amount: string
+  amount?: string
   units?: string
   preparation?: string
 }

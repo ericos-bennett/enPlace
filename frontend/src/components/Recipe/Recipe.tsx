@@ -24,7 +24,7 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
   const [copiedTooltipOpen, setCopiedTooltipOpen] = useState(false)
 
   const formatIngredient = (ingredient: Ingredient): string => {
-    return `${ingredient.ingredient} - ${ingredient.amount}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`
+    return `${ingredient.ingredient}${ingredient.amount ? ` - ${ingredient.amount}` : ''}${ingredient.units ? ` ${ingredient.units}` : ''}${ingredient.preparation ? `, ${ingredient.preparation}` : ''}`
   }
 
   const handleCopy = async () => {

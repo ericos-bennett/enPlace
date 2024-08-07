@@ -44,7 +44,7 @@ def log_exception():
 # Define OpenAI output schema
 class Ingredient(BaseModel):
     ingredient: str
-    amount: str
+    amount: Optional[str]
     units: Optional[str]
     preparation: Optional[str]
 
@@ -69,17 +69,6 @@ def handler(event, context):
         if not all([result.scheme, result.netloc]):
             return client_response(400, {'errorMessage': "Not a valid URL"})
         
-        # Get date from website
-        scraper = scrape_me(recipe_url, wild_mode=True)
-        recipe_name = scraper.title()
-        recipe_description = scraper.description()
-        recipe_servings = re.sub(r'\D', '', scraper.yields())
-        recipe_total_time = scraper.total_time()
-        recipe_image_url = scraper.image()
-        ingredients = scraper.ingredients()
-        instructions = scraper.instructions_list()
-        logger.info(f"Recipe data retrieved from: {recipe_url}")
-
         # Check if URL already exists in DB
         dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))
         table = dynamodb.Table('Recipes')
@@ -102,6 +91,19 @@ def handler(event, context):
                     UpdateExpression='REMOVE DeletedAt'
                 )
             return client_response(409, {'recipeId': existing_recipe_id})
+        
+        # Get data from website
+        scraper = scrape_me(recipe_url, wild_mode=True)
+        recipe_name = scraper.title()
+        recipe_description = scraper.description()
+        recipe_servings = re.sub(r'\D', '', scraper.yields())
+        recipe_total_time = scraper.total_time()
+        recipe_image_url = scraper.image()
+        ingredients = scraper.ingredients()
+        instructions = scraper.instructions_list()
+        logger.info(f"Recipe data retrieved from: {recipe_url}")
+        logger.info(f"Ingredients: {ingredients}")
+        logger.info(f"Instructions: {instructions}")
 
         # Get OpenAI secret and start client
         secrets_manager = boto3.client('secretsmanager', endpoint_url=os.getenv('SECRETSMANAGER_ENDPOINT'))
