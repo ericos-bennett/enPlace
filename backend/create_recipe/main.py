@@ -8,8 +8,10 @@ import re
 import datetime
 import boto3
 import jwt
-from openai import OpenAI
 from recipe_scrapers import scrape_me
+from openai import OpenAI
+from pydantic import BaseModel
+from typing import Optional
 from decimal import Decimal
 from urllib.parse import urlparse
 
@@ -38,6 +40,20 @@ def log_exception():
         "stackTrace": traceback.format_exception(exception_type, exception_value, exception_traceback)
     })
     logger.error(error_message)
+
+# Define OpenAI output schema
+class Ingredient(BaseModel):
+    ingredient: str
+    amount: str
+    units: Optional[str]
+    preparation: Optional[str]
+
+class Step(BaseModel):
+    instructions: str
+    ingredients: Optional[list[Ingredient]]
+
+class RecipeSteps(BaseModel):
+    steps: list[Step]
 
 def handler(event, context):
     try:
@@ -93,28 +109,23 @@ def handler(event, context):
         secret_data = secrets_manager.get_secret_value(SecretId=os.getenv('OPENAI_API_KEY_ID'))
         openai_client = OpenAI(api_key=secret_data['SecretString'])
 
-        # Load example recipe JSON
-        with open('exampleRecipe.json', 'r') as f:
-            example_recipe = json.load(f)
-
         # Use OpenAI to format recipe steps
-        completion = openai_client.chat.completions.create(
+        response = openai_client.beta.chat.completions.parse(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content":  f"You are a recipe formatter which matches a recipe's ingredients with their relevant steps and returns only a valid JSON matching exactly this format: {json.dumps(example_recipe)}"},
-                {"role": "user", "content": f"Only mention each ingredient once, when it is first used in the recipe"},
+                {"role": "system", "content":  f"You are a recipe formatter which matches a recipe's ingredients with their relevant steps. Only mention each ingredient once, when it is first used in the recipe."},
                 {"role": "user", "content": f"Here are the ingredients: {ingredients}"},
                 {"role": "user", "content": f"Here are the instructions: {instructions}"}
             ],
-            response_format={ "type": "json_object" },
-            temperature=0
+            temperature=0,
+            response_format=RecipeSteps,
         )
-        openai_response = completion.choices[0].message.content
-        logger.info(f"OpenAI Response: {json.dumps(openai_response, default=str)}")
-        logger.info(f"OpenAI API Usage: {completion.usage}")
+        recipe_steps = response.choices[0].message.content
+        logger.info(f"OpenAI Response: {json.dumps(recipe_steps, default=str)}")
+        logger.info(f"OpenAI API Usage: {response.usage}")
 
         # Build the recipe object
-        recipe = json.loads(openai_response, parse_float=Decimal)
+        recipe = json.loads(recipe_steps, parse_float=Decimal)
         recipe['Id'] = str(uuid.uuid4())
         recipe['UserId'] = user_id
         recipe['CreatedAt'] = datetime.datetime.utcnow().isoformat()

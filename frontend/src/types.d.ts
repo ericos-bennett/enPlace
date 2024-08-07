@@ -20,9 +20,9 @@ export type Step = {
 
 export type Ingredient = {
   ingredient: string
-  preparation?: string
   amount: string
   units?: string
+  preparation?: string
 }
 
 export type DeleteRecipeResponse = {

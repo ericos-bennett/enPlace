@@ -45,6 +45,7 @@
 - [x] Redirect to signin page if 401 returned
 - [x] Save ingredients feature - copy ingredient list to clipboard
 - [x] Add 'softDelete' function to list page
+- [x] Specify strict JSON output in OpenAI API request
 - [ ] Add daily report of all activity and variable costs (signups, OpenAI usage, serverless executions)
 - [ ] Allow signups with Google, FB, etc.
 - [ ] Enable signups
@@ -56,7 +57,6 @@
 - [ ] Add animation when creating recipe
 - [ ] Use imageUrl
 - [ ] When listing ingredients, combine multiple occurences of the same
-- [ ] Specify strict JSON output in OpenAI API request
 - [ ] Allow users to input a recipe prompt instead of a URL
 - [ ] Meal plan feature - users can group recipes together
 - [ ] Investigate risk/reward of hiding or rate-limiting sign in page
