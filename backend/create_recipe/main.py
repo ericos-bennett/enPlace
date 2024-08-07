@@ -125,7 +125,7 @@ def handler(event, context):
         response = openai_client.beta.chat.completions.parse(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are a recipe formatter which matches a recipe's ingredients with their relevant steps. Only mention each ingredient once, when it is first used in the recipe."},
+                {"role": "system", "content": "You are a recipe formatter which matches a recipe's ingredients with their relevant steps. Only mention each ingredient once, when it is first used in the recipe. If an optional field is empty, return the non-string null instead of 'null' or 'none'."},
                 {"role": "user", "content": f"Ingredients: {ingredients}"},
                 {"role": "user", "content": f"Instructions: {instructions}"}
             ],
