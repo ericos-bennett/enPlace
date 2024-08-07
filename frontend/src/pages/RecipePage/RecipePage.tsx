@@ -13,7 +13,7 @@ export const RecipePage: React.FC = () => {
     getRecipe(recipeId)
       .then((recipe) => setRecipe(recipe))
       .catch((error) => {
-        if (error.message.includes('404')) {
+        if (error.message.includes('not found')) {
           navigate('/recipes/404')
         } else {
           console.error('Error fetching recipe:', error)
