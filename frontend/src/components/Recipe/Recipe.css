@@ -34,3 +34,7 @@
 .ingredients-column {
   width: 300px;
 }
+
+.ingredient-item:first-letter {
+  text-transform: capitalize;
+}

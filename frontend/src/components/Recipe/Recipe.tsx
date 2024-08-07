@@ -88,7 +88,7 @@ export const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
                   <TableCell>
                     <ul>
                       {step.ingredients?.map((ingredient, ingredientIndex) => (
-                        <li key={ingredientIndex}>
+                        <li key={ingredientIndex} className="ingredient-item">
                           {formatIngredient(ingredient)}
                         </li>
                       ))}
