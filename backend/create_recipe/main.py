@@ -41,6 +41,19 @@ def log_exception():
     })
     logger.error(error_message)
 
+def replace_units(text):
+    replacements = {
+        'tablespoons': 'Tbsp',
+        'tablespoon': 'Tbsp',
+        'teaspoons': 'tsp',
+        'teaspoon': 'tsp',
+        'pound': 'lb',
+        'pounds': 'lbs'
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    return text
+
 # Define OpenAI output schema
 class Ingredient(BaseModel):
     ingredient: str
@@ -99,11 +112,9 @@ def handler(event, context):
         recipe_servings = re.sub(r'\D', '', scraper.yields())
         recipe_total_time = scraper.total_time()
         recipe_image_url = scraper.image()
-        ingredients = scraper.ingredients()
-        instructions = scraper.instructions_list()
+        ingredients = [replace_units(ingredient) for ingredient in scraper.ingredients()]
+        instructions = [replace_units(instruction) for instruction in scraper.instructions_list()]
         logger.info(f"Recipe data retrieved from: {recipe_url}")
-        logger.info(f"Ingredients: {ingredients}")
-        logger.info(f"Instructions: {instructions}")
 
         # Get OpenAI secret and start client
         secrets_manager = boto3.client('secretsmanager', endpoint_url=os.getenv('SECRETSMANAGER_ENDPOINT'))
@@ -114,9 +125,9 @@ def handler(event, context):
         response = openai_client.beta.chat.completions.parse(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content":  f"You are a recipe formatter which matches a recipe's ingredients with their relevant steps. Only mention each ingredient once, when it is first used in the recipe."},
-                {"role": "user", "content": f"Here are the ingredients: {ingredients}"},
-                {"role": "user", "content": f"Here are the instructions: {instructions}"}
+                {"role": "system", "content": "You are a recipe formatter which matches a recipe's ingredients with their relevant steps. Only mention each ingredient once, when it is first used in the recipe."},
+                {"role": "user", "content": f"Ingredients: {ingredients}"},
+                {"role": "user", "content": f"Instructions: {instructions}"}
             ],
             temperature=0,
             response_format=RecipeSteps,
