@@ -57,13 +57,12 @@ class RecipeSteps(BaseModel):
 
 def handler(event, context):
     try:
-        logger.info(f"Event: {event}")
         auth_token = event['headers']['Authorization']
         decoded_token = jwt.decode(auth_token, options={"verify_signature": False})
         user_id = decoded_token['sub']
-
         body = json.loads(event['body'])
         recipe_url = body['recipeUrl']
+        logger.info(f"Event received with user_id: {user_id} and recipe_url: {recipe_url}")
 
         # Validate URL input
         result = urlparse(recipe_url)

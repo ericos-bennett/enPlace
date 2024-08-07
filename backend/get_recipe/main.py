@@ -33,8 +33,8 @@ def log_exception():
 
 def handler(event, context):
     try:
-        logger.info(f"Event: {event}")
         recipe_id = event['pathParameters']['recipeId']
+        logger.info(f"Event received with recipe_id: {recipe_id}")
 
         dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))
         table = dynamodb.Table('Recipes')

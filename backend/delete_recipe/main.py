@@ -35,11 +35,11 @@ def log_exception():
 
 def handler(event, context):
     try:
-        logger.info(f"Event: {event}")
-        recipe_id = event['pathParameters']['recipeId']
         auth_token = event['headers']['Authorization']
         decoded_token = jwt.decode(auth_token, options={"verify_signature": False})
         user_id = decoded_token['sub']
+        recipe_id = event['pathParameters']['recipeId']
+        logger.info(f"Event received with user_id: {user_id} and recipe_id: {recipe_id}")
 
         dynamodb = boto3.resource('dynamodb', endpoint_url=os.getenv('DYNAMODB_ENDPOINT'))
         table = dynamodb.Table('Recipes')
