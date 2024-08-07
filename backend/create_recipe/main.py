@@ -29,7 +29,7 @@ def client_response(status_code, body_json):
             'Access-Control-Allow-Credentials': True,
         },
     }
-    logger.info(f'Response: {response}')
+    logger.info(f'Returning {status_code}')
     return response
 
 def log_exception():
