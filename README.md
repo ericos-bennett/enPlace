@@ -2,6 +2,10 @@
 
 A better way to save and follow recipes. Built with a serverless architecture on AWS (API Gateway, Lambdas, DynamoDB), the OpenAI API, React, and Terraform.
 
+Try out the app at [enplace.xyz](https://www.enplace.xyz/)!
+
+![Architecture Diagram](docs/architecture.png)
+
 ## Local Setup
 
 1. [Sign up for an OpenAI API Key](https://platform.openai.com/docs/quickstart/account-setup) and export it as the `TF_VAR_openai_api_key` variable in your `.bashrc` or `.zshrc`
