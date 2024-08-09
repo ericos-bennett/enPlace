@@ -47,16 +47,16 @@
 - [x] Add 'softDelete' function to list page
 - [x] Specify strict JSON output in OpenAI API request
 - [x] Make ingredient amount nullable in types and UI
-- [ ] Enable signups
+- [x] Enable signups
 - [ ] Improve performance or timeout length to prevent 504s
 - [ ] Handle NoSchemaFoundInWildMode error when creating recipe
-- [ ] Allow signups with Google, FB, etc.
 - [ ] Use HttpOnly cookies for tokens
 - [ ] Landing page design, including signup CTA
+- [ ] Use imageUrl
+- [ ] Add animation when creating recipe
 - [ ] Remove auth check from GET /recipe endpoint (but restrict origin to SPA?)
 - [ ] Improve FE design and make it mobile-friendly
-- [ ] Add animation when creating recipe
-- [ ] Use imageUrl
+- [ ] Allow signups with Google, FB, etc.
 - [ ] When listing ingredients, combine multiple occurences of the same
 - [ ] Allow users to input a recipe prompt instead of a URL
 - [ ] Meal plan feature - users can group recipes together
