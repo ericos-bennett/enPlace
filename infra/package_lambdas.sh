@@ -84,22 +84,5 @@ pip install \
 cd package && zip -q -r ../create_recipe.zip .
 cd .. && zip create_recipe.zip main.py
 mv create_recipe.zip ../../infra/$ENV
-cd ..
-
-echo ">>> Updating metrics_report lambda"
-cd metrics_report
-pip install \
-  --upgrade \
-  --quiet \
-  --python-version 3.12 \
-  --platform manylinux2014_aarch64 \
-  --implementation cp \
-  --only-binary=:all: \
-  --no-deps \
-  --target package \
-  -r requirements.txt
-cd package && zip -q -r ../metrics_report.zip .
-cd .. && zip metrics_report.zip main.py
-mv metrics_report.zip ../../infra/$ENV
 
 echo ">>> Lambda code updated"
