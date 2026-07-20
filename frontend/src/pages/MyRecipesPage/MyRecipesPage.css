@@ -1,12 +1,18 @@
 .my-recipes-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 1rem 1rem;
 }
 
 .my-recipes-title {
-  position: sticky;
+  position: fixed;
   top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+  box-sizing: border-box;
   z-index: 999;
   background-color: white;
 }

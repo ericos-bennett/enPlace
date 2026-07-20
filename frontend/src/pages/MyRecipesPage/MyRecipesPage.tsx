@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { TextField } from '@mui/material'
 import { RecipeMeta } from '~/components/RecipeMeta/RecipeMeta'
 import { getRecipeMetas, deleteRecipe } from '~/services/recipe'
@@ -8,11 +8,24 @@ import './MyRecipesPage.css'
 export const MyRecipesPage: React.FC = () => {
   const [recipeMetas, setRecipeMetas] = useState<RecipeMetaType[] | null>(null)
   const [searchTerm, setSearchTerm] = useState<string>('')
+  const titleRef = useRef<HTMLDivElement>(null)
+  const [titleHeight, setTitleHeight] = useState(0)
 
   useEffect(() => {
     getRecipeMetas()
       .then((recipeMetas) => setRecipeMetas(recipeMetas))
       .catch((error) => console.error('Error fetching recipes:', error))
+  }, [])
+
+  useLayoutEffect(() => {
+    const updateTitleHeight = () => {
+      if (titleRef.current) {
+        setTitleHeight(titleRef.current.offsetHeight)
+      }
+    }
+    updateTitleHeight()
+    window.addEventListener('resize', updateTitleHeight)
+    return () => window.removeEventListener('resize', updateTitleHeight)
   }, [])
 
   const onDelete = async (recipeId: string): Promise<void> => {
@@ -45,7 +58,7 @@ export const MyRecipesPage: React.FC = () => {
   return (
     <>
       <div className="my-recipes-container">
-        <div className="my-recipes-title">
+        <div className="my-recipes-title" ref={titleRef}>
           <h1>My Recipes</h1>
           <TextField
             label="Search"
@@ -58,7 +71,7 @@ export const MyRecipesPage: React.FC = () => {
           />
         </div>
         {recipeMetas && (
-          <div className="recipe-metas">
+          <div className="recipe-metas" style={{ paddingTop: titleHeight }}>
             {filteredRecipeMetas(recipeMetas).map((recipeMeta, index) => (
               <RecipeMeta
                 recipeMeta={recipeMeta}
