@@ -15,8 +15,11 @@ cp ../prod/dynamodb.tf .
 cp ../prod/apigateway.tf .
 
 # Remove auth from API gateway
-sed -i '' 's/COGNITO_USER_POOLS/NONE/g' apigateway.tf
-sed -i '' '/authorizer_id/d' apigateway.tf
+# (-i.bak instead of -i '' since the latter is BSD/macOS-only syntax; GNU sed
+# on Linux CI runners parses '' as the script and errors on the next arg)
+sed -i.bak 's/COGNITO_USER_POOLS/NONE/g' apigateway.tf
+sed -i.bak '/authorizer_id/d' apigateway.tf
+rm -f apigateway.tf.bak
 
 # Apply terraform
 echo ">>> Applying terraform locally"
