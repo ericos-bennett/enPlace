@@ -27,6 +27,11 @@ fi
 # Start localstack container
 # Pinned (not :latest): 2026.3.0+ merged Community/Pro into one image that
 # requires a paid LOCALSTACK_AUTH_TOKEN to start at all.
+# LAMBDA_DOCKER_NETWORK must match --network above, or Lambda's own execution
+# containers land on the default bridge network instead and can't reach back
+# to this container - API Gateway then returns 502 for every route that
+# invokes a lambda. Docker Desktop's networking on macOS papers over this;
+# native Linux docker (e.g. GitHub Actions runners) does not.
 echo ">>> Starting localstack docker container"
 docker run -d \
     --name $CONTAINER_NAME \
@@ -35,6 +40,7 @@ docker run -d \
     -e SERVICES=iam,apigateway,secretsmanager,lambda,dynamodb,logs \
     -e DEBUG=1 \
     -e LAMBDA_EXECUTOR=docker \
+    -e LAMBDA_DOCKER_NETWORK=$NETWORK_NAME \
     -v /var/run/docker.sock:/var/run/docker.sock \
     localstack/localstack:4.10.0
 echo ">>> Localstack docker container is running"
