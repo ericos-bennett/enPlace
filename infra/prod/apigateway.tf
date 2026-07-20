@@ -190,7 +190,7 @@ resource "aws_api_gateway_integration" "get_recipe" {
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.get_recipe.invoke_arn
+  uri                     = aws_lambda_function.recipes.invoke_arn
 
   request_parameters = {
     "integration.request.path.recipeId" = "method.request.path.recipeId"
@@ -212,7 +212,7 @@ resource "aws_api_gateway_integration" "get_recipes" {
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.get_recipes.invoke_arn
+  uri                     = aws_lambda_function.recipes.invoke_arn
 }
 
 resource "aws_api_gateway_method" "delete_recipe" {
@@ -234,7 +234,7 @@ resource "aws_api_gateway_integration" "delete_recipe" {
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.delete_recipe.invoke_arn
+  uri                     = aws_lambda_function.recipes.invoke_arn
 
   request_parameters = {
     "integration.request.path.recipeId" = "method.request.path.recipeId"
@@ -256,5 +256,5 @@ resource "aws_api_gateway_integration" "create_recipe" {
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.create_recipe.invoke_arn
+  uri                     = aws_lambda_function.recipes.invoke_arn
 }

@@ -12,8 +12,10 @@ else
 fi
 
 # Delete the localstack container if it exists
+# (anchored regex so this doesn't also match LocalStack's own per-lambda
+# execution containers, e.g. enplace-localstack-lambda-recipes-<hash>)
 CONTAINER_NAME="enplace-localstack"
-if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+if [ "$(docker ps -aq -f "name=^${CONTAINER_NAME}\$")" ]; then
     echo ">>> Stopping and removing the container: $CONTAINER_NAME"
     docker stop $CONTAINER_NAME 2>/dev/null
     docker rm $CONTAINER_NAME
@@ -23,6 +25,8 @@ else
 fi
 
 # Start localstack container
+# Pinned (not :latest): 2026.3.0+ merged Community/Pro into one image that
+# requires a paid LOCALSTACK_AUTH_TOKEN to start at all.
 echo ">>> Starting localstack docker container"
 docker run -d \
     --name $CONTAINER_NAME \
@@ -32,5 +36,5 @@ docker run -d \
     -e DEBUG=1 \
     -e LAMBDA_EXECUTOR=docker \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    localstack/localstack
+    localstack/localstack:4.10.0
 echo ">>> Localstack docker container is running"

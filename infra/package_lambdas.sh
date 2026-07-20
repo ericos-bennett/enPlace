@@ -12,59 +12,8 @@ ENV=$1
 echo ">>> Packaging lambdas"
 cd ../backend
 
-echo ">>> Updating get_recipe lambda"
-cd get_recipe
-pip install \
-  --upgrade \
-  --quiet \
-  --python-version 3.12 \
-  --platform manylinux2014_aarch64 \
-  --implementation cp \
-  --only-binary=:all: \
-  --no-deps \
-  --target package \
-  -r requirements.txt
-cd package && zip -q -r ../get_recipe.zip .
-cd .. && zip get_recipe.zip main.py
-mv get_recipe.zip ../../infra/$ENV
-cd ..
-
-echo ">>> Updating get_recipes lambda"
-cd get_recipes
-pip install \
-  --upgrade \
-  --quiet \
-  --python-version 3.12 \
-  --platform manylinux2014_aarch64 \
-  --implementation cp \
-  --only-binary=:all: \
-  --no-deps \
-  --target package \
-  -r requirements.txt
-cd package && zip -q -r ../get_recipes.zip .
-cd .. && zip get_recipes.zip main.py
-mv get_recipes.zip ../../infra/$ENV
-cd ..
-
-echo ">>> Updating delete_recipe lambda"
-cd delete_recipe
-pip install \
-  --upgrade \
-  --quiet \
-  --python-version 3.12 \
-  --platform manylinux2014_aarch64 \
-  --implementation cp \
-  --only-binary=:all: \
-  --no-deps \
-  --target package \
-  -r requirements.txt
-cd package && zip -q -r ../delete_recipe.zip .
-cd .. && zip delete_recipe.zip main.py
-mv delete_recipe.zip ../../infra/$ENV
-cd ..
-
-echo ">>> Updating create_recipe lambda"
-cd create_recipe
+echo ">>> Updating recipes lambda"
+cd recipes
 pip install \
   --upgrade \
   --quiet \
@@ -81,8 +30,8 @@ pip install \
   --quiet \
   --target package \
   -r requirements_source.txt
-cd package && zip -q -r ../create_recipe.zip .
-cd .. && zip create_recipe.zip main.py
-mv create_recipe.zip ../../infra/$ENV
+cd package && zip -q -r ../recipes.zip .
+cd .. && zip recipes.zip main.py
+mv recipes.zip ../../infra/$ENV
 
 echo ">>> Lambda code updated"
