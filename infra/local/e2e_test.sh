@@ -9,6 +9,11 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 cd "$SCRIPT_DIR"
 
 cleanup() {
+  local exit_code=$?
+  if [ "$exit_code" -ne 0 ]; then
+    echo ">>> E2E run failed (exit $exit_code); dumping LocalStack container logs for diagnosis"
+    docker logs enplace-localstack 2>&1 | tail -500
+  fi
   echo ">>> Tearing down localstack container"
   # Also sweep up LocalStack's own per-lambda execution containers, which
   # aren't stopped by removing the main container and would otherwise leak.
