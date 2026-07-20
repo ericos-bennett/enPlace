@@ -70,3 +70,10 @@ jobs:
 
       - name: Deploy Terraform
         run: terraform apply -var-file="prod.tfvars" -auto-approve
+
+      # S3 objects have no explicit Cache-Control, so CloudFront falls back
+      # to default_ttl (1hr) per edge location. Without this, edges that
+      # already cached the previous index.html/assets keep serving them for
+      # up to an hour after a successful deploy.
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id "$(terraform output -raw cloudfront_distribution_id)" --paths "/*"

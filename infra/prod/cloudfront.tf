@@ -59,3 +59,7 @@ resource "aws_cloudfront_distribution" "enplace_fe" {
 
   depends_on = [aws_acm_certificate_validation.enplace]
 }
+
+output "cloudfront_distribution_id" {
+  value = aws_cloudfront_distribution.enplace_fe.id
+}
