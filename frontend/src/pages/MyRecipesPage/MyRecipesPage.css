@@ -5,12 +5,8 @@
 }
 
 .my-recipes-title {
-  position: fixed;
-  min-width: 800px;
+  position: sticky;
+  top: 4rem;
   z-index: 999;
   background-color: white;
-}
-
-.recipe-metas {
-  margin-top: 200px;
 }
