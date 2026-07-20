@@ -28,6 +28,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Prod Lambdas are packaged/deployed as arm64 (see infra/prod/lambda.tf)
+      # to match Graviton, but this runner is x86_64. Without emulation,
+      # LocalStack's arm64 Lambda execution container fails with
+      # "exec format error" when the E2E suite invokes it below.
+      - name: Set up QEMU for arm64 emulation
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v4
         with:
