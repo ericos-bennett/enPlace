@@ -27,8 +27,16 @@ resource "aws_dynamodb_table" "recipes" {
     read_capacity  = 10
     write_capacity = 10
 
-    hash_key           = "UserId"
-    range_key          = "SourceUrl"
+    key_schema {
+      attribute_name = "UserId"
+      key_type       = "HASH"
+    }
+
+    key_schema {
+      attribute_name = "SourceUrl"
+      key_type       = "RANGE"
+    }
+
     projection_type    = "INCLUDE"
     non_key_attributes = ["name", "CreatedAt", "DeletedAt"]
   }

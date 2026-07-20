@@ -4,8 +4,12 @@ resource "aws_api_gateway_rest_api" "enplace" {
 }
 
 resource "aws_api_gateway_deployment" "enplace" {
-  rest_api_id       = aws_api_gateway_rest_api.enplace.id
-  stage_description = md5(file("apigateway.tf"))
+  rest_api_id = aws_api_gateway_rest_api.enplace.id
+
+  triggers = {
+    redeployment = md5(file("apigateway.tf"))
+  }
+
   depends_on = [
     aws_api_gateway_integration.get_recipe,
     aws_api_gateway_integration.get_recipes,
