@@ -46,6 +46,10 @@ jobs:
         with:
           terraform_version: 1.9.0
 
+      - name: Run E2E Tests
+        working-directory: ./infra/local
+        run: ./e2e_test.sh
+
       - name: Initialize Terraform
         run: terraform init -backend-config="bucket=${{env.AWS_TFSTATE_BUCKET_NAME}}" -backend-config="key=${{env.AWS_TFSTATE_BUCKET_KEY_NAME}}" -backend-config="region=${{env.AWS_REGION}}"
 
