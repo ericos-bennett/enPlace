@@ -8,6 +8,7 @@ These tests exercise every route that used to be its own lambda
 (get_recipe, get_recipes, delete_recipe, create_recipe) to confirm that
 the single consolidated lambda still dispatches each one correctly.
 """
+
 import requests
 
 from conftest import USER_ID, OTHER_USER_ID, make_token

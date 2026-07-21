@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Runs the backend/recipes E2E test suite against a real Terraform deploy
+# Runs the backend E2E test suite against a real Terraform deploy
 # (lambda + API Gateway + DynamoDB) inside a throwaway LocalStack container.
 # Usage: ./e2e_test.sh
 
@@ -54,6 +54,6 @@ STAGE_NAME=$(echo "$OUTPUTS" | jq -r '.api_gateway_stage_name.value')
 export API_BASE_URL="https://${API_ID}.execute-api.localhost.localstack.cloud:4566/${STAGE_NAME}"
 
 echo ">>> Running E2E tests against $API_BASE_URL"
-cd "$SCRIPT_DIR/../../backend/recipes/tests"
+cd "$SCRIPT_DIR/../../backend/tests"
 pip install --quiet -r requirements.txt
 pytest -v

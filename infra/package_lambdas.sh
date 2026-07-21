@@ -13,7 +13,6 @@ echo ">>> Packaging lambdas"
 cd ../backend
 
 echo ">>> Updating recipes lambda"
-cd recipes
 pip install \
   --upgrade \
   --quiet \
@@ -32,6 +31,6 @@ pip install \
   -r requirements_source.txt
 cd package && zip -q -r ../recipes.zip .
 cd .. && zip recipes.zip main.py
-mv recipes.zip ../../infra/$ENV
+mv recipes.zip ../infra/$ENV
 
 echo ">>> Lambda code updated"

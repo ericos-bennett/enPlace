@@ -12,7 +12,7 @@ dist-ssr
 !.env.example
 
 # BACKEND
-backend/*/package
+backend/package
 __pycache__
 
 # INFRA

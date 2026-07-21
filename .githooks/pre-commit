@@ -10,8 +10,13 @@ echo ">>> Formatting frontend code"
 cd frontend || exit 1
 npm run format
 
+echo ">>> Formatting backend code"
+cd ../backend || exit 1
+myenv/bin/black .
+cd ..
+
 echo ">>> Formatting infra code"
-cd ../infra/local || exit 1
+cd infra/local || exit 1
 terraform fmt
 cd ../prod || exit 1
 terraform fmt

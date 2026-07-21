@@ -13,7 +13,9 @@ OTHER_USER_ID = "e2e-test-other-user"
 def make_token(user_id):
     # The API gateway authorizer is disabled locally (see infra/local/deploy_infra.sh),
     # so the lambda decodes this without verifying the signature.
-    return jwt.encode({"sub": user_id}, "unused-signing-key-padded-to-32-bytes", algorithm="HS256")
+    return jwt.encode(
+        {"sub": user_id}, "unused-signing-key-padded-to-32-bytes", algorithm="HS256"
+    )
 
 
 @pytest.fixture(scope="session")
