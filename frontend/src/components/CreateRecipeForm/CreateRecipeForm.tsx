@@ -47,6 +47,7 @@ export const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({
         </Alert>
       )}
       <TextField
+        id="recipe-url-input"
         label="Enter Recipe URL"
         value={inputValue}
         onChange={handleInputChange}

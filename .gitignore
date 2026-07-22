@@ -6,6 +6,7 @@ node_modules
 dist
 dist-ssr
 .vscode/*
+.claude/*
 .idea
 .DS_Store
 .env*

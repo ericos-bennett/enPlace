@@ -1,18 +1,310 @@
-.home-container {
-  height: 100%;
-  display: flex !important;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
+.home-page {
+  display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  min-height: calc(100vh - 4rem);
+  background: linear-gradient(
+    180deg,
+    var(--primary-color) 0%,
+    var(--background-color) 100%
+  );
+  box-sizing: border-box;
+  /* Breaks out of #page-container's MUI gutters (16px below the `sm`
+     breakpoint at 600px, 24px at/above it) so the background reaches the
+     viewport edges. */
+  margin-left: -16px;
+  margin-right: -16px;
+  width: calc(100% + 32px);
+}
+
+@media (min-width: 600px) {
+  .home-page {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+}
+
+/* Hero */
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: 56rem !important;
+}
+
+.hero-headline {
+  font-weight: 700;
+  /* vw-driven (no fixed floor) so the line width stays a constant
+     fraction of the viewport and never wraps; capped for large screens. */
+  font-size: clamp(1.25rem, 6.5vw, 3.75rem);
+  white-space: nowrap;
+}
+
+.hero-subhead {
+  color: var(--font-color);
+  font-weight: 400;
+  font-size: clamp(1rem, 1vw + 0.85rem, 1.25rem);
+  max-width: 34rem;
+  margin-top: 0.5rem;
+}
+
+.hero-container .create-recipe-form {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.section-heading {
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.125rem);
+  margin-bottom: 2rem !important;
+}
+
+/* Before / after demo */
+
+.demo-section {
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.demo-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mock-window {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mock-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.6rem 0.75rem;
+}
+
+.mock-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--border-color);
+}
+
+.mock-window-label {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-font-color);
+}
+
+.mock-window-body {
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 1rem;
+  height: 260px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.mock-blog {
+  background-color: var(--background-color);
+}
+
+.mock-line {
+  height: 0.6rem;
+  border-radius: 0.25rem;
+  background-color: var(--border-color);
+  margin-bottom: 0.6rem;
+}
+
+.mock-line-title {
+  height: 0.9rem;
+  width: 70%;
+  background-color: var(--secondary-color);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.mock-line-short {
+  width: 55%;
+}
+
+.mock-ad {
+  margin: 0.75rem 0;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--muted-font-color);
+  border: 1px dashed var(--border-color);
+  border-radius: 0.25rem;
+}
+
+.mock-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  background: linear-gradient(180deg, transparent, var(--background-color));
+}
+
+.mock-recipe {
+  background-color: var(--background-color);
+}
+
+.mock-recipe-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.mock-recipe-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted-font-color);
+  margin-bottom: 0.75rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  img {
+    display: block;
+  }
+}
+
+.mock-recipe-copy {
+  margin-left: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 0.15rem 0.6rem;
+}
+
+.mock-recipe-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.7rem;
+  table-layout: fixed;
+
+  th {
+    text-align: left;
+    font-weight: 700;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th:first-child,
+  td:first-child {
+    width: 40%;
+  }
+
+  td {
+    vertical-align: top;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1rem;
+  }
+
+  li {
+    margin-bottom: 0.2rem;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.demo-arrow {
+  font-size: 1.75rem;
+  color: var(--secondary-color);
+}
+
+.demo-caption {
+  text-align: center;
+  color: var(--muted-font-color);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* How it works */
+
+.steps-section {
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
-.home-headline {
+.step-card {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.home-image {
-  display: block;
-  margin: 0 auto;
+.step-number {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--font-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.step-description {
+  color: var(--muted-font-color);
+}
+
+@media (max-width: 720px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1080px) {
+  .demo-arrow {
+    transform: rotate(90deg);
+  }
 }
