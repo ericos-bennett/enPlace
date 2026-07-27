@@ -5,7 +5,6 @@ frontend/npm-debug.log*
 node_modules
 dist
 dist-ssr
-.vscode/*
 .claude/*
 .idea
 .DS_Store
