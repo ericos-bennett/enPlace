@@ -6,6 +6,7 @@ resource "aws_lambda_function" "recipes" {
   source_code_hash = filebase64sha256("${path.module}/recipes.zip")
   runtime          = "python3.12"
   timeout          = 30
+  memory_size      = 512
   architectures    = ["arm64"]
   environment {
     variables = {

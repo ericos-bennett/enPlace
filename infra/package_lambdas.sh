@@ -30,7 +30,7 @@ pip install \
   --target package \
   -r requirements_source.txt
 cd package && zip -q -r ../recipes.zip .
-cd .. && zip recipes.zip main.py
+cd .. && zip recipes.zip main.py common.py create_recipe.py
 mv recipes.zip ../infra/$ENV
 
 echo ">>> Lambda code updated"
