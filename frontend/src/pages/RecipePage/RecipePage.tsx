@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router'
 import { Recipe } from '~/components/Recipe/Recipe'
 import { getRecipe } from '~/services/recipe'
 import type { Recipe as RecipeType } from '~/types'

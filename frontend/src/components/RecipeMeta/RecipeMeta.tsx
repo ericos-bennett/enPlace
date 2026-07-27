@@ -1,5 +1,5 @@
 import { ListItemButton, ListItemText, IconButton } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import type { RecipeMeta as RecipeMetaType } from '~/types'
 import garbage from '~/assets/icons/garbage.svg'
 

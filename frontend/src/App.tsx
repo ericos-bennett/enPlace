@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router'
 import { Box, Container } from '@mui/material'
 import { getAuthTokensAndSave, getIdToken } from '~/services/auth'
 import { useAuthStore } from '~/store/auth'

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Box, Typography } from '@mui/material'
 import { LoginButton } from '../LoginButton/LoginButton'
 import { useAuthStore } from '~/store/auth'

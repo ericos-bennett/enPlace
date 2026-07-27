@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { CreateRecipeForm } from '~/components/CreateRecipeForm/CreateRecipeForm'
 import cutlery from '~/assets/icons/cutlery.svg'
 import clock from '~/assets/icons/clock.svg'
