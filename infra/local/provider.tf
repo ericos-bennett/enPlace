@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 6.0"
+      version = "~> 6.0, < 6.58.0" # 6.58.0+ waits for REST API status AVAILABLE, which LocalStack 4.10.0 never reports
     }
   }
 }
