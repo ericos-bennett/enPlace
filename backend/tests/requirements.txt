@@ -1,4 +1,4 @@
 boto3==1.43.51
-PyJWT==2.13.0
+PyJWT==2.14.0
 pytest==9.0.3
 requests==2.34.2
