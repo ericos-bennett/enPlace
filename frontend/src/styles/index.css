@@ -8,8 +8,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  /* Disable the rubber-band overscroll, which otherwise exposes a white
+     strip below the fixed header when pulling down at the top. */
+  overscroll-behavior-y: none;
+
   body {
     margin: 0;
+    overscroll-behavior-y: none;
   }
 
   a {

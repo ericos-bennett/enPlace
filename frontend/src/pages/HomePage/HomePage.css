@@ -297,6 +297,15 @@
   color: var(--muted-font-color);
 }
 
+/* Footer */
+
+.home-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted-font-color);
+  padding: 1rem;
+}
+
 @media (max-width: 720px) {
   .steps-grid {
     grid-template-columns: 1fr;

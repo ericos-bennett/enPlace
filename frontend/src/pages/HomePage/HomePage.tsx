@@ -150,6 +150,10 @@ export const HomePage: React.FC = () => {
           ))}
         </div>
       </Container>
+
+      <footer className="home-footer">
+        &copy; {new Date().getFullYear()} enPlace. All rights reserved.
+      </footer>
     </Box>
   )
 }
